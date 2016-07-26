@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration device="PIC16F1503" mcc_version="v2.25.2">
+    <managers>
+        <manager generated="true" name="Pin Manager" reloadPin="manual">
+            <setting name="NCO1SEL" option="RC1"/>
+            <setting name="SDOSEL" option="RC2"/>
+            <setting name="SSSEL" option="RC3"/>
+            <setting name="CLC1SEL" option="RA2"/>
+            <setting name="T1GSEL" option="RA4"/>
+            <setting name="package" option="SOIC14"/>
+            <setting name="sorting" option="true"/>
+            <file checksum="3498411396" modified="false" name="pin_manager.c" path="mcc_generated_files/pin_manager.c"/>
+            <file checksum="1444933996" modified="false" name="pin_manager.h" path="mcc_generated_files/pin_manager.h"/>
+        </manager>
+        <manager generated="true" name="System" reloadPin="manual">
+            <initializer comment="" name="Initialize">
+                <setting name="SCS" option="INTOSC" register="OSCCON"/>
+                <setting name="IRCF" option="16MHz_HF" register="OSCCON"/>
+                <setting name="HFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="HFIOFS" option="not0.5percent_acc" register="OSCSTAT"/>
+                <setting name="LFIOFR" option="disabled" register="OSCSTAT"/>
+                <additionalSetting name="pllMultiplier" option=""/>
+                <additionalSetting name="extclk" option="1.0 MHz"/>
+            </initializer>
+            <setting name="BOREN" option="ON"/>
+            <setting name="PWRTE" option="OFF"/>
+            <setting name="FOSC" option="INTOSC"/>
+            <setting name="MCLRE" option="ON"/>
+            <setting name="CP" option="OFF"/>
+            <setting name="WDTE" option="OFF"/>
+            <setting name="CLKOUTEN" option="OFF"/>
+            <setting name="WRT" option="OFF"/>
+            <setting name="LPBOR" option="OFF"/>
+            <setting name="LVP" option="OFF"/>
+            <setting name="STVREN" option="ON"/>
+            <setting name="BORV" option="LO"/>
+            <setting name="generateConfigBits" option="true"/>
+            <file checksum="926761492" modified="false" name="mcc.c" path="mcc_generated_files/mcc.c"/>
+            <file checksum="1012075465" modified="false" name="mcc.h" path="mcc_generated_files/mcc.h"/>
+        </manager>
+    </managers>
+    <modules>
+        <module generated="true" mode="Memory" name="MEMORY" order="0" reloadPin="manual" type="nvm">
+            <file checksum="4084144108" modified="false" name="memory.c" path="mcc_generated_files/memory.c"/>
+            <file checksum="2025791399" modified="false" name="memory.h" path="mcc_generated_files/memory.h"/>
+        </module>
+    </modules>
+</configuration>
