@@ -32,8 +32,8 @@ void initFuzz(void) {
     
     feedback_state = 0;
     Feedback_LED = 0;
-    Relay_Feedback1 = 0;
-    Relay_Feedback2 = 1;    
+    Relay_Feedback1 = 1;//off
+    Relay_Feedback2 = 0;//off   
 
 }
 

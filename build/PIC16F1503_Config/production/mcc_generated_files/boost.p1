@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"1698 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f1503.h
+"1698 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic16f1503.h
 [s S98 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S98 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 ]
 "1697
@@ -21,7 +21,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f1503.h: 49: extern volatile unsigned char INDF0 @ 0x000;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f1503.h
+"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic16f1503.h
 [; ;pic16f1503.h: 51: asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
 [; ;pic16f1503.h: 54: typedef union {

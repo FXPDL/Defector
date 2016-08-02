@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/PIC16F1503_Config/production\Defector.X.production.hex">
+  <executable name="dist/PIC16F1503_Config/production\Defector.production.hex">
     <memory name="program">
       <units>words</units>
       <length>2048</length>
