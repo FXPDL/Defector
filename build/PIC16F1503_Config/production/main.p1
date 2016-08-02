@@ -4,32 +4,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
 "13 user.h
 [v _InitApp `(v ~T0 @X0 0 ef ]
-"1698 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f1503.h
-[s S98 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S98 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 ]
-"1697
-[u S97 `S98 1 ]
-[n S97 . . ]
-"1707
-[v _LATCbits `VS97 ~T0 @X0 0 e@270 ]
-"1654
-[s S96 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S96 . LATA0 LATA1 LATA2 . LATA4 LATA5 ]
-"1653
-[u S95 `S96 1 ]
-[n S95 . . ]
-"1663
-[v _LATAbits `VS95 ~T0 @X0 0 e@268 ]
-"420
-[s S30 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S30 . RA0 RA1 RA2 RA3 RA4 RA5 ]
-"419
-[u S29 `S30 1 ]
-[n S29 . . ]
-"429
-[v _PORTAbits `VS29 ~T0 @X0 0 e@12 ]
-"19 system.h
-[v _wait_ms `(v ~T0 @X0 0 ef1`ui ]
+"35 ./mcc_generated_files/fuzz.h
+[v _initFuzz `(v ~T0 @X0 0 ef ]
+"30 ./mcc_generated_files/boost.h
+[v _initBoost `(v ~T0 @X0 0 ef ]
+"36 ./mcc_generated_files/fuzz.h
+[v _updateFuzz `(v ~T0 @X0 0 ef1`i ]
+"31 ./mcc_generated_files/boost.h
+[v _updateBoost `(v ~T0 @X0 0 ef1`i ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -2869,200 +2851,55 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.h: 13: void InitApp(void);
 [; ;user.h: 14: void init_timer2(void);
 [; ;user.h: 15: void init_adc(void);
-"30 main.c
-[v _debounce_count_fuzz `i ~T0 @X0 1 e ]
-[i _debounce_count_fuzz
--> 0 `i
+[; ;fuzz.h: 35: void initFuzz(void);
+[; ;fuzz.h: 36: void updateFuzz(int);
+[; ;fuzz.h: 37: void setFuzzState(int);
+[; ;fuzz.h: 38: void setFeedbackState(int);
+[; ;boost.h: 30: void initBoost(void);
+[; ;boost.h: 31: void updateBoost(int);
+[; ;boost.h: 32: void setBoostState(int);
+"20 main.c
+[v _debounce_limit `i ~T0 @X0 1 e ]
+[i _debounce_limit
+-> 25 `i
 ]
-[; ;main.c: 30: int debounce_count_fuzz = 0;
-"31
-[v _debounce_count_boost `i ~T0 @X0 1 e ]
-[i _debounce_count_boost
--> 0 `i
-]
-[; ;main.c: 31: int debounce_count_boost = 0;
-"33
-[v _fuzz_state `i ~T0 @X0 1 e ]
-[i _fuzz_state
--> 0 `i
-]
-[; ;main.c: 33: int fuzz_state = 0;
-"34
-[v _boost_state `i ~T0 @X0 1 e ]
-[i _boost_state
--> 0 `i
-]
-[; ;main.c: 34: int boost_state = 0;
-"35
-[v _feedback_state `i ~T0 @X0 1 e ]
-[i _feedback_state
--> 0 `i
-]
-[; ;main.c: 35: int feedback_state = 0;
-"42
+[; ;main.c: 20: int debounce_limit = 25;
+"27
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 42: void main(void) {
+[; ;main.c: 27: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 43: ConfigureOscillator();
-"43
+[; ;main.c: 28: ConfigureOscillator();
+"28
 [e ( _ConfigureOscillator ..  ]
-[; ;main.c: 44: InitApp();
-"44
+[; ;main.c: 29: InitApp();
+"29
 [e ( _InitApp ..  ]
-[; ;main.c: 46: LATCbits.LATC4 = 0;
-"46
-[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
-[; ;main.c: 47: LATCbits.LATC0 = 0;
-"47
-[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 48: LATCbits.LATC1 = 0;
-"48
-[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
-[; ;main.c: 49: LATCbits.LATC2 = 0;
-"49
-[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
-[; ;main.c: 52: LATCbits.LATC4 = !boost_state;
-"52
-[e = . . _LATCbits 0 4 -> -> ! != _boost_state -> 0 `i `i `uc ]
-[; ;main.c: 53: LATCbits.LATC0 = boost_state;
-"53
-[e = . . _LATCbits 0 0 -> _boost_state `uc ]
-[; ;main.c: 54: LATCbits.LATC5 = boost_state;
-"54
-[e = . . _LATCbits 0 5 -> _boost_state `uc ]
-[; ;main.c: 56: LATCbits.LATC1 = !fuzz_state;
-"56
-[e = . . _LATCbits 0 1 -> -> ! != _fuzz_state -> 0 `i `i `uc ]
-[; ;main.c: 57: LATCbits.LATC2 = fuzz_state;
-"57
-[e = . . _LATCbits 0 2 -> _fuzz_state `uc ]
-[; ;main.c: 58: LATAbits.LATA2 = fuzz_state;
-"58
-[e = . . _LATAbits 0 2 -> _fuzz_state `uc ]
-[; ;main.c: 67: while (1) {
-"67
+[; ;main.c: 31: initFuzz();
+"31
+[e ( _initFuzz ..  ]
+[; ;main.c: 32: initBoost();
+"32
+[e ( _initBoost ..  ]
+[; ;main.c: 34: while (1) {
+"34
 [e :U 344 ]
 {
-[; ;main.c: 68: if (PORTAbits.RA4 == 0) {
-"68
-[e $ ! == -> . . _PORTAbits 0 4 `i -> 0 `i 346  ]
-{
-[; ;main.c: 69: debounce_count_fuzz++;
-"69
-[e ++ _debounce_count_fuzz -> 1 `i ]
-[; ;main.c: 70: if (debounce_count_fuzz > 25) {
-"70
-[e $ ! > _debounce_count_fuzz -> 25 `i 347  ]
-{
-[; ;main.c: 71: fuzz_state = !fuzz_state;
-"71
-[e = _fuzz_state -> ! != _fuzz_state -> 0 `i `i ]
-[; ;main.c: 72: LATAbits.LATA2 = !fuzz_state;
-"72
-[e = . . _LATAbits 0 2 -> -> ! != _fuzz_state -> 0 `i `i `uc ]
-[; ;main.c: 73: LATCbits.LATC1 = fuzz_state;
-"73
-[e = . . _LATCbits 0 1 -> _fuzz_state `uc ]
-[; ;main.c: 74: LATCbits.LATC2 = !fuzz_state;
-"74
-[e = . . _LATCbits 0 2 -> -> ! != _fuzz_state -> 0 `i `i `uc ]
-[; ;main.c: 75: while (PORTAbits.RA4 == 0) {
-"75
-[e $U 348  ]
-[e :U 349 ]
-{
-[; ;main.c: 76: wait_ms(20);
-"76
-[e ( _wait_ms (1 -> -> 20 `i `ui ]
-"77
-}
-[e :U 348 ]
-"75
-[e $ == -> . . _PORTAbits 0 4 `i -> 0 `i 349  ]
-[e :U 350 ]
-"78
-}
-[e :U 347 ]
-"79
-}
-[; ;main.c: 77: }
-[; ;main.c: 78: }
-[; ;main.c: 79: } else {
-[e $U 351  ]
-[e :U 346 ]
-{
-[; ;main.c: 80: debounce_count_fuzz = 0;
-"80
-[e = _debounce_count_fuzz -> 0 `i ]
-"81
-}
-[e :U 351 ]
-[; ;main.c: 81: }
-[; ;main.c: 94: if (PORTAbits.RA5 == 0) {
-"94
-[e $ ! == -> . . _PORTAbits 0 5 `i -> 0 `i 352  ]
-{
-[; ;main.c: 95: debounce_count_boost++;
-"95
-[e ++ _debounce_count_boost -> 1 `i ]
-[; ;main.c: 96: if (debounce_count_boost > 25) {
-"96
-[e $ ! > _debounce_count_boost -> 25 `i 353  ]
-{
-[; ;main.c: 97: boost_state = !boost_state;
-"97
-[e = _boost_state -> ! != _boost_state -> 0 `i `i ]
-[; ;main.c: 98: LATCbits.LATC5 = !boost_state;
-"98
-[e = . . _LATCbits 0 5 -> -> ! != _boost_state -> 0 `i `i `uc ]
-[; ;main.c: 99: LATCbits.LATC4 = boost_state;
-"99
-[e = . . _LATCbits 0 4 -> _boost_state `uc ]
-[; ;main.c: 100: LATCbits.LATC0 = !boost_state;
-"100
-[e = . . _LATCbits 0 0 -> -> ! != _boost_state -> 0 `i `i `uc ]
-[; ;main.c: 101: while (PORTAbits.RA5 == 0) {
-"101
-[e $U 354  ]
-[e :U 355 ]
-{
-[; ;main.c: 102: wait_ms(20);
-"102
-[e ( _wait_ms (1 -> -> 20 `i `ui ]
-"103
-}
-[e :U 354 ]
-"101
-[e $ == -> . . _PORTAbits 0 5 `i -> 0 `i 355  ]
-[e :U 356 ]
-"104
-}
-[e :U 353 ]
-"105
-}
-[; ;main.c: 103: }
-[; ;main.c: 104: }
-[; ;main.c: 105: } else {
-[e $U 357  ]
-[e :U 352 ]
-{
-[; ;main.c: 106: debounce_count_boost = 0;
-"106
-[e = _debounce_count_boost -> 0 `i ]
-"107
-}
-[e :U 357 ]
-"108
+[; ;main.c: 35: updateFuzz(debounce_limit);
+"35
+[e ( _updateFuzz (1 _debounce_limit ]
+[; ;main.c: 36: updateBoost(debounce_limit);
+"36
+[e ( _updateBoost (1 _debounce_limit ]
+"38
 }
 [e :U 343 ]
-"67
+"34
 [e $U 344  ]
 [e :U 345 ]
-[; ;main.c: 107: }
-[; ;main.c: 108: }
-[; ;main.c: 110: }
-"110
+[; ;main.c: 38: }
+[; ;main.c: 40: }
+"40
 [e :UE 342 ]
 }

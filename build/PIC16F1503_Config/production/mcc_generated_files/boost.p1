@@ -1,9 +1,4 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[p mainexit ]
-"18 system.h
-[v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
-"13 user.h
-[v _InitApp `(v ~T0 @X0 0 ef ]
 "1698 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f1503.h
 [s S98 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S98 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 ]
@@ -12,14 +7,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S97 . . ]
 "1707
 [v _LATCbits `VS97 ~T0 @X0 0 e@270 ]
-"1654
-[s S96 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S96 . LATA0 LATA1 LATA2 . LATA4 LATA5 ]
-"1653
-[u S95 `S96 1 ]
-[n S95 . . ]
-"1663
-[v _LATAbits `VS95 ~T0 @X0 0 e@268 ]
 "420
 [s S30 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S30 . RA0 RA1 RA2 RA3 RA4 RA5 ]
@@ -28,6 +15,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S29 . . ]
 "429
 [v _PORTAbits `VS29 ~T0 @X0 0 e@12 ]
+"32 mcc_generated_files/boost.h
+[v _setBoostState `(v ~T0 @X0 0 ef1`i ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -2832,439 +2821,164 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern unsigned char __resetbits;
 [; ;pic.h: 187: extern __bit __powerdown;
 [; ;pic.h: 188: extern __bit __timeout;
-[; ;stdint.h: 13: typedef signed char int8_t;
-[; ;stdint.h: 20: typedef signed int int16_t;
-[; ;stdint.h: 28: typedef signed short long int int24_t;
-[; ;stdint.h: 36: typedef signed long int int32_t;
-[; ;stdint.h: 43: typedef unsigned char uint8_t;
-[; ;stdint.h: 49: typedef unsigned int uint16_t;
-[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
-[; ;stdint.h: 63: typedef unsigned long int uint32_t;
-[; ;stdint.h: 71: typedef signed char int_least8_t;
-[; ;stdint.h: 78: typedef signed int int_least16_t;
-[; ;stdint.h: 90: typedef signed short long int int_least24_t;
-[; ;stdint.h: 98: typedef signed long int int_least32_t;
-[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
-[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
-[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
-[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
-[; ;stdint.h: 137: typedef signed char int_fast8_t;
-[; ;stdint.h: 144: typedef signed int int_fast16_t;
-[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
-[; ;stdint.h: 164: typedef signed long int int_fast32_t;
-[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
-[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
-[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
-[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
-[; ;stdint.h: 200: typedef int32_t intmax_t;
-[; ;stdint.h: 205: typedef uint32_t uintmax_t;
-[; ;stdint.h: 210: typedef int16_t intptr_t;
-[; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;system.h: 18: void ConfigureOscillator(void);
-[; ;system.h: 19: void wait_ms(uint16_t);
-[; ;system.h: 20: uint16_t adc_convert(uint8_t);
-[; ;user.h: 13: void InitApp(void);
-[; ;user.h: 14: void init_timer2(void);
-[; ;user.h: 15: void init_adc(void);
-"32 main.c
-[v _debounce_count_fuzz `i ~T0 @X0 1 e ]
-[i _debounce_count_fuzz
--> 0 `i
-]
-[; ;main.c: 32: int debounce_count_fuzz = 0;
-"33
-[v _debounce_count_boost `i ~T0 @X0 1 e ]
-[i _debounce_count_boost
--> 0 `i
-]
-[; ;main.c: 33: int debounce_count_boost = 0;
-"35
-[v _fuzz_state `i ~T0 @X0 1 e ]
-[i _fuzz_state
--> 0 `i
-]
-[; ;main.c: 35: int fuzz_state = 0;
-"36
+[; ;boost.h: 30: void initBoost(void);
+[; ;boost.h: 31: void updateBoost(int);
+[; ;boost.h: 32: void setBoostState(int);
+"14 mcc_generated_files/boost.c
 [v _boost_state `i ~T0 @X0 1 e ]
 [i _boost_state
 -> 0 `i
 ]
-[; ;main.c: 36: int boost_state = 0;
-"37
-[v _feedback_state `i ~T0 @X0 1 e ]
-[i _feedback_state
--> 0 `i
-]
-[; ;main.c: 37: int feedback_state = 0;
-"39
-[v _fuzz_pressed `i ~T0 @X0 1 e ]
-[i _fuzz_pressed
--> 0 `i
-]
-[; ;main.c: 39: int fuzz_pressed = 0;
-"40
-[v _fuzz_up `i ~T0 @X0 1 e ]
-[i _fuzz_up
--> 1 `i
-]
-[; ;main.c: 40: int fuzz_up = 1;
-"41
-[v _fuzz_down `i ~T0 @X0 1 e ]
-[i _fuzz_down
--> 0 `i
-]
-[; ;main.c: 41: int fuzz_down = 0;
-"42
-[v _fuzz_toggle `i ~T0 @X0 1 e ]
-[i _fuzz_toggle
--> 0 `i
-]
-[; ;main.c: 42: int fuzz_toggle = 0;
-"43
-[v _fuzz_turning_on `i ~T0 @X0 1 e ]
-[i _fuzz_turning_on
--> 0 `i
-]
-[; ;main.c: 43: int fuzz_turning_on = 0;
-"46
-[v _feedback_on `i ~T0 @X0 1 e ]
-[i _feedback_on
--> 0 `i
-]
-[; ;main.c: 46: int feedback_on = 0;
-"49
+[; ;boost.c: 14: int boost_state = 0;
+"16
 [v _boost_pressed `i ~T0 @X0 1 e ]
 [i _boost_pressed
 -> 0 `i
 ]
-[; ;main.c: 49: int boost_pressed = 0;
-"50
+[; ;boost.c: 16: int boost_pressed = 0;
+"17
 [v _boost_up `i ~T0 @X0 1 e ]
 [i _boost_up
 -> 1 `i
 ]
-[; ;main.c: 50: int boost_up = 1;
-"51
+[; ;boost.c: 17: int boost_up = 1;
+"18
 [v _boost_down `i ~T0 @X0 1 e ]
 [i _boost_down
 -> 0 `i
 ]
-[; ;main.c: 51: int boost_down = 0;
-"52
+[; ;boost.c: 18: int boost_down = 0;
+"19
 [v _last_boost_state `i ~T0 @X0 1 e ]
 [i _last_boost_state
 -> 0 `i
 ]
-[; ;main.c: 52: int last_boost_state = 0;
-"54
-[v _debounce_limit `i ~T0 @X0 1 e ]
-[i _debounce_limit
--> 25 `i
-]
-[; ;main.c: 54: int debounce_limit = 25;
-"55
-[v _long_press_limit `i ~T0 @X0 1 e ]
-[i _long_press_limit
--> -> 20000000 `l `i
-]
-[; ;main.c: 55: int long_press_limit = 20000000;
-"61
-[v _main `(v ~T0 @X0 1 ef ]
+[; ;boost.c: 19: int last_boost_state = 0;
+"21
+[v _initBoost `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 61: void main(void) {
-[e :U _main ]
+[; ;boost.c: 21: void initBoost(void) {
+[e :U _initBoost ]
 [f ]
-[; ;main.c: 62: ConfigureOscillator();
-"62
-[e ( _ConfigureOscillator ..  ]
-[; ;main.c: 63: InitApp();
-"63
-[e ( _InitApp ..  ]
-[; ;main.c: 65: LATCbits.LATC4 = 0;
-"65
-[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
-[; ;main.c: 66: LATCbits.LATC0 = 0;
-"66
+[; ;boost.c: 22: boost_state = 0;
+"22
+[e = _boost_state -> 0 `i ]
+[; ;boost.c: 23: LATCbits.LATC5 = 0;
+"23
+[e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
+[; ;boost.c: 24: LATCbits.LATC4 = 1;
+"24
+[e = . . _LATCbits 0 4 -> -> 1 `i `uc ]
+[; ;boost.c: 25: LATCbits.LATC0 = 0;
+"25
 [e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 67: LATCbits.LATC1 = 0;
-"67
-[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
-[; ;main.c: 68: LATCbits.LATC2 = 0;
-"68
-[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
-[; ;main.c: 71: LATCbits.LATC4 = !boost_state;
-"71
-[e = . . _LATCbits 0 4 -> -> ! != _boost_state -> 0 `i `i `uc ]
-[; ;main.c: 72: LATCbits.LATC0 = boost_state;
-"72
-[e = . . _LATCbits 0 0 -> _boost_state `uc ]
-[; ;main.c: 73: LATCbits.LATC5 = boost_state;
-"73
-[e = . . _LATCbits 0 5 -> _boost_state `uc ]
-[; ;main.c: 77: LATAbits.LATA2 = 0;
-"77
-[e = . . _LATAbits 0 2 -> -> 0 `i `uc ]
-[; ;main.c: 86: while (1) {
-"86
+[; ;boost.c: 27: }
+"27
+[e :UE 342 ]
+}
+"29
+[v _updateBoost `(v ~T0 @X0 1 ef1`i ]
+{
+[; ;boost.c: 29: void updateBoost(int debounce_limit) {
+[e :U _updateBoost ]
+[v _debounce_limit `i ~T0 @X0 1 r1 ]
+[f ]
+[; ;boost.c: 36: if (PORTAbits.RA5 == 0) {
+"36
+[e $ ! == -> . . _PORTAbits 0 5 `i -> 0 `i 344  ]
+{
+[; ;boost.c: 37: if (boost_pressed > 0) {
+"37
+[e $ ! > _boost_pressed -> 0 `i 345  ]
+{
+[; ;boost.c: 38: boost_pressed--;
+"38
+[e -- _boost_pressed -> 1 `i ]
+"39
+}
+[e :U 345 ]
+"40
+}
+[; ;boost.c: 39: }
+[; ;boost.c: 40: } else if (boost_pressed < debounce_limit) {
+[e $U 346  ]
 [e :U 344 ]
+[e $ ! < _boost_pressed _debounce_limit 347  ]
 {
-[; ;main.c: 92: if (PORTAbits.RA4 == 0) {
-"92
-[e $ ! == -> . . _PORTAbits 0 4 `i -> 0 `i 346  ]
-{
-[; ;main.c: 93: if (fuzz_pressed > 0) {
-"93
-[e $ ! > _fuzz_pressed -> 0 `i 347  ]
-{
-[; ;main.c: 94: fuzz_pressed--;
-"94
-[e -- _fuzz_pressed -> 1 `i ]
-"95
+[; ;boost.c: 41: boost_pressed++;
+"41
+[e ++ _boost_pressed -> 1 `i ]
+"42
 }
 [e :U 347 ]
-"96
-}
-[; ;main.c: 95: }
-[; ;main.c: 96: } else if (fuzz_pressed < debounce_limit) {
-[e $U 348  ]
+"48
 [e :U 346 ]
-[e $ ! < _fuzz_pressed _debounce_limit 349  ]
+[; ;boost.c: 42: }
+[; ;boost.c: 48: if (boost_pressed == 0) {
+[e $ ! == _boost_pressed -> 0 `i 348  ]
 {
-[; ;main.c: 97: fuzz_pressed++;
-"97
-[e ++ _fuzz_pressed -> 1 `i ]
-"99
+[; ;boost.c: 50: boost_down = 1;
+"50
+[e = _boost_down -> 1 `i ]
+[; ;boost.c: 51: if (boost_up == 1) {
+"51
+[e $ ! == _boost_up -> 1 `i 349  ]
+{
+[; ;boost.c: 52: setBoostState(!boost_state);
+"52
+[e ( _setBoostState (1 -> ! != _boost_state -> 0 `i `i ]
+"53
 }
 [e :U 349 ]
-"106
-[e :U 348 ]
-[; ;main.c: 99: }
-[; ;main.c: 106: if (fuzz_pressed == 0 ) {
-[e $ ! == _fuzz_pressed -> 0 `i 350  ]
-{
-[; ;main.c: 108: fuzz_down++;
-"108
-[e ++ _fuzz_down -> 1 `i ]
-[; ;main.c: 109: if (fuzz_state == 1) {
-"109
-[e $ ! == _fuzz_state -> 1 `i 351  ]
-{
-[; ;main.c: 110: if (fuzz_up == 1) {fuzz_toggle = 1; }
-"110
-[e $ ! == _fuzz_up -> 1 `i 352  ]
-{
-[e = _fuzz_toggle -> 1 `i ]
-}
-[e :U 352 ]
-[; ;main.c: 112: if (fuzz_down >= long_press_limit && feedback_on == 0 && fuzz_turning_on == 0) {
-"112
-[e $ ! && && >= _fuzz_down _long_press_limit == _feedback_on -> 0 `i == _fuzz_turning_on -> 0 `i 353  ]
-{
-[; ;main.c: 114: fuzz_down = long_press_limit;
-"114
-[e = _fuzz_down _long_press_limit ]
-[; ;main.c: 115: feedback_on = 1;
-"115
-[e = _feedback_on -> 1 `i ]
-[; ;main.c: 116: LATAbits.LATA2 = 0;
-"116
-[e = . . _LATAbits 0 2 -> -> 0 `i `uc ]
-[; ;main.c: 117: LATCbits.LATC3 = 1;
-"117
-[e = . . _LATCbits 0 3 -> -> 1 `i `uc ]
-[; ;main.c: 118: LATAbits.LATA0 = 1;
-"118
-[e = . . _LATAbits 0 0 -> -> 1 `i `uc ]
-[; ;main.c: 119: LATAbits.LATA1 = 0;
-"119
-[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
-"120
-}
-[e :U 353 ]
-"121
-}
-[; ;main.c: 120: }
-[; ;main.c: 121: } else {
-[e $U 354  ]
-[e :U 351 ]
-{
-[; ;main.c: 123: fuzz_turning_on = 1;
-"123
-[e = _fuzz_turning_on -> 1 `i ]
-[; ;main.c: 124: fuzz_state = 1;
-"124
-[e = _fuzz_state -> 1 `i ]
-[; ;main.c: 125: fuzz_toggle = 0;
-"125
-[e = _fuzz_toggle -> 0 `i ]
-[; ;main.c: 126: LATAbits.LATA2 = fuzz_state;
-"126
-[e = . . _LATAbits 0 2 -> _fuzz_state `uc ]
-[; ;main.c: 127: LATCbits.LATC1 = fuzz_state;
-"127
-[e = . . _LATCbits 0 1 -> _fuzz_state `uc ]
-[; ;main.c: 128: LATCbits.LATC2 = !fuzz_state;
-"128
-[e = . . _LATCbits 0 2 -> -> ! != _fuzz_state -> 0 `i `i `uc ]
-[; ;main.c: 129: feedback_on = 0;
-"129
-[e = _feedback_on -> 0 `i ]
-"130
-}
-[e :U 354 ]
-[; ;main.c: 130: }
-[; ;main.c: 138: fuzz_up = 0;
-"138
-[e = _fuzz_up -> 0 `i ]
-"139
-}
-[; ;main.c: 139: } else if (fuzz_pressed >= debounce_limit) {
-[e $U 355  ]
-[e :U 350 ]
-[e $ ! >= _fuzz_pressed _debounce_limit 356  ]
-{
-[; ;main.c: 142: LATCbits.LATC3 = 0;
-"142
-[e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
-[; ;main.c: 143: LATAbits.LATA0 = 0;
-"143
-[e = . . _LATAbits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 144: LATAbits.LATA1 = 1;
-"144
-[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
-[; ;main.c: 145: if (fuzz_toggle == 1 && feedback_on == 0) {
-"145
-[e $ ! && == _fuzz_toggle -> 1 `i == _feedback_on -> 0 `i 357  ]
-{
-[; ;main.c: 146: fuzz_state = 0;
-"146
-[e = _fuzz_state -> 0 `i ]
-[; ;main.c: 148: LATCbits.LATC1 = fuzz_state;
-"148
-[e = . . _LATCbits 0 1 -> _fuzz_state `uc ]
-[; ;main.c: 149: LATCbits.LATC2 = !fuzz_state;
-"149
-[e = . . _LATCbits 0 2 -> -> ! != _fuzz_state -> 0 `i `i `uc ]
-"150
-}
-[e :U 357 ]
-[; ;main.c: 150: }
-[; ;main.c: 151: LATAbits.LATA2 = fuzz_state;
-"151
-[e = . . _LATAbits 0 2 -> _fuzz_state `uc ]
-[; ;main.c: 152: fuzz_turning_on = 0;
-"152
-[e = _fuzz_turning_on -> 0 `i ]
-[; ;main.c: 153: fuzz_toggle = 0;
-"153
-[e = _fuzz_toggle -> 0 `i ]
-[; ;main.c: 154: fuzz_up = 1;
-"154
-[e = _fuzz_up -> 1 `i ]
-[; ;main.c: 155: fuzz_down = 0;
-"155
-[e = _fuzz_down -> 0 `i ]
-[; ;main.c: 156: feedback_on = 0;
-"156
-[e = _feedback_on -> 0 `i ]
-[; ;main.c: 157: fuzz_pressed = debounce_limit;
-"157
-[e = _fuzz_pressed _debounce_limit ]
-"158
-}
-[e :U 356 ]
-"165
-[e :U 355 ]
-[; ;main.c: 158: }
-[; ;main.c: 165: if (PORTAbits.RA5 == 0) {
-[e $ ! == -> . . _PORTAbits 0 5 `i -> 0 `i 358  ]
-{
-[; ;main.c: 166: if (boost_pressed > 0) {
-"166
-[e $ ! > _boost_pressed -> 0 `i 359  ]
-{
-[; ;main.c: 167: boost_pressed--;
-"167
-[e -- _boost_pressed -> 1 `i ]
-"169
-}
-[e :U 359 ]
-"170
-}
-[; ;main.c: 169: }
-[; ;main.c: 170: } else if (boost_pressed < debounce_limit) {
-[e $U 360  ]
-[e :U 358 ]
-[e $ ! < _boost_pressed _debounce_limit 361  ]
-{
-[; ;main.c: 171: boost_pressed++;
-"171
-[e ++ _boost_pressed -> 1 `i ]
-"173
-}
-[e :U 361 ]
-"180
-[e :U 360 ]
-[; ;main.c: 173: }
-[; ;main.c: 180: if (boost_pressed == 0) {
-[e $ ! == _boost_pressed -> 0 `i 362  ]
-{
-[; ;main.c: 182: boost_down = 1;
-"182
-[e = _boost_down -> 1 `i ]
-[; ;main.c: 183: if (boost_up == 1) {
-"183
-[e $ ! == _boost_up -> 1 `i 363  ]
-{
-[; ;main.c: 184: boost_state = !boost_state;
-"184
-[e = _boost_state -> ! != _boost_state -> 0 `i `i ]
-[; ;main.c: 185: LATCbits.LATC5 = !boost_state;
-"185
-[e = . . _LATCbits 0 5 -> -> ! != _boost_state -> 0 `i `i `uc ]
-[; ;main.c: 186: LATCbits.LATC4 = boost_state;
-"186
-[e = . . _LATCbits 0 4 -> _boost_state `uc ]
-[; ;main.c: 187: LATCbits.LATC0 = !boost_state;
-"187
-[e = . . _LATCbits 0 0 -> -> ! != _boost_state -> 0 `i `i `uc ]
-"188
-}
-[e :U 363 ]
-[; ;main.c: 188: }
-[; ;main.c: 189: boost_up = 0;
-"189
+[; ;boost.c: 53: }
+[; ;boost.c: 54: boost_up = 0;
+"54
 [e = _boost_up -> 0 `i ]
-"190
+"55
 }
-[; ;main.c: 190: } else if (boost_pressed >= debounce_limit) {
-[e $U 364  ]
-[e :U 362 ]
-[e $ ! >= _boost_pressed _debounce_limit 365  ]
+[; ;boost.c: 55: } else if (boost_pressed >= debounce_limit) {
+[e $U 350  ]
+[e :U 348 ]
+[e $ ! >= _boost_pressed _debounce_limit 351  ]
 {
-[; ;main.c: 192: boost_up = 1;
-"192
+[; ;boost.c: 56: boost_up = 1;
+"56
 [e = _boost_up -> 1 `i ]
-[; ;main.c: 193: boost_down = 0;
-"193
+[; ;boost.c: 57: boost_down = 0;
+"57
 [e = _boost_down -> 0 `i ]
-[; ;main.c: 194: boost_pressed = debounce_limit;
-"194
+[; ;boost.c: 58: boost_pressed = debounce_limit;
+"58
 [e = _boost_pressed _debounce_limit ]
-"195
+"59
 }
-[e :U 365 ]
-"197
-[e :U 364 ]
+[e :U 351 ]
+"62
+[e :U 350 ]
+[; ;boost.c: 59: }
+[; ;boost.c: 62: }
+[e :UE 343 ]
 }
-[e :U 343 ]
-"86
-[e $U 344  ]
-[e :U 345 ]
-[; ;main.c: 195: }
-[; ;main.c: 197: }
-[; ;main.c: 199: }
-"199
-[e :UE 342 ]
+"65
+[v _setBoostState `(v ~T0 @X0 1 ef1`i ]
+{
+[; ;boost.c: 65: void setBoostState(int f_state) {
+[e :U _setBoostState ]
+[v _f_state `i ~T0 @X0 1 r1 ]
+[f ]
+[; ;boost.c: 66: boost_state = f_state;
+"66
+[e = _boost_state _f_state ]
+[; ;boost.c: 67: LATCbits.LATC5 = f_state;
+"67
+[e = . . _LATCbits 0 5 -> _f_state `uc ]
+[; ;boost.c: 68: LATCbits.LATC4 = !f_state;
+"68
+[e = . . _LATCbits 0 4 -> -> ! != _f_state -> 0 `i `i `uc ]
+[; ;boost.c: 69: LATCbits.LATC0 = f_state;
+"69
+[e = . . _LATCbits 0 0 -> _f_state `uc ]
+[; ;boost.c: 70: }
+"70
+[e :UE 352 ]
 }

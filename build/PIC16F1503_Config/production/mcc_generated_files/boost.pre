@@ -1,5 +1,5 @@
 
-# 1 "user.c"
+# 1 "mcc_generated_files/boost.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -3779,144 +3779,59 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdint.h"
-typedef signed char int8_t;
+# 30 "mcc_generated_files/boost.h"
+void initBoost(void);
+void updateBoost(int);
+void setBoostState(int);
 
-# 20
-typedef signed int int16_t;
+# 14 "mcc_generated_files/boost.c"
+int boost_state = 0;
 
-# 28
-typedef signed short long int int24_t;
+int boost_pressed = 0;
+int boost_up = 1;
+int boost_down = 0;
+int last_boost_state = 0;
+
+void initBoost(void) {
+boost_state = 0;
+LATCbits.LATC5 = 0;
+LATCbits.LATC4 = 1;
+LATCbits.LATC0 = 0;
+
+}
+
+void updateBoost(int debounce_limit) {
 
 # 36
-typedef signed long int int32_t;
+if (PORTAbits.RA5 == 0) {
+if (boost_pressed > 0) {
+boost_pressed--;
+}
+} else if (boost_pressed < debounce_limit) {
+boost_pressed++;
+}
 
-# 43
-typedef unsigned char uint8_t;
+# 48
+if (boost_pressed == 0) {
 
-# 49
-typedef unsigned int uint16_t;
+boost_down = 1;
+if (boost_up == 1) {
+setBoostState(!boost_state);
+}
+boost_up = 0;
+} else if (boost_pressed >= debounce_limit) {
+boost_up = 1;
+boost_down = 0;
+boost_pressed = debounce_limit;
+}
 
-# 56
-typedef unsigned short long int uint24_t;
-
-# 63
-typedef unsigned long int uint32_t;
-
-# 71
-typedef signed char int_least8_t;
-
-# 78
-typedef signed int int_least16_t;
-
-# 90
-typedef signed short long int int_least24_t;
-
-# 98
-typedef signed long int int_least32_t;
-
-# 105
-typedef unsigned char uint_least8_t;
-
-# 111
-typedef unsigned int uint_least16_t;
-
-# 121
-typedef unsigned short long int uint_least24_t;
-
-# 128
-typedef unsigned long int uint_least32_t;
-
-# 137
-typedef signed char int_fast8_t;
-
-# 144
-typedef signed int int_fast16_t;
-
-# 156
-typedef signed short long int int_fast24_t;
-
-# 164
-typedef signed long int int_fast32_t;
-
-# 171
-typedef unsigned char uint_fast8_t;
-
-# 177
-typedef unsigned int uint_fast16_t;
-
-# 187
-typedef unsigned short long int uint_fast24_t;
-
-# 194
-typedef unsigned long int uint_fast32_t;
-
-# 200
-typedef int32_t intmax_t;
-
-
-
-
-typedef uint32_t uintmax_t;
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdbool.h"
-typedef unsigned char bool;
-
-# 13 "user.h"
-void InitApp(void);
-void init_timer2(void);
-void init_adc(void);
-
-# 27 "user.c"
-void InitApp(void) {
-TRISAbits.TRISA0 = 0;
-TRISAbits.TRISA1 = 0;
-
-TRISAbits.TRISA2 = 0;
-TRISAbits.TRISA4 = 1;
-TRISAbits.TRISA5 = 1;
-ANSELAbits.ANSA4 = 0;
-
-TRISCbits.TRISC0 = 0;
-TRISCbits.TRISC1 = 0;
-TRISCbits.TRISC2 = 0;
-TRISCbits.TRISC3 = 0;
-TRISCbits.TRISC4 = 0;
-TRISCbits.TRISC5 = 0;
-
-init_adc();
 
 }
 
 
-void init_timer2(void) {
-PIR1bits.ADIF = 0;
-T2CONbits.T2CKPS = 0b00;
-T2CONbits.T2OUTPS = 0b0000;
-T2CONbits.TMR2ON = 1;
+void setBoostState(int f_state) {
+boost_state = f_state;
+LATCbits.LATC5 = f_state;
+LATCbits.LATC4 = !f_state;
+LATCbits.LATC0 = f_state;
 }
-
-void init_adc(void) {
-ADCON1bits.ADFM = 0b1;
-ADCON1bits.ADCS = 0b110;
-ADCON1bits.ADPREF = 0b00;
-ADCON0bits.ADON = 0b1;
-}
-
-uint16_t adc_convert(uint8_t channel) {
-ADCON0bits.CHS = channel;
-ADCON0bits.GO = 0b1;
-while (ADCON0bits.GO_nDONE);
-return (ADRESH << 8) | ADRESL;
-}
-

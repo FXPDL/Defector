@@ -3877,7 +3877,7 @@ void InitApp(void);
 void init_timer2(void);
 void init_adc(void);
 
-# 22 "user.c"
+# 27 "user.c"
 void InitApp(void) {
 TRISAbits.TRISA0 = 0;
 TRISAbits.TRISA1 = 0;

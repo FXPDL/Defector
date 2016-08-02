@@ -3882,65 +3882,32 @@ void InitApp(void);
 void init_timer2(void);
 void init_adc(void);
 
-# 30 "main.c"
-int debounce_count_fuzz = 0;
-int debounce_count_boost = 0;
+# 35 "./mcc_generated_files/fuzz.h"
+void initFuzz(void);
+void updateFuzz(int);
+void setFuzzState(int);
+void setFeedbackState(int);
 
-int fuzz_state = 0;
-int boost_state = 0;
-int feedback_state = 0;
+# 30 "./mcc_generated_files/boost.h"
+void initBoost(void);
+void updateBoost(int);
+void setBoostState(int);
 
-# 42
+# 20 "main.c"
+int debounce_limit = 25;
+
+# 27
 void main(void) {
 ConfigureOscillator();
 InitApp();
 
-LATCbits.LATC4 = 0;
-LATCbits.LATC0 = 0;
-LATCbits.LATC1 = 0;
-LATCbits.LATC2 = 0;
+initFuzz();
+initBoost();
 
-
-LATCbits.LATC4 = !boost_state;
-LATCbits.LATC0 = boost_state;
-LATCbits.LATC5 = boost_state;
-
-LATCbits.LATC1 = !fuzz_state;
-LATCbits.LATC2 = fuzz_state;
-LATAbits.LATA2 = fuzz_state;
-
-# 67
 while (1) {
-if (PORTAbits.RA4 == 0) {
-debounce_count_fuzz++;
-if (debounce_count_fuzz > 25) {
-fuzz_state = !fuzz_state;
-LATAbits.LATA2 = !fuzz_state;
-LATCbits.LATC1 = fuzz_state;
-LATCbits.LATC2 = !fuzz_state;
-while (PORTAbits.RA4 == 0) {
-wait_ms(20);
-}
-}
-} else {
-debounce_count_fuzz = 0;
-}
+updateFuzz(debounce_limit);
+updateBoost(debounce_limit);
 
-# 94
-if (PORTAbits.RA5 == 0) {
-debounce_count_boost++;
-if (debounce_count_boost > 25) {
-boost_state = !boost_state;
-LATCbits.LATC5 = !boost_state;
-LATCbits.LATC4 = boost_state;
-LATCbits.LATC0 = !boost_state;
-while (PORTAbits.RA5 == 0) {
-wait_ms(20);
-}
-}
-} else {
-debounce_count_boost = 0;
-}
 }
 
 }

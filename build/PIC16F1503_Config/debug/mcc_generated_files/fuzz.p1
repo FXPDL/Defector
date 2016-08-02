@@ -1,0 +1,12 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"2 mcc_generated_files/fuzz.c
+[v _checkFuzz `(v ~T0 @X0 1 ef1`i ]
+{
+[; ;fuzz.c: 2: void checkFuzz(int fuzz_state) {
+[e :U _checkFuzz ]
+[v _fuzz_state `i ~T0 @X0 1 r1 ]
+[f ]
+[; ;fuzz.c: 6: }
+"6
+[e :UE 1 ]
+}

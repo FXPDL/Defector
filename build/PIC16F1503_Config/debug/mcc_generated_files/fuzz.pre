@@ -1,0 +1,8 @@
+
+# 1 "mcc_generated_files/fuzz.c"
+
+void checkFuzz(int fuzz_state) {
+
+
+
+}

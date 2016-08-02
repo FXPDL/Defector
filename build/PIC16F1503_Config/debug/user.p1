@@ -2912,124 +2912,124 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.h: 13: void InitApp(void);
 [; ;user.h: 14: void init_timer2(void);
 [; ;user.h: 15: void init_adc(void);
-"22 user.c
+"27 user.c
 [v _InitApp `(v ~T0 @X0 1 ef ]
 {
-[; ;user.c: 22: void InitApp(void) {
+[; ;user.c: 27: void InitApp(void) {
 [e :U _InitApp ]
 [f ]
-[; ;user.c: 23: TRISAbits.TRISA0 = 0;
-"23
-[e = . . _TRISAbits 0 0 -> -> 0 `i `uc ]
-[; ;user.c: 24: TRISAbits.TRISA1 = 0;
-"24
-[e = . . _TRISAbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 26: TRISAbits.TRISA2 = 0;
-"26
-[e = . . _TRISAbits 0 2 -> -> 0 `i `uc ]
-[; ;user.c: 27: TRISAbits.TRISA4 = 1;
-"27
-[e = . . _TRISAbits 0 4 -> -> 1 `i `uc ]
-[; ;user.c: 28: TRISAbits.TRISA5 = 1;
+[; ;user.c: 28: TRISAbits.TRISA0 = 0;
 "28
-[e = . . _TRISAbits 0 5 -> -> 1 `i `uc ]
-[; ;user.c: 29: ANSELAbits.ANSA4 = 0;
+[e = . . _TRISAbits 0 0 -> -> 0 `i `uc ]
+[; ;user.c: 29: TRISAbits.TRISA1 = 0;
 "29
-[e = . . _ANSELAbits 0 4 -> -> 0 `i `uc ]
-[; ;user.c: 31: TRISCbits.TRISC0 = 0;
+[e = . . _TRISAbits 0 1 -> -> 0 `i `uc ]
+[; ;user.c: 31: TRISAbits.TRISA2 = 0;
 "31
-[e = . . _TRISCbits 0 0 -> -> 0 `i `uc ]
-[; ;user.c: 32: TRISCbits.TRISC1 = 0;
+[e = . . _TRISAbits 0 2 -> -> 0 `i `uc ]
+[; ;user.c: 32: TRISAbits.TRISA4 = 1;
 "32
-[e = . . _TRISCbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 33: TRISCbits.TRISC2 = 0;
+[e = . . _TRISAbits 0 4 -> -> 1 `i `uc ]
+[; ;user.c: 33: TRISAbits.TRISA5 = 1;
 "33
-[e = . . _TRISCbits 0 2 -> -> 0 `i `uc ]
-[; ;user.c: 34: TRISCbits.TRISC3 = 0;
+[e = . . _TRISAbits 0 5 -> -> 1 `i `uc ]
+[; ;user.c: 34: ANSELAbits.ANSA4 = 0;
 "34
-[e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
-[; ;user.c: 35: TRISCbits.TRISC4 = 0;
-"35
-[e = . . _TRISCbits 0 4 -> -> 0 `i `uc ]
-[; ;user.c: 36: TRISCbits.TRISC5 = 0;
+[e = . . _ANSELAbits 0 4 -> -> 0 `i `uc ]
+[; ;user.c: 36: TRISCbits.TRISC0 = 0;
 "36
-[e = . . _TRISCbits 0 5 -> -> 0 `i `uc ]
-[; ;user.c: 38: init_adc();
+[e = . . _TRISCbits 0 0 -> -> 0 `i `uc ]
+[; ;user.c: 37: TRISCbits.TRISC1 = 0;
+"37
+[e = . . _TRISCbits 0 1 -> -> 0 `i `uc ]
+[; ;user.c: 38: TRISCbits.TRISC2 = 0;
 "38
-[e ( _init_adc ..  ]
-[; ;user.c: 40: }
+[e = . . _TRISCbits 0 2 -> -> 0 `i `uc ]
+[; ;user.c: 39: TRISCbits.TRISC3 = 0;
+"39
+[e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
+[; ;user.c: 40: TRISCbits.TRISC4 = 0;
 "40
+[e = . . _TRISCbits 0 4 -> -> 0 `i `uc ]
+[; ;user.c: 41: TRISCbits.TRISC5 = 0;
+"41
+[e = . . _TRISCbits 0 5 -> -> 0 `i `uc ]
+[; ;user.c: 43: init_adc();
+"43
+[e ( _init_adc ..  ]
+[; ;user.c: 45: }
+"45
 [e :UE 342 ]
 }
-"43
+"48
 [v _init_timer2 `(v ~T0 @X0 1 ef ]
 {
-[; ;user.c: 43: void init_timer2(void) {
+[; ;user.c: 48: void init_timer2(void) {
 [e :U _init_timer2 ]
 [f ]
-[; ;user.c: 44: PIR1bits.ADIF = 0;
-"44
+[; ;user.c: 49: PIR1bits.ADIF = 0;
+"49
 [e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-[; ;user.c: 45: T2CONbits.T2CKPS = 0b00;
-"45
+[; ;user.c: 50: T2CONbits.T2CKPS = 0b00;
+"50
 [e = . . _T2CONbits 0 0 -> -> 0 `i `uc ]
-[; ;user.c: 46: T2CONbits.T2OUTPS = 0b0000;
-"46
+[; ;user.c: 51: T2CONbits.T2OUTPS = 0b0000;
+"51
 [e = . . _T2CONbits 0 2 -> -> 0 `i `uc ]
-[; ;user.c: 47: T2CONbits.TMR2ON = 1;
-"47
+[; ;user.c: 52: T2CONbits.TMR2ON = 1;
+"52
 [e = . . _T2CONbits 0 1 -> -> 1 `i `uc ]
-[; ;user.c: 48: }
-"48
+[; ;user.c: 53: }
+"53
 [e :UE 343 ]
 }
-"50
+"55
 [v _init_adc `(v ~T0 @X0 1 ef ]
 {
-[; ;user.c: 50: void init_adc(void) {
+[; ;user.c: 55: void init_adc(void) {
 [e :U _init_adc ]
 [f ]
-[; ;user.c: 51: ADCON1bits.ADFM = 0b1;
-"51
+[; ;user.c: 56: ADCON1bits.ADFM = 0b1;
+"56
 [e = . . _ADCON1bits 0 3 -> -> 1 `i `uc ]
-[; ;user.c: 52: ADCON1bits.ADCS = 0b110;
-"52
+[; ;user.c: 57: ADCON1bits.ADCS = 0b110;
+"57
 [e = . . _ADCON1bits 0 2 -> -> 6 `i `uc ]
-[; ;user.c: 53: ADCON1bits.ADPREF = 0b00;
-"53
+[; ;user.c: 58: ADCON1bits.ADPREF = 0b00;
+"58
 [e = . . _ADCON1bits 0 0 -> -> 0 `i `uc ]
-[; ;user.c: 54: ADCON0bits.ADON = 0b1;
-"54
+[; ;user.c: 59: ADCON0bits.ADON = 0b1;
+"59
 [e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
-[; ;user.c: 55: }
-"55
+[; ;user.c: 60: }
+"60
 [e :UE 344 ]
 }
-"57
+"62
 [v _adc_convert `(ui ~T0 @X0 1 ef1`uc ]
 {
-[; ;user.c: 57: uint16_t adc_convert(uint8_t channel) {
+[; ;user.c: 62: uint16_t adc_convert(uint8_t channel) {
 [e :U _adc_convert ]
 [v _channel `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;user.c: 58: ADCON0bits.CHS = channel;
-"58
+[; ;user.c: 63: ADCON0bits.CHS = channel;
+"63
 [e = . . _ADCON0bits 0 2 _channel ]
-[; ;user.c: 59: ADCON0bits.GO = 0b1;
-"59
+[; ;user.c: 64: ADCON0bits.GO = 0b1;
+"64
 [e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-[; ;user.c: 60: while (ADCON0bits.GO_nDONE);
-"60
+[; ;user.c: 65: while (ADCON0bits.GO_nDONE);
+"65
 [e $U 346  ]
 [e :U 347 ]
 [e :U 346 ]
 [e $ != -> . . _ADCON0bits 0 1 `i -> -> -> 0 `i `Vuc `i 347  ]
 [e :U 348 ]
-[; ;user.c: 61: return (ADRESH << 8) | ADRESL;
-"61
+[; ;user.c: 66: return (ADRESH << 8) | ADRESL;
+"66
 [e ) -> | << -> _ADRESH `i -> 8 `i -> _ADRESL `i `ui ]
 [e $UE 345  ]
-[; ;user.c: 62: }
-"62
+[; ;user.c: 67: }
+"67
 [e :UE 345 ]
 }
