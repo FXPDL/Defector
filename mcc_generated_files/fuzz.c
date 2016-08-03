@@ -25,16 +25,19 @@ int fuzz_turning_on = 0;
 int long_press_limit = 20000000; 
 
 void initFuzz(void) {
-    fuzz_state = 0;
+   /*  fuzz_state = 0;
     Fuzz_LED = 0;
-    Relay_Fuzz1 = 0; //off
-    Relay_Fuzz10 = 1; //off
+   Relay_Fuzz1 = 0; //off
+    Relay_Fuzz10 = 1; //off*/
+    setFuzzState(0);
     
     
-    feedback_state = 0;
+   /* feedback_state = 0;
     Feedback_LED = 0;
     Relay_Feedback1 = 0;//off 
-    Relay_Feedback10 = 1;//off
+    Relay_Feedback10 = 1;//off*/
+    
+    setFeedbackState(0);
 
 }
 
@@ -83,13 +86,13 @@ void updateFuzz(int debounce_limit) {
         
         fuzz_up = 0;
     } else if (fuzz_pressed >= debounce_limit) {
-
-        //when the switch is up, Feedback is definitely off.  If the toggle for fuzz is true, then turn the fuzz off.
-        setFeedbackState(0);
-        if (fuzz_toggle == 1 && feedback_state == 0) {
+        int fb_state = feedback_state;
+        if (fuzz_toggle == 1 && fb_state == 0) {
             setFuzzState(0);
         }
         Fuzz_LED = fuzz_state;
+        //when the switch is up, Feedback is definitely off.  If the toggle for fuzz is true, then turn the fuzz off.
+        setFeedbackState(0);
         fuzz_turning_on = 0;
         fuzz_toggle = 0;
         fuzz_up = 1;
@@ -99,18 +102,36 @@ void updateFuzz(int debounce_limit) {
 }
 
 void setFuzzState(int f_state) {
+    if (fuzz_state == f_state) {return;}
     fuzz_state = f_state;
     Fuzz_LED = f_state;
     Relay_Fuzz1 = f_state;
     Relay_Fuzz10 = !f_state;
     
+    wait_ms(relay_delay);
+    
+    Relay_Fuzz1 = 0;
+    Relay_Fuzz10 = 0;  
+    
+        
+    wait_ms(relay_delay);
 }
 
 
 void setFeedbackState(int f_state) {
+    if (feedback_state == f_state) {return;}
     feedback_state = f_state;
     Feedback_LED = f_state;
     Relay_Feedback1 = f_state;
     Relay_Feedback10 = !f_state;
     
+      wait_ms(relay_delay);
+    
+    Relay_Feedback1 = 0;
+    Relay_Feedback10 = 0;  
+    
+        
+    wait_ms(relay_delay);
+    
 }
+ 

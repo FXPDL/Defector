@@ -1,17 +1,17 @@
 
 # 1 "mcc_generated_files/fuzz.c"
 
-# 26 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\htc.h"
+# 26 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
 extern double __fpnormalize(double);
 
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\xc8debug.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\xc8debug.h"
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 
-# 49 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic16f1503.h"
+# 49 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f1503.h"
 extern volatile unsigned char INDF0 @ 0x000;
 
 asm("INDF0 equ 00h");
@@ -3762,7 +3762,7 @@ extern volatile __bit nTO @ (((unsigned) &STATUS)*8) + 4;
 extern volatile __bit nWPUEN @ (((unsigned) &OPTION_REG)*8) + 7;
 
 
-# 27 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic.h"
+# 27 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic.h"
 #pragma intrinsic(__nop)
 extern void __nop(void);
 
@@ -3779,7 +3779,102 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 35 "mcc_generated_files/fuzz.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdint.h"
+typedef signed char int8_t;
+
+# 20
+typedef signed int int16_t;
+
+# 28
+typedef signed short long int int24_t;
+
+# 36
+typedef signed long int int32_t;
+
+# 43
+typedef unsigned char uint8_t;
+
+# 49
+typedef unsigned int uint16_t;
+
+# 56
+typedef unsigned short long int uint24_t;
+
+# 63
+typedef unsigned long int uint32_t;
+
+# 71
+typedef signed char int_least8_t;
+
+# 78
+typedef signed int int_least16_t;
+
+# 90
+typedef signed short long int int_least24_t;
+
+# 98
+typedef signed long int int_least32_t;
+
+# 105
+typedef unsigned char uint_least8_t;
+
+# 111
+typedef unsigned int uint_least16_t;
+
+# 121
+typedef unsigned short long int uint_least24_t;
+
+# 128
+typedef unsigned long int uint_least32_t;
+
+# 137
+typedef signed char int_fast8_t;
+
+# 144
+typedef signed int int_fast16_t;
+
+# 156
+typedef signed short long int int_fast24_t;
+
+# 164
+typedef signed long int int_fast32_t;
+
+# 171
+typedef unsigned char uint_fast8_t;
+
+# 177
+typedef unsigned int uint_fast16_t;
+
+# 187
+typedef unsigned short long int uint_fast24_t;
+
+# 194
+typedef unsigned long int uint_fast32_t;
+
+# 200
+typedef int32_t intmax_t;
+
+
+
+
+typedef uint32_t uintmax_t;
+
+
+
+
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
+
+# 18 "mcc_generated_files/../system.h"
+void ConfigureOscillator(void);
+void wait_ms(uint16_t);
+uint16_t adc_convert(uint8_t);
+
+# 39 "mcc_generated_files/fuzz.h"
 void initFuzz(void);
 void updateFuzz(int);
 void setFuzzState(int);
@@ -3798,21 +3893,18 @@ int fuzz_turning_on = 0;
 int long_press_limit = 20000000;
 
 void initFuzz(void) {
-fuzz_state = 0;
-LATAbits.LATA2 = 0;
-LATCbits.LATC1 = 1;
-LATCbits.LATC2 = 0;
 
-feedback_state = 0;
-LATCbits.LATC3 = 0;
-LATAbits.LATA0 = 0;
-LATAbits.LATA1 = 1;
+# 32
+setFuzzState(0);
+
+# 40
+setFeedbackState(0);
 
 }
 
 void updateFuzz(int debounce_limit) {
 
-# 47
+# 51
 if (PORTAbits.RA4 == 0) {
 if (fuzz_pressed > 0) {
 fuzz_pressed--;
@@ -3822,7 +3914,7 @@ fuzz_pressed++;
 
 }
 
-# 60
+# 64
 if (fuzz_pressed == 0) {
 
 fuzz_down++;
@@ -3848,13 +3940,13 @@ feedback_state = 0;
 
 fuzz_up = 0;
 } else if (fuzz_pressed >= debounce_limit) {
-
-
-setFeedbackState(0);
-if (fuzz_toggle == 1 && feedback_state == 0) {
+int fb_state = feedback_state;
+if (fuzz_toggle == 1 && fb_state == 0) {
 setFuzzState(0);
 }
 LATAbits.LATA2 = fuzz_state;
+
+setFeedbackState(0);
 fuzz_turning_on = 0;
 fuzz_toggle = 0;
 fuzz_up = 1;
@@ -3864,16 +3956,36 @@ fuzz_pressed = debounce_limit;
 }
 
 void setFuzzState(int f_state) {
+if (fuzz_state == f_state) {return;}
 fuzz_state = f_state;
 LATAbits.LATA2 = f_state;
-LATCbits.LATC1 = !f_state;
 LATCbits.LATC2 = f_state;
+LATCbits.LATC1 = !f_state;
+
+wait_ms(20);
+
+LATCbits.LATC2 = 0;
+LATCbits.LATC1 = 0;
+
+
+wait_ms(20);
 }
 
 
 void setFeedbackState(int f_state) {
+if (feedback_state == f_state) {return;}
 feedback_state = f_state;
 LATCbits.LATC3 = f_state;
-LATAbits.LATA0 = !f_state;
-LATAbits.LATA1 = f_state;
+LATAbits.LATA0 = f_state;
+LATAbits.LATA1 = !f_state;
+
+wait_ms(20);
+
+LATAbits.LATA0 = 0;
+LATAbits.LATA1 = 0;
+
+
+wait_ms(20);
+
 }
+

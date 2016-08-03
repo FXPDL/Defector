@@ -1,5 +1,5 @@
 
-# 1 "main.c"
+# 1 "mcc_generated_files/boost.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -3869,55 +3869,67 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdbool.h"
-typedef unsigned char bool;
-
-# 18 "system.h"
+# 18 "mcc_generated_files/../system.h"
 void ConfigureOscillator(void);
 void wait_ms(uint16_t);
 uint16_t adc_convert(uint8_t);
 
-# 13 "user.h"
-void InitApp(void);
-void init_timer2(void);
-void init_adc(void);
-
-# 18 "./mcc_generated_files/../system.h"
-void ConfigureOscillator(void);
-void wait_ms(uint16_t);
-uint16_t adc_convert(uint8_t);
-
-# 39 "./mcc_generated_files/fuzz.h"
-void initFuzz(void);
-void updateFuzz(int);
-void setFuzzState(int);
-void setFeedbackState(int);
-
-# 18 "./mcc_generated_files/../system.h"
-void ConfigureOscillator(void);
-void wait_ms(uint16_t);
-uint16_t adc_convert(uint8_t);
-
-# 33 "./mcc_generated_files/boost.h"
+# 32 "mcc_generated_files/boost.h"
 void initBoost(void);
 void updateBoost(int);
 void setBoostState(int);
 
-# 21 "main.c"
-int debounce_limit = 25;
+# 15 "mcc_generated_files/boost.c"
+int boost_state = 0;
 
-# 28
-void main(void) {
-ConfigureOscillator();
-InitApp();
+int boost_pressed = 0;
+int boost_up = 1;
+int boost_down = 0;
+int last_boost_state = 0;
 
-initFuzz();
-initBoost();
+void initBoost(void) {
+setBoostState(0);
+}
 
-while (1) {
-updateFuzz(debounce_limit);
-updateBoost(debounce_limit);
+void updateBoost(int debounce_limit) {
+
+# 33
+if (PORTAbits.RA5 == 0) {
+if (boost_pressed > 0) {
+boost_pressed--;
+}
+} else if (boost_pressed < debounce_limit) {
+boost_pressed++;
+}
+
+# 45
+if (boost_pressed == 0) {
+boost_down = 1;
+if (boost_up == 1) {
+setBoostState(!boost_state);
+}
+boost_up = 0;
+} else if (boost_pressed >= debounce_limit) {
+boost_up = 1;
+boost_down = 0;
+boost_pressed = debounce_limit;
+}
+
 
 }
 
+
+void setBoostState(int f_state) {
+if (boost_state == f_state) {return;}
+boost_state = f_state;
+LATCbits.LATC5 = f_state;
+LATCbits.LATC0 = f_state;
+LATCbits.LATC4 = !f_state;
+
+wait_ms(10);
+
+LATCbits.LATC0 = 0;
+LATCbits.LATC4 = 0;
+
+wait_ms(10);
 }

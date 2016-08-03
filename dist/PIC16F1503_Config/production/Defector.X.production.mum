@@ -1,9 +1,9 @@
 
 Memory Summary:
-    Program space        used   1C5h (   453) of   800h words   ( 22.1%)
-    Data space           used    29h (    41) of    80h bytes   ( 32.0%)
+    Program space        used   268h (   616) of   800h words   ( 30.1%)
+    Data space           used    38h (    56) of    80h bytes   ( 43.8%)
     EEPROM space         None available
-    Data stack space     used     0h (     0) of    56h bytes   (  0.0%)
+    Data stack space     used     0h (     0) of    47h bytes   (  0.0%)
     Configuration bits   used     2h (     2) of     2h words   (100.0%)
     ID Location space    used     0h (     0) of     4h bytes   (  0.0%)
 

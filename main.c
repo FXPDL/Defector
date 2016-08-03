@@ -12,6 +12,7 @@
 #include <stdbool.h>       /* For true/false definition */
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "user.h"          /* User funct/params, such as InitApp */
+          
 #include "./mcc_generated_files/fuzz.h"          /* Fuzz control */
 #include "./mcc_generated_files/boost.h"          /* Boost control */
 
@@ -27,7 +28,7 @@ int debounce_limit = 25;
 void main(void) {
     ConfigureOscillator();
     InitApp();
-    
+     
     initFuzz();
     initBoost();
     

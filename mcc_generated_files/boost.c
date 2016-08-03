@@ -8,6 +8,7 @@
 #include <htc.h>        /* HiTech General Include File */
 #endif
 
+ 
 #include "boost.h"
 
 
@@ -19,12 +20,7 @@ int boost_down = 0;
 int last_boost_state = 0;
 
 void initBoost(void) {
-    boost_state = 0;
-    Boost_LED = 0;
-    Relay_Boost1 = 0; //off
-    Relay_Boost10 = 1; //off
-    
-
+    setBoostState(0);
 }
 
 void updateBoost(int debounce_limit) {
@@ -47,7 +43,6 @@ void updateBoost(int debounce_limit) {
     0 or MAXIMUM. */
 
     if (boost_pressed == 0) {
-        // Fuzz_LED = 0;
         boost_down = 1;
         if (boost_up == 1) {
             setBoostState(!boost_state);
@@ -64,8 +59,16 @@ void updateBoost(int debounce_limit) {
 
 
 void setBoostState(int f_state) {
+    if (boost_state == f_state) {return;}
     boost_state = f_state;
     Boost_LED = f_state;
+     Relay_Boost1 = f_state;
     Relay_Boost10 = !f_state;
-    Relay_Boost1 = f_state;
+
+    wait_ms(relay_delay);
+
+    Relay_Boost1 = 0;
+    Relay_Boost10 = 0;
+
+    wait_ms(relay_delay);
 }

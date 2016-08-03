@@ -4,19 +4,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
 "13 user.h
 [v _InitApp `(v ~T0 @X0 0 ef ]
-"35 ./mcc_generated_files/fuzz.h
+"39 ./mcc_generated_files/fuzz.h
 [v _initFuzz `(v ~T0 @X0 0 ef ]
-"30 ./mcc_generated_files/boost.h
+"33 ./mcc_generated_files/boost.h
 [v _initBoost `(v ~T0 @X0 0 ef ]
-"36 ./mcc_generated_files/fuzz.h
+"40 ./mcc_generated_files/fuzz.h
 [v _updateFuzz `(v ~T0 @X0 0 ef1`i ]
-"31 ./mcc_generated_files/boost.h
+"34 ./mcc_generated_files/boost.h
 [v _updateBoost `(v ~T0 @X0 0 ef1`i ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f1503.h: 49: extern volatile unsigned char INDF0 @ 0x000;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic16f1503.h
+"51 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f1503.h
 [; ;pic16f1503.h: 51: asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
 [; ;pic16f1503.h: 54: typedef union {
@@ -2851,55 +2851,61 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;user.h: 13: void InitApp(void);
 [; ;user.h: 14: void init_timer2(void);
 [; ;user.h: 15: void init_adc(void);
-[; ;fuzz.h: 35: void initFuzz(void);
-[; ;fuzz.h: 36: void updateFuzz(int);
-[; ;fuzz.h: 37: void setFuzzState(int);
-[; ;fuzz.h: 38: void setFeedbackState(int);
-[; ;boost.h: 30: void initBoost(void);
-[; ;boost.h: 31: void updateBoost(int);
-[; ;boost.h: 32: void setBoostState(int);
-"20 main.c
+[; ;system.h: 18: void ConfigureOscillator(void);
+[; ;system.h: 19: void wait_ms(uint16_t);
+[; ;system.h: 20: uint16_t adc_convert(uint8_t);
+[; ;fuzz.h: 39: void initFuzz(void);
+[; ;fuzz.h: 40: void updateFuzz(int);
+[; ;fuzz.h: 41: void setFuzzState(int);
+[; ;fuzz.h: 42: void setFeedbackState(int);
+[; ;system.h: 18: void ConfigureOscillator(void);
+[; ;system.h: 19: void wait_ms(uint16_t);
+[; ;system.h: 20: uint16_t adc_convert(uint8_t);
+[; ;boost.h: 33: void initBoost(void);
+[; ;boost.h: 34: void updateBoost(int);
+[; ;boost.h: 35: void setBoostState(int);
+"21 main.c
 [v _debounce_limit `i ~T0 @X0 1 e ]
 [i _debounce_limit
 -> 25 `i
 ]
-[; ;main.c: 20: int debounce_limit = 25;
-"27
+[; ;main.c: 21: int debounce_limit = 25;
+"28
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 27: void main(void) {
+[; ;main.c: 28: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 28: ConfigureOscillator();
-"28
-[e ( _ConfigureOscillator ..  ]
-[; ;main.c: 29: InitApp();
+[; ;main.c: 29: ConfigureOscillator();
 "29
+[e ( _ConfigureOscillator ..  ]
+[; ;main.c: 30: InitApp();
+"30
 [e ( _InitApp ..  ]
-[; ;main.c: 31: initFuzz();
-"31
-[e ( _initFuzz ..  ]
-[; ;main.c: 32: initBoost();
+[; ;main.c: 32: initFuzz();
 "32
+[e ( _initFuzz ..  ]
+[; ;main.c: 33: initBoost();
+"33
 [e ( _initBoost ..  ]
-[; ;main.c: 34: while (1) {
-"34
+[; ;main.c: 35: while (1) {
+"35
 [e :U 344 ]
 {
-[; ;main.c: 35: updateFuzz(debounce_limit);
-"35
-[e ( _updateFuzz (1 _debounce_limit ]
-[; ;main.c: 36: updateBoost(debounce_limit);
+[; ;main.c: 36: updateFuzz(debounce_limit);
 "36
+[e ( _updateFuzz (1 _debounce_limit ]
+[; ;main.c: 37: updateBoost(debounce_limit);
+"37
 [e ( _updateBoost (1 _debounce_limit ]
-"38
+"39
 }
 [e :U 343 ]
-"34
+"35
 [e $U 344  ]
 [e :U 345 ]
-[; ;main.c: 38: }
-[; ;main.c: 40: }
-"40
+[; ;main.c: 39: }
+[; ;main.c: 41: }
+"41
 [e :UE 342 ]
 }

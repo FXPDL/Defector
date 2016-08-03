@@ -21,7 +21,11 @@ extern "C" {
 
 #endif	/* BOOST_H */
 
-#define Boost_LED LATCbits.LATC5
+#include <stdint.h>        /* For uint8_t definition */
+#include "../system.h"
+#include "hardware_controls.h"
+
+#define Boost_LED  LATCbits.LATC5
 #define Boost_Stomp PORTAbits.RA5
 #define Relay_Boost1 LATCbits.LATC0
 #define Relay_Boost10 LATCbits.LATC4

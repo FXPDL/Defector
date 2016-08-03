@@ -21,6 +21,10 @@ extern "C" {
 
 #endif	/* FUZZ_H */
 
+#include <stdint.h>        /* For uint8_t definition */
+#include "../system.h"
+#include "hardware_controls.h"
+
 #define Fuzz_LED LATAbits.LATA2
 #define Feedback_LED LATCbits.LATC3
 

@@ -3882,142 +3882,41 @@ void InitApp(void);
 void init_timer2(void);
 void init_adc(void);
 
-# 32 "main.c"
-int debounce_count_fuzz = 0;
-int debounce_count_boost = 0;
+# 18 "./mcc_generated_files/../system.h"
+void ConfigureOscillator(void);
+void wait_ms(uint16_t);
+uint16_t adc_convert(uint8_t);
 
-int fuzz_state = 0;
-int boost_state = 0;
-int feedback_state = 0;
+# 38 "./mcc_generated_files/fuzz.h"
+void initFuzz(void);
+void updateFuzz(int);
+void setFuzzState(int);
+void setFeedbackState(int);
 
-int fuzz_pressed = 0;
-int fuzz_up = 1;
-int fuzz_down = 0;
-int fuzz_toggle = 0;
-int fuzz_turning_on = 0;
+# 18 "./mcc_generated_files/../system.h"
+void ConfigureOscillator(void);
+void wait_ms(uint16_t);
+uint16_t adc_convert(uint8_t);
 
+# 32 "./mcc_generated_files/boost.h"
+void initBoost(void);
+void updateBoost(int);
+void setBoostState(int);
 
-int feedback_on = 0;
-
-
-int boost_pressed = 0;
-int boost_up = 1;
-int boost_down = 0;
-int last_boost_state = 0;
-
+# 21 "main.c"
 int debounce_limit = 25;
-int long_press_limit = 20000000;
 
-# 61
+# 28
 void main(void) {
 ConfigureOscillator();
 InitApp();
 
-LATCbits.LATC4 = 0;
-LATCbits.LATC0 = 0;
-LATCbits.LATC1 = 0;
-LATCbits.LATC2 = 0;
+initFuzz();
+initBoost();
 
-
-LATCbits.LATC4 = !boost_state;
-LATCbits.LATC0 = boost_state;
-LATCbits.LATC5 = boost_state;
-
-
-
-LATAbits.LATA2 = 0;
-
-# 86
 while (1) {
-
-# 92
-if (PORTAbits.RA4 == 0) {
-if (fuzz_pressed > 0) {
-fuzz_pressed--;
-}
-} else if (fuzz_pressed < debounce_limit) {
-fuzz_pressed++;
-
-}
-
-# 106
-if (fuzz_pressed == 0 ) {
-
-fuzz_down++;
-if (fuzz_state == 1) {
-if (fuzz_up == 1) {fuzz_toggle = 1; }
-
-if (fuzz_down >= long_press_limit && feedback_on == 0 && fuzz_turning_on == 0) {
-
-fuzz_down = long_press_limit;
-feedback_on = 1;
-LATAbits.LATA2 = 0;
-LATCbits.LATC3 = 1;
-LATAbits.LATA0 = 1;
-LATAbits.LATA1 = 0;
-}
-} else {
-
-fuzz_turning_on = 1;
-fuzz_state = 1;
-fuzz_toggle = 0;
-LATAbits.LATA2 = fuzz_state;
-LATCbits.LATC1 = fuzz_state;
-LATCbits.LATC2 = !fuzz_state;
-feedback_on = 0;
-}
-
-# 138
-fuzz_up = 0;
-} else if (fuzz_pressed >= debounce_limit) {
-
-
-LATCbits.LATC3 = 0;
-LATAbits.LATA0 = 0;
-LATAbits.LATA1 = 1;
-if (fuzz_toggle == 1 && feedback_on == 0) {
-fuzz_state = 0;
-
-LATCbits.LATC1 = fuzz_state;
-LATCbits.LATC2 = !fuzz_state;
-}
-LATAbits.LATA2 = fuzz_state;
-fuzz_turning_on = 0;
-fuzz_toggle = 0;
-fuzz_up = 1;
-fuzz_down = 0;
-feedback_on = 0;
-fuzz_pressed = debounce_limit;
-}
-
-# 165
-if (PORTAbits.RA5 == 0) {
-if (boost_pressed > 0) {
-boost_pressed--;
-
-}
-} else if (boost_pressed < debounce_limit) {
-boost_pressed++;
-
-}
-
-# 180
-if (boost_pressed == 0) {
-
-boost_down = 1;
-if (boost_up == 1) {
-boost_state = !boost_state;
-LATCbits.LATC5 = !boost_state;
-LATCbits.LATC4 = boost_state;
-LATCbits.LATC0 = !boost_state;
-}
-boost_up = 0;
-} else if (boost_pressed >= debounce_limit) {
-
-boost_up = 1;
-boost_down = 0;
-boost_pressed = debounce_limit;
-}
+updateFuzz(debounce_limit);
+updateBoost(debounce_limit);
 
 }
 
