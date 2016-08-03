@@ -66,6 +66,6 @@ void updateBoost(int debounce_limit) {
 void setBoostState(int f_state) {
     boost_state = f_state;
     Boost_LED = f_state;
-    Relay_Boost1 = !f_state;
-    Relay_Boost2 = f_state;
+    Relay_Boost10 = !f_state;
+    Relay_Boost1 = f_state;
 }
