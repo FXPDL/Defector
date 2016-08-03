@@ -27,13 +27,14 @@ int long_press_limit = 20000000;
 void initFuzz(void) {
     fuzz_state = 0;
     Fuzz_LED = 0;
-    Relay_Fuzz1 = 1; //off
-    Relay_Fuzz2 = 0; //off
+    Relay_Fuzz1 = 0; //off
+    Relay_Fuzz10 = 1; //off
+    
     
     feedback_state = 0;
     Feedback_LED = 0;
-    Relay_Feedback1 = 1;//off
-    Relay_Feedback2 = 0;//off   
+    Relay_Feedback1 = 0;//off 
+    Relay_Feedback10 = 1;//off
 
 }
 
@@ -100,14 +101,16 @@ void updateFuzz(int debounce_limit) {
 void setFuzzState(int f_state) {
     fuzz_state = f_state;
     Fuzz_LED = f_state;
-    Relay_Fuzz1 = !f_state;
-    Relay_Fuzz2 = f_state;
+    Relay_Fuzz1 = f_state;
+    Relay_Fuzz10 = !f_state;
+    
 }
 
 
 void setFeedbackState(int f_state) {
     feedback_state = f_state;
     Feedback_LED = f_state;
-    Relay_Feedback1 = !f_state;
-    Relay_Feedback2 = f_state;
+    Relay_Feedback1 = f_state;
+    Relay_Feedback10 = !f_state;
+    
 }

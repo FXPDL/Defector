@@ -21,8 +21,9 @@ int last_boost_state = 0;
 void initBoost(void) {
     boost_state = 0;
     Boost_LED = 0;
-    Relay_Boost1 = 1; //off
-    Relay_Boost2 = 0; //off
+    Relay_Boost1 = 0; //off
+    Relay_Boost10 = 1; //off
+    
 
 }
 

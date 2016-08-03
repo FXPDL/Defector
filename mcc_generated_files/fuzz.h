@@ -26,10 +26,10 @@ extern "C" {
 
 #define Fuzz_Stomp PORTAbits.RA4
 
-#define Relay_Fuzz1 LATCbits.LATC1
-#define Relay_Fuzz2 LATCbits.LATC2
-#define Relay_Feedback1 LATAbits.LATA1
-#define Relay_Feedback2 LATAbits.LATA0
+#define Relay_Fuzz10 LATCbits.LATC1
+#define Relay_Fuzz1 LATCbits.LATC2
+#define Relay_Feedback10 LATAbits.LATA1
+#define Relay_Feedback1 LATAbits.LATA0
 
 
 void initFuzz(void);

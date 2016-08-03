@@ -23,9 +23,8 @@ extern "C" {
 
 #define Boost_LED LATCbits.LATC5
 #define Boost_Stomp PORTAbits.RA5
-
-#define Relay_Boost1 LATCbits.LATC4
-#define Relay_Boost2 LATCbits.LATC0
+#define Relay_Boost1 LATCbits.LATC0
+#define Relay_Boost10 LATCbits.LATC4
 
 void initBoost(void);
 void updateBoost(int);
