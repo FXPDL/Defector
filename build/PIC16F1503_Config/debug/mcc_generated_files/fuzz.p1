@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"40 mcc_generated_files/fuzz.h
+"41 mcc_generated_files/fuzz.h
 [v _setFuzzState `(v ~T0 @X0 0 ef1`i ]
-"41
+"42
 [v _setFeedbackState `(v ~T0 @X0 0 ef1`i ]
 "420 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f1503.h
 [s S30 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -27,6 +27,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S97 . . ]
 "1707
 [v _LATCbits `VS97 ~T0 @X0 0 e@270 ]
+"19 mcc_generated_files/../system.h
+[v _wait_ms `(v ~T0 @X0 0 ef1`ui ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -2862,22 +2864,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 18: void ConfigureOscillator(void);
 [; ;system.h: 19: void wait_ms(uint16_t);
 [; ;system.h: 20: uint16_t adc_convert(uint8_t);
-[; ;fuzz.h: 38: void initFuzz(void);
-[; ;fuzz.h: 39: void updateFuzz(int);
-[; ;fuzz.h: 40: void setFuzzState(int);
-[; ;fuzz.h: 41: void setFeedbackState(int);
+[; ;fuzz.h: 39: void initFuzz(void);
+[; ;fuzz.h: 40: void updateFuzz(int);
+[; ;fuzz.h: 41: void setFuzzState(int);
+[; ;fuzz.h: 42: void setFeedbackState(int);
 "16 mcc_generated_files/fuzz.c
 [v _fuzz_state `i ~T0 @X0 1 e ]
 [i _fuzz_state
--> 0 `i
+-U -> 1 `i
 ]
-[; ;fuzz.c: 16: int fuzz_state = 0;
+[; ;fuzz.c: 16: int fuzz_state = -1;
 "17
 [v _feedback_state `i ~T0 @X0 1 e ]
 [i _feedback_state
--> 0 `i
+-U -> 1 `i
 ]
-[; ;fuzz.c: 17: int feedback_state = 0;
+[; ;fuzz.c: 17: int feedback_state = -1;
 "19
 [v _fuzz_pressed `i ~T0 @X0 1 e ]
 [i _fuzz_pressed
@@ -3038,23 +3040,27 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 348 ]
 [e $ ! >= _fuzz_pressed _debounce_limit 354  ]
 {
-[; ;fuzz.c: 91: setFeedbackState(0);
-"91
-[e ( _setFeedbackState (1 -> 0 `i ]
-[; ;fuzz.c: 92: if (fuzz_toggle == 1 && feedback_state == 0) {
-"92
-[e $ ! && == _fuzz_toggle -> 1 `i == _feedback_state -> 0 `i 355  ]
+"89
+[v _fb_state `i ~T0 @X0 1 a ]
+[; ;fuzz.c: 89: int fb_state = feedback_state;
+[e = _fb_state _feedback_state ]
+[; ;fuzz.c: 90: if (fuzz_toggle == 1 && fb_state == 0) {
+"90
+[e $ ! && == _fuzz_toggle -> 1 `i == _fb_state -> 0 `i 355  ]
 {
-[; ;fuzz.c: 93: setFuzzState(0);
-"93
+[; ;fuzz.c: 91: setFuzzState(0);
+"91
 [e ( _setFuzzState (1 -> 0 `i ]
-"94
+"92
 }
 [e :U 355 ]
-[; ;fuzz.c: 94: }
-[; ;fuzz.c: 95: LATAbits.LATA2 = fuzz_state;
-"95
+[; ;fuzz.c: 92: }
+[; ;fuzz.c: 93: LATAbits.LATA2 = fuzz_state;
+"93
 [e = . . _LATAbits 0 2 -> _fuzz_state `uc ]
+[; ;fuzz.c: 95: setFeedbackState(0);
+"95
+[e ( _setFeedbackState (1 -> 0 `i ]
 [; ;fuzz.c: 96: fuzz_turning_on = 0;
 "96
 [e = _fuzz_turning_on -> 0 `i ]
@@ -3099,6 +3105,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;fuzz.c: 107: LATAbits.LATA2 = f_state;
 "107
 [e = . . _LATAbits 0 2 -> _f_state `uc ]
+[; ;fuzz.c: 108: LATCbits.LATC2 = f_state;
+"108
+[e = . . _LATCbits 0 2 -> _f_state `uc ]
+[; ;fuzz.c: 109: LATCbits.LATC1 = !f_state;
+"109
+[e = . . _LATCbits 0 1 -> -> ! != _f_state -> 0 `i `i `uc ]
+[; ;fuzz.c: 111: wait_ms(20);
+"111
+[e ( _wait_ms (1 -> -> 20 `i `ui ]
+[; ;fuzz.c: 113: LATCbits.LATC2 = 0;
+"113
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+[; ;fuzz.c: 114: LATCbits.LATC1 = 0;
+"114
+[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
+[; ;fuzz.c: 117: wait_ms(20);
+"117
+[e ( _wait_ms (1 -> -> 20 `i `ui ]
 [; ;fuzz.c: 118: }
 "118
 [e :UE 356 ]
@@ -3123,6 +3147,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;fuzz.c: 124: LATCbits.LATC3 = f_state;
 "124
 [e = . . _LATCbits 0 3 -> _f_state `uc ]
+[; ;fuzz.c: 125: LATAbits.LATA0 = f_state;
+"125
+[e = . . _LATAbits 0 0 -> _f_state `uc ]
+[; ;fuzz.c: 126: LATAbits.LATA1 = !f_state;
+"126
+[e = . . _LATAbits 0 1 -> -> ! != _f_state -> 0 `i `i `uc ]
+[; ;fuzz.c: 128: wait_ms(20);
+"128
+[e ( _wait_ms (1 -> -> 20 `i `ui ]
+[; ;fuzz.c: 130: LATAbits.LATA0 = 0;
+"130
+[e = . . _LATAbits 0 0 -> -> 0 `i `uc ]
+[; ;fuzz.c: 131: LATAbits.LATA1 = 0;
+"131
+[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
+[; ;fuzz.c: 134: wait_ms(20);
+"134
+[e ( _wait_ms (1 -> -> 20 `i `ui ]
 [; ;fuzz.c: 136: }
 "136
 [e :UE 358 ]

@@ -4,13 +4,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
 "13 user.h
 [v _InitApp `(v ~T0 @X0 0 ef ]
-"38 ./mcc_generated_files/fuzz.h
-[v _initFuzz `(v ~T0 @X0 0 ef ]
-"32 ./mcc_generated_files/boost.h
-[v _initBoost `(v ~T0 @X0 0 ef ]
 "39 ./mcc_generated_files/fuzz.h
-[v _updateFuzz `(v ~T0 @X0 0 ef1`i ]
+[v _initFuzz `(v ~T0 @X0 0 ef ]
 "33 ./mcc_generated_files/boost.h
+[v _initBoost `(v ~T0 @X0 0 ef ]
+"40 ./mcc_generated_files/fuzz.h
+[v _updateFuzz `(v ~T0 @X0 0 ef1`i ]
+"34 ./mcc_generated_files/boost.h
 [v _updateBoost `(v ~T0 @X0 0 ef1`i ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
@@ -2854,16 +2854,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 18: void ConfigureOscillator(void);
 [; ;system.h: 19: void wait_ms(uint16_t);
 [; ;system.h: 20: uint16_t adc_convert(uint8_t);
-[; ;fuzz.h: 38: void initFuzz(void);
-[; ;fuzz.h: 39: void updateFuzz(int);
-[; ;fuzz.h: 40: void setFuzzState(int);
-[; ;fuzz.h: 41: void setFeedbackState(int);
+[; ;fuzz.h: 39: void initFuzz(void);
+[; ;fuzz.h: 40: void updateFuzz(int);
+[; ;fuzz.h: 41: void setFuzzState(int);
+[; ;fuzz.h: 42: void setFeedbackState(int);
 [; ;system.h: 18: void ConfigureOscillator(void);
 [; ;system.h: 19: void wait_ms(uint16_t);
 [; ;system.h: 20: uint16_t adc_convert(uint8_t);
-[; ;boost.h: 32: void initBoost(void);
-[; ;boost.h: 33: void updateBoost(int);
-[; ;boost.h: 34: void setBoostState(int);
+[; ;boost.h: 33: void initBoost(void);
+[; ;boost.h: 34: void updateBoost(int);
+[; ;boost.h: 35: void setBoostState(int);
 "21 main.c
 [v _debounce_limit `i ~T0 @X0 1 e ]
 [i _debounce_limit

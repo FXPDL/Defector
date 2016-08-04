@@ -5,4 +5,5 @@
 user.h  \
 system.h  \
 ./mcc_generated_files/boost.h  \
+./mcc_generated_files/hardware_controls.h  \
 ./mcc_generated_files/fuzz.h 

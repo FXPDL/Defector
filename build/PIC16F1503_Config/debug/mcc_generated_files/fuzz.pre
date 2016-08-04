@@ -3874,15 +3874,15 @@ void ConfigureOscillator(void);
 void wait_ms(uint16_t);
 uint16_t adc_convert(uint8_t);
 
-# 38 "mcc_generated_files/fuzz.h"
+# 39 "mcc_generated_files/fuzz.h"
 void initFuzz(void);
 void updateFuzz(int);
 void setFuzzState(int);
 void setFeedbackState(int);
 
 # 16 "mcc_generated_files/fuzz.c"
-int fuzz_state = 0;
-int feedback_state = 0;
+int fuzz_state = -1;
+int feedback_state = -1;
 
 int fuzz_pressed = 0;
 int fuzz_up = 1;
@@ -3940,13 +3940,13 @@ feedback_state = 0;
 
 fuzz_up = 0;
 } else if (fuzz_pressed >= debounce_limit) {
-
-
-setFeedbackState(0);
-if (fuzz_toggle == 1 && feedback_state == 0) {
+int fb_state = feedback_state;
+if (fuzz_toggle == 1 && fb_state == 0) {
 setFuzzState(0);
 }
 LATAbits.LATA2 = fuzz_state;
+
+setFeedbackState(0);
 fuzz_turning_on = 0;
 fuzz_toggle = 0;
 fuzz_up = 1;
@@ -3959,8 +3959,16 @@ void setFuzzState(int f_state) {
 if (fuzz_state == f_state) {return;}
 fuzz_state = f_state;
 LATAbits.LATA2 = f_state;
+LATCbits.LATC2 = f_state;
+LATCbits.LATC1 = !f_state;
 
-# 118
+wait_ms(20);
+
+LATCbits.LATC2 = 0;
+LATCbits.LATC1 = 0;
+
+
+wait_ms(20);
 }
 
 
@@ -3968,7 +3976,16 @@ void setFeedbackState(int f_state) {
 if (feedback_state == f_state) {return;}
 feedback_state = f_state;
 LATCbits.LATC3 = f_state;
+LATAbits.LATA0 = f_state;
+LATAbits.LATA1 = !f_state;
 
-# 136
+wait_ms(20);
+
+LATAbits.LATA0 = 0;
+LATAbits.LATA1 = 0;
+
+
+wait_ms(20);
+
 }
 

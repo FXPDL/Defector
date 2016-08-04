@@ -13,8 +13,8 @@
 
 #include "fuzz.h"
 
-int fuzz_state = 0; //off
-int feedback_state = 0; //off
+int fuzz_state = -1; //initialize to an invalid value so the initialize will run.
+int feedback_state = -1; //initialize to an invalid value so the initialize will run.
 
 int fuzz_pressed = 0;  
 int fuzz_up = 1;  

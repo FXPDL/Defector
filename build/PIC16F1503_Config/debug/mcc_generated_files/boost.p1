@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"34 mcc_generated_files/boost.h
+"35 mcc_generated_files/boost.h
 [v _setBoostState `(v ~T0 @X0 0 ef1`i ]
 "420 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f1503.h
 [s S30 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -2854,15 +2854,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 18: void ConfigureOscillator(void);
 [; ;system.h: 19: void wait_ms(uint16_t);
 [; ;system.h: 20: uint16_t adc_convert(uint8_t);
-[; ;boost.h: 32: void initBoost(void);
-[; ;boost.h: 33: void updateBoost(int);
-[; ;boost.h: 34: void setBoostState(int);
+[; ;boost.h: 33: void initBoost(void);
+[; ;boost.h: 34: void updateBoost(int);
+[; ;boost.h: 35: void setBoostState(int);
 "15 mcc_generated_files/boost.c
 [v _boost_state `i ~T0 @X0 1 e ]
 [i _boost_state
--> 0 `i
+-U -> 1 `i
 ]
-[; ;boost.c: 15: int boost_state = 0;
+[; ;boost.c: 15: int boost_state = -1;
 "17
 [v _boost_pressed `i ~T0 @X0 1 e ]
 [i _boost_pressed
@@ -3009,18 +3009,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;boost.c: 66: LATCbits.LATC4 = !f_state;
 "66
 [e = . . _LATCbits 0 4 -> -> ! != _f_state -> 0 `i `i `uc ]
-[; ;boost.c: 68: wait_ms(10);
+[; ;boost.c: 68: wait_ms(20);
 "68
-[e ( _wait_ms (1 -> -> 10 `i `ui ]
+[e ( _wait_ms (1 -> -> 20 `i `ui ]
 [; ;boost.c: 70: LATCbits.LATC0 = 0;
 "70
 [e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
 [; ;boost.c: 71: LATCbits.LATC4 = 0;
 "71
 [e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
-[; ;boost.c: 73: wait_ms(10);
+[; ;boost.c: 73: wait_ms(20);
 "73
-[e ( _wait_ms (1 -> -> 10 `i `ui ]
+[e ( _wait_ms (1 -> -> 20 `i `ui ]
 [; ;boost.c: 74: }
 "74
 [e :UE 352 ]

@@ -12,7 +12,7 @@
 #include "boost.h"
 
 
-int boost_state = 0; //off
+int boost_state = -1; //initialize to an invalid value so the initialize will run.
 
 int boost_pressed = 0;  
 int boost_up = 1;  

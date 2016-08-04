@@ -39,6 +39,11 @@ void InitApp(void) {
     TRISCbits.TRISC3 = 0; //output - Feedback LED
     TRISCbits.TRISC4 = 0; //output - Relay_boost1
     TRISCbits.TRISC5 = 0; //output - Boost_LED
+    
+    LATCbits.LATC5 = 0; //Boost_LED
+    
+    LATAbits.LATA2 = 0; //Fuzz_LED
+    LATCbits.LATC3 = 0; //Feedback_LED
 
     init_adc();
 

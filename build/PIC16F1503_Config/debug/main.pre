@@ -3887,7 +3887,7 @@ void ConfigureOscillator(void);
 void wait_ms(uint16_t);
 uint16_t adc_convert(uint8_t);
 
-# 38 "./mcc_generated_files/fuzz.h"
+# 39 "./mcc_generated_files/fuzz.h"
 void initFuzz(void);
 void updateFuzz(int);
 void setFuzzState(int);
@@ -3898,7 +3898,7 @@ void ConfigureOscillator(void);
 void wait_ms(uint16_t);
 uint16_t adc_convert(uint8_t);
 
-# 32 "./mcc_generated_files/boost.h"
+# 33 "./mcc_generated_files/boost.h"
 void initBoost(void);
 void updateBoost(int);
 void setBoostState(int);

@@ -3881,8 +3881,8 @@ void setFuzzState(int);
 void setFeedbackState(int);
 
 # 16 "mcc_generated_files/fuzz.c"
-int fuzz_state = 0;
-int feedback_state = 0;
+int fuzz_state = -1;
+int feedback_state = -1;
 
 int fuzz_pressed = 0;
 int fuzz_up = 1;

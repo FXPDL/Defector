@@ -3874,13 +3874,13 @@ void ConfigureOscillator(void);
 void wait_ms(uint16_t);
 uint16_t adc_convert(uint8_t);
 
-# 32 "mcc_generated_files/boost.h"
+# 33 "mcc_generated_files/boost.h"
 void initBoost(void);
 void updateBoost(int);
 void setBoostState(int);
 
 # 15 "mcc_generated_files/boost.c"
-int boost_state = 0;
+int boost_state = -1;
 
 int boost_pressed = 0;
 int boost_up = 1;
@@ -3926,10 +3926,10 @@ LATCbits.LATC5 = f_state;
 LATCbits.LATC0 = f_state;
 LATCbits.LATC4 = !f_state;
 
-wait_ms(10);
+wait_ms(20);
 
 LATCbits.LATC0 = 0;
 LATCbits.LATC4 = 0;
 
-wait_ms(10);
+wait_ms(20);
 }

@@ -3880,7 +3880,7 @@ void updateBoost(int);
 void setBoostState(int);
 
 # 15 "mcc_generated_files/boost.c"
-int boost_state = 0;
+int boost_state = -1;
 
 int boost_pressed = 0;
 int boost_up = 1;

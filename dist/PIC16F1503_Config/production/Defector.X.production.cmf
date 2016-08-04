@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\Nancy\AppData\Local\Temp\sces.obj
+$C:\Users\Nancy\AppData\Local\Temp\s10o.obj
 reset_vec CODE 0 0 0 1 2
 end_init CODE 0 D D 1 2
 config CONFIG 0 8007 8007 2 2
@@ -19,25 +19,25 @@ $dist/PIC16F1503_Config/production\Defector.X.production.obj
 cinit CODE 0 E E 13 2
 text1 CODE 0 21 21 A7 2
 text2 CODE 0 C8 C8 5B 2
-text3 CODE 0 238 238 B 2
+text3 CODE 0 24A 24A B 2
 text4 CODE 0 123 123 34 2
 text5 CODE 0 157 157 34 2
-text6 CODE 0 261 261 6 2
+text6 CODE 0 26B 26B 6 2
 text7 CODE 0 18B 18B 34 2
 text8 CODE 0 1EE 1EE 28 2
 text9 CODE 0 1BF 1BF 2F 2
-text10 CODE 0 227 227 11 2
-text11 CODE 0 243 243 A 2
-text12 CODE 0 267 267 5 2
-maintext CODE 0 216 216 11 2
+text10 CODE 0 216 216 15 2
+text11 CODE 0 255 255 A 2
+text12 CODE 0 271 271 5 2
+maintext CODE 0 22B 22B 11 2
 cstackCOMMON COMMON 1 70 70 D 1
-cstackBANK0 BANK0 1 38 38 9 1
-inittext CODE 0 25B 25B 6 2
+cstackBANK0 BANK0 1 40 40 9 1
+inittext CODE 0 265 265 6 2
 intentry CODE 0 4 4 9 2
-bssBANK0 BANK0 1 20 20 18 1
-idataBANK0 CODE 0 24D 24D 8 2
-dataBANK0 BANK0 1 41 41 8 1
-clrtext CODE 0 255 255 6 2
+bssBANK0 BANK0 1 20 20 12 1
+idataBANK0 CODE 0 23C 23C E 2
+dataBANK0 BANK0 1 32 32 E 1
+clrtext CODE 0 25F 25F 6 2
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -49,9 +49,9 @@ RAM A0-BF 1
 BANK0 49-6F 1
 BANK1 A0-BF 1
 CONST 1-3 2
-CONST 26C-7FF 2
+CONST 276-7FF 2
 ENTRY 1-3 2
-ENTRY 26C-7FF 2
+ENTRY 276-7FF 2
 IDLOC 8000-8003 2
 SFR10 500-56F 1
 SFR11 580-5EF 1
@@ -77,7 +77,7 @@ SFR30 F00-F6F 1
 SFR31 F80-FEF 1
 STACK 2029-206F 1
 CODE 1-3 2
-CODE 26C-7FF 2
+CODE 276-7FF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
 SFR2 100-16F 1
@@ -91,9 +91,9 @@ SFR9 480-4EF 1
 BIGRAM 2000-206F 1
 COMMON 7D-7D 1
 STRCODE 1-3 2
-STRCODE 26C-7FF 2
+STRCODE 276-7FF 2
 STRING 1-3 2
-STRING 26C-7FF 2
+STRING 276-7FF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -108,55 +108,58 @@ STRING 26C-7FF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/PIC16F1503_Config/production\Defector.X.production.obj
-E cinit CODE >2494:C:\Users\Nancy\AppData\Local\Temp\sces.
-E cinit CODE >2497:C:\Users\Nancy\AppData\Local\Temp\sces.
-E cinit CODE >2577:C:\Users\Nancy\AppData\Local\Temp\sces.
-F cinit CODE >2578:C:\Users\Nancy\AppData\Local\Temp\sces.
-10 cinit CODE >2579:C:\Users\Nancy\AppData\Local\Temp\sces.
-11 cinit CODE >2580:C:\Users\Nancy\AppData\Local\Temp\sces.
-12 cinit CODE >2581:C:\Users\Nancy\AppData\Local\Temp\sces.
-13 cinit CODE >2582:C:\Users\Nancy\AppData\Local\Temp\sces.
-14 cinit CODE >2597:C:\Users\Nancy\AppData\Local\Temp\sces.
-15 cinit CODE >2598:C:\Users\Nancy\AppData\Local\Temp\sces.
-16 cinit CODE >2599:C:\Users\Nancy\AppData\Local\Temp\sces.
-17 cinit CODE >2600:C:\Users\Nancy\AppData\Local\Temp\sces.
-18 cinit CODE >2601:C:\Users\Nancy\AppData\Local\Temp\sces.
-19 cinit CODE >2602:C:\Users\Nancy\AppData\Local\Temp\sces.
-1A cinit CODE >2603:C:\Users\Nancy\AppData\Local\Temp\sces.
-1B cinit CODE >2604:C:\Users\Nancy\AppData\Local\Temp\sces.
-1C cinit CODE >2605:C:\Users\Nancy\AppData\Local\Temp\sces.
-1D cinit CODE >2606:C:\Users\Nancy\AppData\Local\Temp\sces.
-1E cinit CODE >2612:C:\Users\Nancy\AppData\Local\Temp\sces.
-1E cinit CODE >2614:C:\Users\Nancy\AppData\Local\Temp\sces.
-1F cinit CODE >2615:C:\Users\Nancy\AppData\Local\Temp\sces.
-20 cinit CODE >2616:C:\Users\Nancy\AppData\Local\Temp\sces.
+E cinit CODE >2512:C:\Users\Nancy\AppData\Local\Temp\s10o.
+E cinit CODE >2515:C:\Users\Nancy\AppData\Local\Temp\s10o.
+E cinit CODE >2604:C:\Users\Nancy\AppData\Local\Temp\s10o.
+F cinit CODE >2605:C:\Users\Nancy\AppData\Local\Temp\s10o.
+10 cinit CODE >2606:C:\Users\Nancy\AppData\Local\Temp\s10o.
+11 cinit CODE >2607:C:\Users\Nancy\AppData\Local\Temp\s10o.
+12 cinit CODE >2608:C:\Users\Nancy\AppData\Local\Temp\s10o.
+13 cinit CODE >2609:C:\Users\Nancy\AppData\Local\Temp\s10o.
+14 cinit CODE >2624:C:\Users\Nancy\AppData\Local\Temp\s10o.
+15 cinit CODE >2625:C:\Users\Nancy\AppData\Local\Temp\s10o.
+16 cinit CODE >2626:C:\Users\Nancy\AppData\Local\Temp\s10o.
+17 cinit CODE >2627:C:\Users\Nancy\AppData\Local\Temp\s10o.
+18 cinit CODE >2628:C:\Users\Nancy\AppData\Local\Temp\s10o.
+19 cinit CODE >2629:C:\Users\Nancy\AppData\Local\Temp\s10o.
+1A cinit CODE >2630:C:\Users\Nancy\AppData\Local\Temp\s10o.
+1B cinit CODE >2631:C:\Users\Nancy\AppData\Local\Temp\s10o.
+1C cinit CODE >2632:C:\Users\Nancy\AppData\Local\Temp\s10o.
+1D cinit CODE >2633:C:\Users\Nancy\AppData\Local\Temp\s10o.
+1E cinit CODE >2639:C:\Users\Nancy\AppData\Local\Temp\s10o.
+1E cinit CODE >2641:C:\Users\Nancy\AppData\Local\Temp\s10o.
+1F cinit CODE >2642:C:\Users\Nancy\AppData\Local\Temp\s10o.
+20 cinit CODE >2643:C:\Users\Nancy\AppData\Local\Temp\s10o.
 4 intentry CODE >23:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\interrupts.c
 9 intentry CODE >50:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\interrupts.c
-267 text12 CODE >17:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
-267 text12 CODE >19:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
-26A text12 CODE >20:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
-26B text12 CODE >21:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
-243 text11 CODE >55:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-243 text11 CODE >56:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-245 text11 CODE >57:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-249 text11 CODE >58:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-24B text11 CODE >59:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-24C text11 CODE >60:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-227 text10 CODE >27:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-227 text10 CODE >28:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-229 text10 CODE >29:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-22A text10 CODE >31:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-22B text10 CODE >32:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-22C text10 CODE >33:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-22D text10 CODE >34:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-22F text10 CODE >36:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-231 text10 CODE >37:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-232 text10 CODE >38:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-233 text10 CODE >39:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-234 text10 CODE >40:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-235 text10 CODE >41:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-236 text10 CODE >43:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
-237 text10 CODE >45:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+271 text12 CODE >17:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
+271 text12 CODE >19:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
+274 text12 CODE >20:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
+275 text12 CODE >21:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
+255 text11 CODE >60:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+255 text11 CODE >61:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+257 text11 CODE >62:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+25B text11 CODE >63:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+25D text11 CODE >64:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+25E text11 CODE >65:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+216 text10 CODE >27:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+216 text10 CODE >28:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+218 text10 CODE >29:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+219 text10 CODE >31:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+21A text10 CODE >32:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+21B text10 CODE >33:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+21C text10 CODE >34:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+21E text10 CODE >36:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+220 text10 CODE >37:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+221 text10 CODE >38:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+222 text10 CODE >39:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+223 text10 CODE >40:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+224 text10 CODE >41:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+225 text10 CODE >43:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+227 text10 CODE >45:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+228 text10 CODE >46:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+229 text10 CODE >48:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
+22A text10 CODE >50:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
 1BF text9 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul32.c
 1BF text9 CODE >119:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul32.c
 1C7 text9 CODE >121:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul32.c
@@ -179,9 +182,9 @@ F cinit CODE >2578:C:\Users\Nancy\AppData\Local\Temp\sces.
 1B7 text7 CODE >71:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 1B8 text7 CODE >73:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 1BE text7 CODE >74:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
-261 text6 CODE >22:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
-261 text6 CODE >23:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
-266 text6 CODE >24:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
+26B text6 CODE >22:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
+26B text6 CODE >23:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
+270 text6 CODE >24:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 157 text5 CODE >121:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 157 text5 CODE >122:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 160 text5 CODE >123:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
@@ -204,10 +207,10 @@ F cinit CODE >2578:C:\Users\Nancy\AppData\Local\Temp\sces.
 14F text4 CODE >114:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 150 text4 CODE >117:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 156 text4 CODE >118:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
-238 text3 CODE >27:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
-238 text3 CODE >32:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
-23D text3 CODE >40:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
-242 text3 CODE >42:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
+24A text3 CODE >27:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
+24A text3 CODE >32:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
+24F text3 CODE >40:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
+254 text3 CODE >42:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 C8 text2 CODE >26:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 C8 text2 CODE >33:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 CB text2 CODE >34:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
@@ -258,31 +261,31 @@ BD text1 CODE >98:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\D
 C1 text1 CODE >99:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 C3 text1 CODE >100:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 C7 text1 CODE >101:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
-216 maintext CODE >28:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
-216 maintext CODE >29:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
-217 maintext CODE >30:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
-218 maintext CODE >32:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
-219 maintext CODE >33:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
-21A maintext CODE >35:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
-21A maintext CODE >36:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
-220 maintext CODE >37:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
-226 maintext CODE >35:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
-25B inittext CODE >2586:C:\Users\Nancy\AppData\Local\Temp\sces.
-25B inittext CODE >2587:C:\Users\Nancy\AppData\Local\Temp\sces.
-25C inittext CODE >2588:C:\Users\Nancy\AppData\Local\Temp\sces.
-25C inittext CODE >2589:C:\Users\Nancy\AppData\Local\Temp\sces.
-25D inittext CODE >2590:C:\Users\Nancy\AppData\Local\Temp\sces.
-25E inittext CODE >2591:C:\Users\Nancy\AppData\Local\Temp\sces.
-25F inittext CODE >2592:C:\Users\Nancy\AppData\Local\Temp\sces.
-260 inittext CODE >2593:C:\Users\Nancy\AppData\Local\Temp\sces.
-255 clrtext CODE >2566:C:\Users\Nancy\AppData\Local\Temp\sces.
-255 clrtext CODE >2567:C:\Users\Nancy\AppData\Local\Temp\sces.
-256 clrtext CODE >2568:C:\Users\Nancy\AppData\Local\Temp\sces.
-256 clrtext CODE >2569:C:\Users\Nancy\AppData\Local\Temp\sces.
-257 clrtext CODE >2570:C:\Users\Nancy\AppData\Local\Temp\sces.
-258 clrtext CODE >2571:C:\Users\Nancy\AppData\Local\Temp\sces.
-259 clrtext CODE >2572:C:\Users\Nancy\AppData\Local\Temp\sces.
-25A clrtext CODE >2573:C:\Users\Nancy\AppData\Local\Temp\sces.
+22B maintext CODE >28:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
+22B maintext CODE >29:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
+22C maintext CODE >30:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
+22D maintext CODE >32:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
+22E maintext CODE >33:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
+22F maintext CODE >35:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
+22F maintext CODE >36:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
+235 maintext CODE >37:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
+23B maintext CODE >35:C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
+265 inittext CODE >2613:C:\Users\Nancy\AppData\Local\Temp\s10o.
+265 inittext CODE >2614:C:\Users\Nancy\AppData\Local\Temp\s10o.
+266 inittext CODE >2615:C:\Users\Nancy\AppData\Local\Temp\s10o.
+266 inittext CODE >2616:C:\Users\Nancy\AppData\Local\Temp\s10o.
+267 inittext CODE >2617:C:\Users\Nancy\AppData\Local\Temp\s10o.
+268 inittext CODE >2618:C:\Users\Nancy\AppData\Local\Temp\s10o.
+269 inittext CODE >2619:C:\Users\Nancy\AppData\Local\Temp\s10o.
+26A inittext CODE >2620:C:\Users\Nancy\AppData\Local\Temp\s10o.
+25F clrtext CODE >2593:C:\Users\Nancy\AppData\Local\Temp\s10o.
+25F clrtext CODE >2594:C:\Users\Nancy\AppData\Local\Temp\s10o.
+260 clrtext CODE >2595:C:\Users\Nancy\AppData\Local\Temp\s10o.
+260 clrtext CODE >2596:C:\Users\Nancy\AppData\Local\Temp\s10o.
+261 clrtext CODE >2597:C:\Users\Nancy\AppData\Local\Temp\s10o.
+262 clrtext CODE >2598:C:\Users\Nancy\AppData\Local\Temp\s10o.
+263 clrtext CODE >2599:C:\Users\Nancy\AppData\Local\Temp\s10o.
+264 clrtext CODE >2600:C:\Users\Nancy\AppData\Local\Temp\s10o.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -307,19 +310,19 @@ __size_of_initFuzz 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.prod
 __size_of_init_adc 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 _PMCON1bits 195 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
-_boost_up 41 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_boost_up 34 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __CFG_MCLRE$ON 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 ltemp0 7E 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 ltemp1 82 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 ltemp2 86 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 ltemp3 80 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Hstrings 0 0 ABS 0 strings -
-___sp 0 0 STACK 2 stack C:\Users\Nancy\AppData\Local\Temp\sces.obj
-_main 42C 0 CODE 0 maintext dist/PIC16F1503_Config/production\Defector.X.production.obj
+___sp 0 0 STACK 2 stack C:\Users\Nancy\AppData\Local\Temp\s10o.obj
+_main 456 0 CODE 0 maintext dist/PIC16F1503_Config/production\Defector.X.production.obj
 btemp 7E 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __size_of_setFuzzState 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 ltemp 7E 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
-start 1A 0 CODE 0 init C:\Users\Nancy\AppData\Local\Temp\sces.obj
+start 1A 0 CODE 0 init C:\Users\Nancy\AppData\Local\Temp\s10o.obj
 ttemp 7E 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 wtemp 7E 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __CFG_BOREN$OFF 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
@@ -329,22 +332,22 @@ _setBoostState 316 0 CODE 0 text7 dist/PIC16F1503_Config/production\Defector.X.p
 ?___lmul 71 0 COMMON 1 cstackCOMMON dist/PIC16F1503_Config/production\Defector.X.production.obj
 __LidataBANK0 0 0 ABS 0 idataBANK0 -
 __Hpowerup 0 0 CODE 0 powerup -
-__end_of_ConfigureOscillator 4D8 0 CODE 0 text12 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__end_of_ConfigureOscillator 4EC 0 CODE 0 text12 dist/PIC16F1503_Config/production\Defector.X.production.obj
 ttemp0 7E 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 ttemp1 81 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 ttemp2 84 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 ttemp3 87 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 ttemp4 7F 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __end_of_setFuzzState 2AE 0 CODE 0 text4 dist/PIC16F1503_Config/production\Defector.X.production.obj
-intlevel0 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\sces.obj
-intlevel1 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\sces.obj
-intlevel2 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\sces.obj
-intlevel3 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\sces.obj
-intlevel4 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\sces.obj
-intlevel5 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\sces.obj
-_InitApp 44E 0 CODE 0 text10 dist/PIC16F1503_Config/production\Defector.X.production.obj
-_initFuzz 470 0 CODE 0 text3 dist/PIC16F1503_Config/production\Defector.X.production.obj
-_init_adc 486 0 CODE 0 text11 dist/PIC16F1503_Config/production\Defector.X.production.obj
+intlevel0 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\s10o.obj
+intlevel1 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\s10o.obj
+intlevel2 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\s10o.obj
+intlevel3 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\s10o.obj
+intlevel4 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\s10o.obj
+intlevel5 0 0 CODE 0 functab C:\Users\Nancy\AppData\Local\Temp\s10o.obj
+_InitApp 42C 0 CODE 0 text10 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_initFuzz 494 0 CODE 0 text3 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_init_adc 4AA 0 CODE 0 text11 dist/PIC16F1503_Config/production\Defector.X.production.obj
 _OSCCONbits 99 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 wtemp0 7E 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 wtemp1 80 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
@@ -355,18 +358,18 @@ wtemp5 88 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 wtemp6 7F 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Hfunctab 0 0 CODE 0 functab -
 __Hclrtext 0 0 ABS 0 clrtext -
-__end_of_initFuzz 486 0 CODE 0 text3 dist/PIC16F1503_Config/production\Defector.X.production.obj
-__end_of_init_adc 49A 0 CODE 0 text11 dist/PIC16F1503_Config/production\Defector.X.production.obj
-_long_press_limit 47 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
-_fuzz_pressed 2E 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__end_of_initFuzz 4AA 0 CODE 0 text3 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__end_of_init_adc 4BE 0 CODE 0 text11 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_long_press_limit 3E 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_fuzz_pressed 2A 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 _ADRESH 9C 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 _ADRESL 9B 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
-updateBoost@debounce_limit 3C 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+updateBoost@debounce_limit 44 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __size_of_updateFuzz 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
-updateFuzz@debounce_limit 3C 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+updateFuzz@debounce_limit 44 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __end_of___lmul 3DC 0 CODE 0 text9 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Lmaintext 0 0 ABS 0 maintext -
-_fuzz_toggle 32 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_fuzz_toggle 2C 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __size_of_setBoostState 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __size_of_wait_ms 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 start_initialization 1C 0 CODE 0 cinit dist/PIC16F1503_Config/production\Defector.X.production.obj
@@ -377,12 +380,12 @@ _PMDATH 194 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.ob
 _PMDATL 193 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 _TRISAbits 8C 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 _TRISCbits 8E 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
-setFeedbackState@f_state 3A 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
-clear_ram0 4AA 0 CODE 0 clrtext dist/PIC16F1503_Config/production\Defector.X.production.obj
+setFeedbackState@f_state 42 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+clear_ram0 4BE 0 CODE 0 clrtext dist/PIC16F1503_Config/production\Defector.X.production.obj
 __end_of_setBoostState 37E 0 CODE 0 text7 dist/PIC16F1503_Config/production\Defector.X.production.obj
-__pcstackBANK0 38 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
-_fuzz_turning_on 34 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
-___int_sp 0 0 STACK 2 stack C:\Users\Nancy\AppData\Local\Temp\sces.obj
+__pcstackBANK0 40 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_fuzz_turning_on 2E 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+___int_sp 0 0 STACK 2 stack C:\Users\Nancy\AppData\Local\Temp\s10o.obj
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 BANK2 1 bank2 -
@@ -446,7 +449,7 @@ __Hmaintext 0 0 ABS 0 maintext -
 __CFG_FOSC$INTOSC 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Hcommon 0 0 ABS 0 common -
 __Hconfig 10012 0 CONFIG 0 config -
-_fuzz_state 30 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_fuzz_state 3A 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Lbank0 0 0 ABS 0 bank0 -
 __Lbank1 0 0 ABS 0 bank1 -
 __Lbank2 0 0 BANK2 1 bank2 -
@@ -482,7 +485,7 @@ __Lsfr29 0 0 ABS 0 sfr29 -
 __Lsfr30 0 0 ABS 0 sfr30 -
 __Lsfr31 0 0 ABS 0 sfr31 -
 __Lstack 0 0 STACK 2 stack -
-init_ram 4B6 0 CODE 0 inittext dist/PIC16F1503_Config/production\Defector.X.production.obj
+init_ram 4CA 0 CODE 0 inittext dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Linittext 0 0 ABS 0 inittext -
 _PORTAbits C 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 _INTCONbits B 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
@@ -527,18 +530,18 @@ _boost_pressed 26 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.
 __end_of_wait_ms 42C 0 CODE 0 text8 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __end_of_isr 1A 0 CODE 0 intentry dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\Nancy\AppData\Local\Temp\sces.obj
+reset_vec 0 0 CODE 0 reset_vec C:\Users\Nancy\AppData\Local\Temp\s10o.obj
 _boost_down 24 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
-__pdataBANK0 41 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__pdataBANK0 32 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __size_of___lmul 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
-wait_ms@time 38 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+wait_ms@time 40 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __size_of_InitApp 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
-__end_of_initBoost 4CE 0 CODE 0 text6 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__end_of_initBoost 4E2 0 CODE 0 text6 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __size_of_initBoost 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
-__ptext10 44E 0 CODE 0 text10 dist/PIC16F1503_Config/production\Defector.X.production.obj
-__ptext11 486 0 CODE 0 text11 dist/PIC16F1503_Config/production\Defector.X.production.obj
-__ptext12 4CE 0 CODE 0 text12 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__ptext10 42C 0 CODE 0 text10 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__ptext11 4AA 0 CODE 0 text11 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__ptext12 4E2 0 CODE 0 text12 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Lbank10 0 0 BANK10 1 bank10 -
 __Lbank11 0 0 BANK11 1 bank11 -
 __Lbank12 0 0 BANK12 1 bank12 -
@@ -561,7 +564,7 @@ __Lbank28 0 0 BANK28 1 bank28 -
 __Lbank29 0 0 BANK29 1 bank29 -
 __Lbank30 0 0 BANK30 1 bank30 -
 __Lbank31 0 0 BANK31 1 bank31 -
-__pmaintext 42C 0 CODE 0 maintext dist/PIC16F1503_Config/production\Defector.X.production.obj
+__pmaintext 456 0 CODE 0 maintext dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Lbigram 0 0 ABS 0 bigram -
 __CFG_BORV$LO 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 ___lmul@multiplier 71 0 COMMON 1 cstackCOMMON dist/PIC16F1503_Config/production\Defector.X.production.obj
@@ -571,12 +574,12 @@ __CFG_CP$OFF 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production
 __CFG_WDTE$OFF 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Hinittext 0 0 ABS 0 inittext -
 _LATAbits 10C 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
-_feedback_state 2A 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_feedback_state 38 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 _LATCbits 10E 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
-_initBoost 4C2 0 CODE 0 text6 dist/PIC16F1503_Config/production\Defector.X.production.obj
-setFuzzState@f_state 3A 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
-stackhi 206F 0 ABS 0 - C:\Users\Nancy\AppData\Local\Temp\sces.obj
-stacklo 2029 0 ABS 0 - C:\Users\Nancy\AppData\Local\Temp\sces.obj
+_initBoost 4D6 0 CODE 0 text6 dist/PIC16F1503_Config/production\Defector.X.production.obj
+setFuzzState@f_state 42 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+stackhi 206F 0 ABS 0 - C:\Users\Nancy\AppData\Local\Temp\s10o.obj
+stacklo 2029 0 ABS 0 - C:\Users\Nancy\AppData\Local\Temp\s10o.obj
 _OSCSTAT 9A 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 _ADCON0bits 9D 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 _ADCON1bits 9E 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
@@ -589,27 +592,27 @@ _PIR1bits 11 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.o
 __Lend_init 1A 0 CODE 0 end_init -
 __CFG_LVP$ON 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
-updateFuzz@fb_state 3F 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+updateFuzz@fb_state 47 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 end_of_initialization 3C 0 CODE 0 cinit dist/PIC16F1503_Config/production\Defector.X.production.obj
-_boost_state 28 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_boost_state 32 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Hintentry 1A 0 CODE 0 intentry -
 __CFG_STVREN$ON 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __size_of_updateBoost 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
-_debounce_limit 43 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_debounce_limit 36 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Lstrings 0 0 ABS 0 strings -
 __Hreset_vec 2 0 CODE 0 reset_vec -
 __HbssBANK0 0 0 ABS 0 bssBANK0 -
 _updateFuzz 42 0 CODE 0 text1 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __ptext1 42 0 CODE 0 text1 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __ptext2 190 0 CODE 0 text2 dist/PIC16F1503_Config/production\Defector.X.production.obj
-__ptext3 470 0 CODE 0 text3 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__ptext3 494 0 CODE 0 text3 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __ptext4 246 0 CODE 0 text4 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __ptext5 2AE 0 CODE 0 text5 dist/PIC16F1503_Config/production\Defector.X.production.obj
-__ptext6 4C2 0 CODE 0 text6 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__ptext6 4D6 0 CODE 0 text6 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __ptext7 316 0 CODE 0 text7 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __ptext8 3DC 0 CODE 0 text8 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __ptext9 37E 0 CODE 0 text9 dist/PIC16F1503_Config/production\Defector.X.production.obj
-__end_of_InitApp 470 0 CODE 0 text10 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__end_of_InitApp 456 0 CODE 0 text10 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Lpowerup 0 0 CODE 0 powerup -
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
 _setFeedbackState 2AE 0 CODE 0 text5 dist/PIC16F1503_Config/production\Defector.X.production.obj
@@ -620,20 +623,20 @@ __CFG_CLKOUTEN$OFF 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.prod
 __end_of__initialization 3C 0 CODE 0 cinit dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Lfunctab 0 0 CODE 0 functab -
 _wait_ms 3DC 0 CODE 0 text8 dist/PIC16F1503_Config/production\Defector.X.production.obj
-__pidataBANK0 49A 0 CODE 0 idataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__pidataBANK0 478 0 CODE 0 idataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Lclrtext 0 0 ABS 0 clrtext -
 ___lmul@product 79 0 COMMON 1 cstackCOMMON dist/PIC16F1503_Config/production\Defector.X.production.obj
-setBoostState@f_state 3A 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+setBoostState@f_state 42 0 BANK0 1 cstackBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 ___lmul@multiplicand 75 0 COMMON 1 cstackCOMMON dist/PIC16F1503_Config/production\Defector.X.production.obj
 __pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/PIC16F1503_Config/production\Defector.X.production.obj
 __end_of_updateFuzz 190 0 CODE 0 text1 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Hend_init 1C 0 CODE 0 end_init -
-__end_of_main 44E 0 CODE 0 maintext dist/PIC16F1503_Config/production\Defector.X.production.obj
-_ConfigureOscillator 4CE 0 CODE 0 text12 dist/PIC16F1503_Config/production\Defector.X.production.obj
-_fuzz_down 2C 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+__end_of_main 478 0 CODE 0 maintext dist/PIC16F1503_Config/production\Defector.X.production.obj
+_ConfigureOscillator 4E2 0 CODE 0 text12 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_fuzz_down 28 0 BANK0 1 bssBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
-_fuzz_up 45 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
+_fuzz_up 3C 0 BANK0 1 dataBANK0 dist/PIC16F1503_Config/production\Defector.X.production.obj
 __pintentry 8 0 CODE 0 intentry dist/PIC16F1503_Config/production\Defector.X.production.obj
 __size_of_isr 0 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.production.obj
 __HdataBANK0 0 0 ABS 0 dataBANK0 -
@@ -671,7 +674,7 @@ _ANSELAbits 18C 0 ABS 0 - dist/PIC16F1503_Config/production\Defector.X.productio
 # All other numeric quantities are in decimal.
 %SEGMENTS
 cstackCOMMON 1 70 70 D 1
-intentry 0 4 8 268 2
+intentry 0 4 8 272 2
 reset_vec 0 0 0 1 2
 bssBANK0 1 20 20 29 1
 config 0 8007 1000E 2 2

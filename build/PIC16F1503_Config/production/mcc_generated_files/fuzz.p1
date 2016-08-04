@@ -2871,15 +2871,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 "16 mcc_generated_files/fuzz.c
 [v _fuzz_state `i ~T0 @X0 1 e ]
 [i _fuzz_state
--> 0 `i
+-U -> 1 `i
 ]
-[; ;fuzz.c: 16: int fuzz_state = 0;
+[; ;fuzz.c: 16: int fuzz_state = -1;
 "17
 [v _feedback_state `i ~T0 @X0 1 e ]
 [i _feedback_state
--> 0 `i
+-U -> 1 `i
 ]
-[; ;fuzz.c: 17: int feedback_state = 0;
+[; ;fuzz.c: 17: int feedback_state = -1;
 "19
 [v _fuzz_pressed `i ~T0 @X0 1 e ]
 [i _fuzz_pressed

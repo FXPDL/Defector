@@ -2860,9 +2860,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "15 mcc_generated_files/boost.c
 [v _boost_state `i ~T0 @X0 1 e ]
 [i _boost_state
--> 0 `i
+-U -> 1 `i
 ]
-[; ;boost.c: 15: int boost_state = 0;
+[; ;boost.c: 15: int boost_state = -1;
 "17
 [v _boost_pressed `i ~T0 @X0 1 e ]
 [i _boost_pressed

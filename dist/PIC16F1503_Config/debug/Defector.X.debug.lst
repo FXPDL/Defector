@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC LITE Macro Assembler V1.37 build -260352376 
-                                                                                               Tue Aug 02 23:26:26 2016
+                                                                                               Wed Aug 03 17:25:09 2016
 
 Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110536
      1                           	processor	16F1503
@@ -1184,1595 +1184,1714 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
   1178  0FEF                     	;# 
   1179                           
   1180                           	psect	idataBANK0
-  1181  0205                     __pidataBANK0:	
+  1181  0238                     __pidataBANK0:	
   1182                           
-  1183                           ;initializer for _boost_up
-  1184  0205  3401               	retlw	1
-  1185  0206  3400               	retlw	0
+  1183                           ;initializer for _boost_state
+  1184  0238  34FF               	retlw	255
+  1185  0239  34FF               	retlw	255
   1186                           
-  1187                           ;initializer for _debounce_limit
-  1188  0207  3419               	retlw	25
-  1189  0208  3400               	retlw	0
+  1187                           ;initializer for _boost_up
+  1188  023A  3401               	retlw	1
+  1189  023B  3400               	retlw	0
   1190                           
-  1191                           ;initializer for _fuzz_up
-  1192  0209  3401               	retlw	1
-  1193  020A  3400               	retlw	0
+  1191                           ;initializer for _debounce_limit
+  1192  023C  3419               	retlw	25
+  1193  023D  3400               	retlw	0
   1194                           
-  1195                           ;initializer for _long_press_limit
-  1196  020B  3400               	retlw	0
-  1197  020C  342D               	retlw	45
-  1198  000B                     _INTCONbits	set	11
-  1199  0011                     _PIR1bits	set	17
-  1200  000C                     _PORTAbits	set	12
-  1201  001C                     _T2CONbits	set	28
-  1202  009D                     _ADCON0bits	set	157
-  1203  009E                     _ADCON1bits	set	158
-  1204  009C                     _ADRESH	set	156
-  1205  009B                     _ADRESL	set	155
-  1206  0099                     _OSCCONbits	set	153
-  1207  009A                     _OSCSTAT	set	154
-  1208  008C                     _TRISAbits	set	140
-  1209  008E                     _TRISCbits	set	142
-  1210  010C                     _LATAbits	set	268
-  1211  010E                     _LATCbits	set	270
-  1212  018C                     _ANSELAbits	set	396
-  1213  0192                     _PMADRH	set	402
-  1214  0191                     _PMADRL	set	401
-  1215  0195                     _PMCON1bits	set	405
-  1216  0196                     _PMCON2	set	406
-  1217  0194                     _PMDATH	set	404
-  1218  0193                     _PMDATL	set	403
-  1219                           
-  1220                           ; #config settings
-  1221  0000                     
-  1222                           	psect	cinit
-  1223  000E                     start_initialization:	
-  1224  000E                     __initialization:	
-  1225                           
-  1226                           ; Clear objects allocated to BANK0
-  1227  000E  3020               	movlw	low __pbssBANK0
-  1228  000F  0084               	movwf	4
-  1229  0010  3000               	movlw	high __pbssBANK0
-  1230  0011  0085               	movwf	5
-  1231  0012  3018               	movlw	24
-  1232  0013  220D               	fcall	clear_ram0
-  1233                           
-  1234                           ; Initialize objects allocated to BANK0
-  1235  0014  3005               	movlw	low __pidataBANK0
-  1236  0015  0084               	movwf	4
-  1237  0016  3082               	movlw	(high __pidataBANK0)| (0+128)
-  1238  0017  0085               	movwf	5
-  1239  0018  3038               	movlw	low __pdataBANK0
-  1240  0019  0086               	movwf	6
-  1241  001A  3000               	movlw	high __pdataBANK0
-  1242  001B  0087               	movwf	7
-  1243  001C  3008               	movlw	8
-  1244  001D  2213               	fcall	init_ram
-  1245  001E                     end_of_initialization:	
-  1246                           ;End of C runtime variable initialization code
-  1247                           
-  1248  001E                     __end_of__initialization:	
-  1249  001E  107E               	bcf	int$flags,0	;clear compiler interrupt flag (level 1)
-  1250  001F  0020               	movlb	0
-  1251  0020  29D0               	ljmp	_main	;jump to C main() function
-  1252                           
-  1253                           	psect	bssBANK0
-  1254  0020                     __pbssBANK0:	
-  1255  0020                     wait_ms@timel:	
-  1256  0020                     	ds	4
-  1257  0024                     _boost_down:	
-  1258  0024                     	ds	2
-  1259  0026                     _boost_pressed:	
-  1260  0026                     	ds	2
-  1261  0028                     _boost_state:	
-  1262  0028                     	ds	2
-  1263  002A                     _feedback_state:	
-  1264  002A                     	ds	2
-  1265  002C                     _fuzz_down:	
-  1266  002C                     	ds	2
-  1267  002E                     _fuzz_pressed:	
-  1268  002E                     	ds	2
-  1269  0030                     _fuzz_state:	
-  1270  0030                     	ds	2
-  1271  0032                     _fuzz_toggle:	
-  1272  0032                     	ds	2
-  1273  0034                     _fuzz_turning_on:	
-  1274  0034                     	ds	2
-  1275  0036                     _last_boost_state:	
-  1276  0036                     	ds	2
-  1277                           
-  1278                           	psect	dataBANK0
-  1279  0038                     __pdataBANK0:	
-  1280  0038                     _boost_up:	
-  1281  0038                     	ds	2
-  1282  003A                     _debounce_limit:	
-  1283  003A                     	ds	2
-  1284  003C                     _fuzz_up:	
-  1285  003C                     	ds	2
-  1286  003E                     _long_press_limit:	
-  1287  003E                     	ds	2
-  1288                           
-  1289                           	psect	clrtext
-  1290  020D                     clear_ram0:	
-  1291                           ;	Called with FSR0 containing the base address, and
-  1292                           ;	WREG with the size to clear
-  1293                           
-  1294  020D  0064               	clrwdt	;clear the watchdog before getting into this loop
-  1295  020E                     clrloop0:	
-  1296  020E  0180               	clrf	0	;clear RAM location pointed to by FSR
-  1297  020F  3101               	addfsr 0,1
-  1298  0210  0B89               	decfsz	9,f	;Have we reached the end of clearing yet?
-  1299  0211  2A0E               	goto	clrloop0	;have we reached the end yet?
-  1300  0212  3400               	retlw	0	;all done for this memory range, return
-  1301                           
-  1302                           	psect	inittext
-  1303  0213                     init_ram:	
-  1304  0213  00FE               	movwf	126
-  1305  0214                     initloop:	
-  1306  0214  0012               	moviw fsr0++
-  1307  0215  001E               	movwi fsr1++
-  1308  0216  0BFE               	decfsz	126,f
-  1309  0217  2A14               	goto	initloop
-  1310  0218  3400               	retlw	0
-  1311                           
-  1312                           	psect	cstackCOMMON
-  1313  0070                     __pcstackCOMMON:	
-  1314  0070                     ?_ConfigureOscillator:	
-  1315  0070                     ?_InitApp:	
-  1316                           ; 1 bytes @ 0x0
-  1317                           
-  1318  0070                     ?_initFuzz:	
-  1319                           ; 1 bytes @ 0x0
-  1320                           
-  1321  0070                     ?_initBoost:	
-  1322                           ; 1 bytes @ 0x0
+  1195                           ;initializer for _feedback_state
+  1196  023E  34FF               	retlw	255
+  1197  023F  34FF               	retlw	255
+  1198                           
+  1199                           ;initializer for _fuzz_state
+  1200  0240  34FF               	retlw	255
+  1201  0241  34FF               	retlw	255
+  1202                           
+  1203                           ;initializer for _fuzz_up
+  1204  0242  3401               	retlw	1
+  1205  0243  3400               	retlw	0
+  1206                           
+  1207                           ;initializer for _long_press_limit
+  1208  0244  3400               	retlw	0
+  1209  0245  342D               	retlw	45
+  1210  000B                     _INTCONbits	set	11
+  1211  0011                     _PIR1bits	set	17
+  1212  000C                     _PORTAbits	set	12
+  1213  001C                     _T2CONbits	set	28
+  1214  009D                     _ADCON0bits	set	157
+  1215  009E                     _ADCON1bits	set	158
+  1216  009C                     _ADRESH	set	156
+  1217  009B                     _ADRESL	set	155
+  1218  0099                     _OSCCONbits	set	153
+  1219  009A                     _OSCSTAT	set	154
+  1220  008C                     _TRISAbits	set	140
+  1221  008E                     _TRISCbits	set	142
+  1222  010C                     _LATAbits	set	268
+  1223  010E                     _LATCbits	set	270
+  1224  018C                     _ANSELAbits	set	396
+  1225  0192                     _PMADRH	set	402
+  1226  0191                     _PMADRL	set	401
+  1227  0195                     _PMCON1bits	set	405
+  1228  0196                     _PMCON2	set	406
+  1229  0194                     _PMDATH	set	404
+  1230  0193                     _PMDATL	set	403
+  1231                           
+  1232                           ; #config settings
+  1233  0000                     
+  1234                           	psect	cinit
+  1235  000E                     start_initialization:	
+  1236  000E                     __initialization:	
+  1237                           
+  1238                           ; Clear objects allocated to BANK0
+  1239  000E  3020               	movlw	low __pbssBANK0
+  1240  000F  0084               	movwf	4
+  1241  0010  3000               	movlw	high __pbssBANK0
+  1242  0011  0085               	movwf	5
+  1243  0012  3012               	movlw	18
+  1244  0013  225B               	fcall	clear_ram0
+  1245                           
+  1246                           ; Initialize objects allocated to BANK0
+  1247  0014  3038               	movlw	low __pidataBANK0
+  1248  0015  0084               	movwf	4
+  1249  0016  3082               	movlw	(high __pidataBANK0)| (0+128)
+  1250  0017  0085               	movwf	5
+  1251  0018  3032               	movlw	low __pdataBANK0
+  1252  0019  0086               	movwf	6
+  1253  001A  3000               	movlw	high __pdataBANK0
+  1254  001B  0087               	movwf	7
+  1255  001C  300E               	movlw	14
+  1256  001D  2261               	fcall	init_ram
+  1257  001E                     end_of_initialization:	
+  1258                           ;End of C runtime variable initialization code
+  1259                           
+  1260  001E                     __end_of__initialization:	
+  1261  001E  107E               	bcf	int$flags,0	;clear compiler interrupt flag (level 1)
+  1262  001F  0020               	movlb	0
+  1263  0020  2A16               	ljmp	_main	;jump to C main() function
+  1264                           
+  1265                           	psect	bssBANK0
+  1266  0020                     __pbssBANK0:	
+  1267  0020                     wait_ms@timel:	
+  1268  0020                     	ds	4
+  1269  0024                     _boost_down:	
+  1270  0024                     	ds	2
+  1271  0026                     _boost_pressed:	
+  1272  0026                     	ds	2
+  1273  0028                     _fuzz_down:	
+  1274  0028                     	ds	2
+  1275  002A                     _fuzz_pressed:	
+  1276  002A                     	ds	2
+  1277  002C                     _fuzz_toggle:	
+  1278  002C                     	ds	2
+  1279  002E                     _fuzz_turning_on:	
+  1280  002E                     	ds	2
+  1281  0030                     _last_boost_state:	
+  1282  0030                     	ds	2
+  1283                           
+  1284                           	psect	dataBANK0
+  1285  0032                     __pdataBANK0:	
+  1286  0032                     _boost_state:	
+  1287  0032                     	ds	2
+  1288  0034                     _boost_up:	
+  1289  0034                     	ds	2
+  1290  0036                     _debounce_limit:	
+  1291  0036                     	ds	2
+  1292  0038                     _feedback_state:	
+  1293  0038                     	ds	2
+  1294  003A                     _fuzz_state:	
+  1295  003A                     	ds	2
+  1296  003C                     _fuzz_up:	
+  1297  003C                     	ds	2
+  1298  003E                     _long_press_limit:	
+  1299  003E                     	ds	2
+  1300                           
+  1301                           	psect	clrtext
+  1302  025B                     clear_ram0:	
+  1303                           ;	Called with FSR0 containing the base address, and
+  1304                           ;	WREG with the size to clear
+  1305                           
+  1306  025B  0064               	clrwdt	;clear the watchdog before getting into this loop
+  1307  025C                     clrloop0:	
+  1308  025C  0180               	clrf	0	;clear RAM location pointed to by FSR
+  1309  025D  3101               	addfsr 0,1
+  1310  025E  0B89               	decfsz	9,f	;Have we reached the end of clearing yet?
+  1311  025F  2A5C               	goto	clrloop0	;have we reached the end yet?
+  1312  0260  3400               	retlw	0	;all done for this memory range, return
+  1313                           
+  1314                           	psect	inittext
+  1315  0261                     init_ram:	
+  1316  0261  00FE               	movwf	126
+  1317  0262                     initloop:	
+  1318  0262  0012               	moviw fsr0++
+  1319  0263  001E               	movwi fsr1++
+  1320  0264  0BFE               	decfsz	126,f
+  1321  0265  2A62               	goto	initloop
+  1322  0266  3400               	retlw	0
   1323                           
-  1324  0070                     ?_init_adc:	
-  1325                           ; 1 bytes @ 0x0
-  1326                           
-  1327  0070                     ?_isr:	
+  1324                           	psect	cstackCOMMON
+  1325  0070                     __pcstackCOMMON:	
+  1326  0070                     ?_ConfigureOscillator:	
+  1327  0070                     ?_InitApp:	
   1328                           ; 1 bytes @ 0x0
   1329                           
-  1330  0070                     ??_isr:	
+  1330  0070                     ?_initFuzz:	
   1331                           ; 1 bytes @ 0x0
   1332                           
-  1333  0070                     ?_main:	
+  1333  0070                     ?_initBoost:	
   1334                           ; 1 bytes @ 0x0
   1335                           
-  1336                           
+  1336  0070                     ?_init_adc:	
   1337                           ; 1 bytes @ 0x0
-  1338  0070                     	ds	1
-  1339  0071                     ??_ConfigureOscillator:	
-  1340  0071                     ??_InitApp:	
-  1341                           ; 1 bytes @ 0x1
-  1342                           
-  1343  0071                     ??_init_adc:	
-  1344                           ; 1 bytes @ 0x1
-  1345                           
-  1346  0071                     ?_setFuzzState:	
-  1347                           ; 1 bytes @ 0x1
+  1338                           
+  1339  0070                     ?_isr:	
+  1340                           ; 1 bytes @ 0x0
+  1341                           
+  1342  0070                     ??_isr:	
+  1343                           ; 1 bytes @ 0x0
+  1344                           
+  1345  0070                     ?_main:	
+  1346                           ; 1 bytes @ 0x0
+  1347                           
   1348                           
-  1349  0071                     ?_setFeedbackState:	
-  1350                           ; 1 bytes @ 0x1
-  1351                           
-  1352  0071                     ?___lmul:	
+  1349                           ; 1 bytes @ 0x0
+  1350  0070                     	ds	1
+  1351  0071                     ??_ConfigureOscillator:	
+  1352  0071                     ??_InitApp:	
   1353                           ; 1 bytes @ 0x1
   1354                           
-  1355  0071                     setFuzzState@f_state:	
-  1356                           ; 4 bytes @ 0x1
+  1355  0071                     ??_init_adc:	
+  1356                           ; 1 bytes @ 0x1
   1357                           
-  1358  0071                     setFeedbackState@f_state:	
-  1359                           ; 2 bytes @ 0x1
+  1358  0071                     ?___lmul:	
+  1359                           ; 1 bytes @ 0x1
   1360                           
   1361  0071                     ___lmul@multiplier:	
-  1362                           ; 2 bytes @ 0x1
+  1362                           ; 4 bytes @ 0x1
   1363                           
   1364                           
   1365                           ; 4 bytes @ 0x1
-  1366  0071                     	ds	2
-  1367  0073                     ??_initFuzz:	
-  1368  0073                     ?_updateFuzz:	
-  1369                           ; 1 bytes @ 0x3
-  1370                           
-  1371  0073                     ??_setFuzzState:	
-  1372                           ; 1 bytes @ 0x3
-  1373                           
-  1374  0073                     ??_setFeedbackState:	
-  1375                           ; 1 bytes @ 0x3
-  1376                           
-  1377  0073                     updateFuzz@debounce_limit:	
-  1378                           ; 1 bytes @ 0x3
-  1379                           
-  1380                           
-  1381                           ; 2 bytes @ 0x3
-  1382  0073                     	ds	2
-  1383  0075                     ??_updateFuzz:	
-  1384  0075                     ___lmul@multiplicand:	
-  1385                           ; 1 bytes @ 0x5
-  1386                           
+  1366  0071                     	ds	4
+  1367  0075                     ___lmul@multiplicand:	
+  1368                           
+  1369                           ; 4 bytes @ 0x5
+  1370  0075                     	ds	4
+  1371  0079                     ??___lmul:	
+  1372  0079                     ___lmul@product:	
+  1373                           ; 1 bytes @ 0x9
+  1374                           
+  1375                           
+  1376                           ; 4 bytes @ 0x9
+  1377  0079                     	ds	4
+  1378  007D                     ??_initFuzz:	
+  1379  007D                     ??_initBoost:	
+  1380                           ; 1 bytes @ 0xD
+  1381                           
+  1382  007D                     ??_setFuzzState:	
+  1383                           ; 1 bytes @ 0xD
+  1384                           
+  1385  007D                     ??_setFeedbackState:	
+  1386                           ; 1 bytes @ 0xD
   1387                           
-  1388                           ; 4 bytes @ 0x5
-  1389  0075                     	ds	4
-  1390  0079                     ??___lmul:	
-  1391  0079                     ___lmul@product:	
-  1392                           ; 1 bytes @ 0x9
+  1388  007D                     ??_setBoostState:	
+  1389                           ; 1 bytes @ 0xD
+  1390                           
+  1391  007D                     ??_main:	
+  1392                           ; 1 bytes @ 0xD
   1393                           
-  1394                           
-  1395                           ; 4 bytes @ 0x9
-  1396  0079                     	ds	4
-  1397  007D                     ??_initBoost:	
-  1398  007D                     ??_setBoostState:	
-  1399                           ; 1 bytes @ 0xD
-  1400                           
-  1401  007D                     ??_main:	
-  1402                           ; 1 bytes @ 0xD
-  1403                           
-  1404  007D                     ??_wait_ms:	
-  1405                           ; 1 bytes @ 0xD
+  1394  007D                     ??_wait_ms:	
+  1395                           ; 1 bytes @ 0xD
+  1396                           
+  1397                           
+  1398                           	psect	cstackBANK0
+  1399  0040                     __pcstackBANK0:	
+  1400                           ; 1 bytes @ 0xD
+  1401                           
+  1402  0040                     ?_wait_ms:	
+  1403  0040                     wait_ms@time:	
+  1404                           ; 1 bytes @ 0x0
+  1405                           
   1406                           
-  1407                           
-  1408                           	psect	cstackBANK0
-  1409  0040                     __pcstackBANK0:	
-  1410                           ; 1 bytes @ 0xD
-  1411                           
-  1412  0040                     ?_wait_ms:	
-  1413  0040                     wait_ms@time:	
-  1414                           ; 1 bytes @ 0x0
+  1407                           ; 2 bytes @ 0x0
+  1408  0040                     	ds	2
+  1409  0042                     ?_setFuzzState:	
+  1410  0042                     ?_setFeedbackState:	
+  1411                           ; 1 bytes @ 0x2
+  1412                           
+  1413  0042                     ?_setBoostState:	
+  1414                           ; 1 bytes @ 0x2
   1415                           
-  1416                           
-  1417                           ; 2 bytes @ 0x0
-  1418  0040                     	ds	2
-  1419  0042                     ?_setBoostState:	
-  1420  0042                     setBoostState@f_state:	
-  1421                           ; 1 bytes @ 0x2
-  1422                           
-  1423                           
-  1424                           ; 2 bytes @ 0x2
-  1425  0042                     	ds	2
-  1426  0044                     ?_updateBoost:	
-  1427  0044                     updateBoost@debounce_limit:	
-  1428                           ; 1 bytes @ 0x4
-  1429                           
-  1430                           
-  1431                           ; 2 bytes @ 0x4
-  1432  0044                     	ds	2
-  1433  0046                     ??_updateBoost:	
+  1416  0042                     setFuzzState@f_state:	
+  1417                           ; 1 bytes @ 0x2
+  1418                           
+  1419  0042                     setFeedbackState@f_state:	
+  1420                           ; 2 bytes @ 0x2
+  1421                           
+  1422  0042                     setBoostState@f_state:	
+  1423                           ; 2 bytes @ 0x2
+  1424                           
+  1425                           
+  1426                           ; 2 bytes @ 0x2
+  1427  0042                     	ds	2
+  1428  0044                     ?_updateFuzz:	
+  1429  0044                     ?_updateBoost:	
+  1430                           ; 1 bytes @ 0x4
+  1431                           
+  1432  0044                     updateFuzz@debounce_limit:	
+  1433                           ; 1 bytes @ 0x4
   1434                           
-  1435                           ; 1 bytes @ 0x6
-  1436  0046                     	ds	2
+  1435  0044                     updateBoost@debounce_limit:	
+  1436                           ; 2 bytes @ 0x4
   1437                           
-  1438                           	psect	maintext
-  1439  01D0                     __pmaintext:	
-  1440 ;;
-  1441 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
-  1442 ;;
-  1443 ;; *************** function _main *****************
-  1444 ;; Defined at:
-  1445 ;;		line 28 in file "main.c"
-  1446 ;; Parameters:    Size  Location     Type
-  1447 ;;		None
-  1448 ;; Auto vars:     Size  Location     Type
-  1449 ;;		None
-  1450 ;; Return value:  Size  Location     Type
-  1451 ;;                  1    wreg      void 
-  1452 ;; Registers used:
-  1453 ;;		wreg, status,2, status,0, pclath, cstack
-  1454 ;; Tracked objects:
-  1455 ;;		On entry : B1F/0
-  1456 ;;		On exit  : 0/0
-  1457 ;;		Unchanged: 0/0
-  1458 ;; Data sizes:     COMMON   BANK0   BANK1
-  1459 ;;      Params:         0       0       0
-  1460 ;;      Locals:         0       0       0
-  1461 ;;      Temps:          0       0       0
-  1462 ;;      Totals:         0       0       0
-  1463 ;;Total ram usage:        0 bytes
-  1464 ;; Hardware stack levels required when called:    5
-  1465 ;; This function calls:
-  1466 ;;		_ConfigureOscillator
-  1467 ;;		_InitApp
-  1468 ;;		_initBoost
-  1469 ;;		_initFuzz
-  1470 ;;		_updateBoost
-  1471 ;;		_updateFuzz
-  1472 ;; This function is called by:
-  1473 ;;		Startup code after reset
-  1474 ;; This function uses a non-reentrant model
-  1475 ;;
-  1476                           
-  1477                           
-  1478                           ;psect for function _main
-  1479  01D0                     _main:	
-  1480                           
-  1481                           ;main.c: 29: ConfigureOscillator();
-  1482                           
-  1483                           ;incstack = 0
-  1484                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
-  1485  01D0  221F               	fcall	_ConfigureOscillator
-  1486                           
-  1487                           ;main.c: 30: InitApp();
-  1488  01D1  21E1               	fcall	_InitApp
-  1489                           
-  1490                           ;main.c: 32: initFuzz();
-  1491  01D2  21FC               	fcall	_initFuzz
+  1438                           
+  1439                           ; 2 bytes @ 0x4
+  1440  0044                     	ds	2
+  1441  0046                     ??_updateFuzz:	
+  1442  0046                     ??_updateBoost:	
+  1443                           ; 1 bytes @ 0x6
+  1444                           
+  1445                           
+  1446                           ; 1 bytes @ 0x6
+  1447  0046                     	ds	1
+  1448  0047                     updateFuzz@fb_state:	
+  1449                           
+  1450                           ; 2 bytes @ 0x7
+  1451  0047                     	ds	2
+  1452                           
+  1453                           	psect	maintext
+  1454  0216                     __pmaintext:	
+  1455 ;;
+  1456 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+  1457 ;;
+  1458 ;; *************** function _main *****************
+  1459 ;; Defined at:
+  1460 ;;		line 28 in file "main.c"
+  1461 ;; Parameters:    Size  Location     Type
+  1462 ;;		None
+  1463 ;; Auto vars:     Size  Location     Type
+  1464 ;;		None
+  1465 ;; Return value:  Size  Location     Type
+  1466 ;;                  1    wreg      void 
+  1467 ;; Registers used:
+  1468 ;;		wreg, status,2, status,0, pclath, cstack
+  1469 ;; Tracked objects:
+  1470 ;;		On entry : B1F/0
+  1471 ;;		On exit  : 0/0
+  1472 ;;		Unchanged: 0/0
+  1473 ;; Data sizes:     COMMON   BANK0   BANK1
+  1474 ;;      Params:         0       0       0
+  1475 ;;      Locals:         0       0       0
+  1476 ;;      Temps:          0       0       0
+  1477 ;;      Totals:         0       0       0
+  1478 ;;Total ram usage:        0 bytes
+  1479 ;; Hardware stack levels required when called:    5
+  1480 ;; This function calls:
+  1481 ;;		_ConfigureOscillator
+  1482 ;;		_InitApp
+  1483 ;;		_initBoost
+  1484 ;;		_initFuzz
+  1485 ;;		_updateBoost
+  1486 ;;		_updateFuzz
+  1487 ;; This function is called by:
+  1488 ;;		Startup code after reset
+  1489 ;; This function uses a non-reentrant model
+  1490 ;;
+  1491                           
   1492                           
-  1493                           ;main.c: 33: initBoost();
-  1494  01D3  2219               	fcall	_initBoost
-  1495  01D4                     l58:	
-  1496                           ;main.c: 35: while (1) {
+  1493                           ;psect for function _main
+  1494  0216                     _main:	
+  1495                           
+  1496                           ;main.c: 29: ConfigureOscillator();
   1497                           
-  1498                           
-  1499                           ;main.c: 36: updateFuzz(debounce_limit);
-  1500  01D4  0020               	movlb	0	; select bank0
-  1501  01D5  083B               	movf	_debounce_limit+1,w
-  1502  01D6  00F4               	movwf	updateFuzz@debounce_limit+1
-  1503  01D7  083A               	movf	_debounce_limit,w
-  1504  01D8  00F3               	movwf	updateFuzz@debounce_limit
-  1505  01D9  2021               	fcall	_updateFuzz
-  1506                           
-  1507                           ;main.c: 37: updateBoost(debounce_limit);
-  1508  01DA  0020               	movlb	0	; select bank0
-  1509  01DB  083B               	movf	_debounce_limit+1,w
-  1510  01DC  00C5               	movwf	updateBoost@debounce_limit+1
-  1511  01DD  083A               	movf	_debounce_limit,w
-  1512  01DE  00C4               	movwf	updateBoost@debounce_limit
-  1513  01DF  20C2               	fcall	_updateBoost
-  1514  01E0  29D4               	goto	l58
-  1515  01E1                     __end_of_main:	
-  1516                           
-  1517                           	psect	text1
-  1518  0021                     __ptext1:	
-  1519 ;; *************** function _updateFuzz *****************
-  1520 ;; Defined at:
-  1521 ;;		line 44 in file "mcc_generated_files/fuzz.c"
-  1522 ;; Parameters:    Size  Location     Type
-  1523 ;;  debounce_lim    2    3[COMMON] int 
-  1524 ;; Auto vars:     Size  Location     Type
-  1525 ;;		None
-  1526 ;; Return value:  Size  Location     Type
-  1527 ;;                  1    wreg      void 
-  1528 ;; Registers used:
-  1529 ;;		wreg, status,2, status,0, pclath, cstack
-  1530 ;; Tracked objects:
-  1531 ;;		On entry : 0/0
-  1532 ;;		On exit  : 0/0
-  1533 ;;		Unchanged: 0/0
-  1534 ;; Data sizes:     COMMON   BANK0   BANK1
-  1535 ;;      Params:         2       0       0
-  1536 ;;      Locals:         0       0       0
-  1537 ;;      Temps:          1       0       0
-  1538 ;;      Totals:         3       0       0
-  1539 ;;Total ram usage:        3 bytes
-  1540 ;; Hardware stack levels used:    1
-  1541 ;; Hardware stack levels required when called:    2
-  1542 ;; This function calls:
-  1543 ;;		_setFeedbackState
-  1544 ;;		_setFuzzState
-  1545 ;; This function is called by:
-  1546 ;;		_main
-  1547 ;; This function uses a non-reentrant model
-  1548 ;;
-  1549                           
-  1550                           
-  1551                           ;psect for function _updateFuzz
-  1552  0021                     _updateFuzz:	
-  1553                           
-  1554                           ;fuzz.c: 51: if (PORTAbits.RA4 == 0) {
-  1555                           
-  1556                           ;incstack = 0
-  1557                           ; Regs used in _updateFuzz: [wreg+status,2+status,0+pclath+cstack]
-  1558  0021  0020               	movlb	0	; select bank0
-  1559  0022  1A0C               	btfsc	12,4	;volatile
-  1560  0023  2834               	goto	l951
-  1561                           
-  1562                           ;fuzz.c: 52: if (fuzz_pressed > 0) {
-  1563  0024  082F               	movf	_fuzz_pressed+1,w
-  1564  0025  3A80               	xorlw	128
-  1565  0026  00F5               	movwf	??_updateFuzz
-  1566  0027  3080               	movlw	128
-  1567  0028  0275               	subwf	??_updateFuzz,w
-  1568  0029  1D03               	skipz
-  1569  002A  282D               	goto	u495
-  1570  002B  3001               	movlw	1
-  1571  002C  022E               	subwf	_fuzz_pressed,w
-  1572  002D                     u495:	
-  1573  002D  1C03               	skipc
-  1574  002E  2845               	goto	l955
-  1575                           
-  1576                           ;fuzz.c: 53: fuzz_pressed--;
-  1577  002F  30FF               	movlw	255
-  1578  0030  0020               	movlb	0	; select bank0
-  1579  0031  07AE               	addwf	_fuzz_pressed,f
-  1580  0032  30FF               	movlw	255
-  1581  0033  2844               	goto	L1
-  1582  0034                     l951:	
-  1583                           ;fuzz.c: 54: }
-  1584                           ;fuzz.c: 55: } else if (fuzz_pressed < debounce_limit) {
-  1585                           
-  1586  0034  082F               	movf	_fuzz_pressed+1,w
-  1587  0035  3A80               	xorlw	128
-  1588  0036  00F5               	movwf	??_updateFuzz
-  1589  0037  0874               	movf	updateFuzz@debounce_limit+1,w
-  1590  0038  3A80               	xorlw	128
-  1591  0039  0275               	subwf	??_updateFuzz,w
-  1592  003A  1D03               	skipz
-  1593  003B  283E               	goto	u505
-  1594  003C  0873               	movf	updateFuzz@debounce_limit,w
-  1595  003D  022E               	subwf	_fuzz_pressed,w
-  1596  003E                     u505:	
-  1597  003E  1803               	skipnc
-  1598  003F  2845               	goto	l955
-  1599                           
-  1600                           ;fuzz.c: 56: fuzz_pressed++;
-  1601  0040  3001               	movlw	1
-  1602  0041  0020               	movlb	0	; select bank0
-  1603  0042  07AE               	addwf	_fuzz_pressed,f
-  1604  0043  3000               	movlw	0
-  1605  0044                     L1:	
-  1606  0044  3DAF               	addwfc	_fuzz_pressed+1,f
-  1607  0045                     l955:	
-  1608                           
-  1609                           ;fuzz.c: 58: }
-  1610                           ;fuzz.c: 64: if (fuzz_pressed == 0) {
-  1611  0045  0020               	movlb	0	; select bank0
-  1612  0046  082E               	movf	_fuzz_pressed,w
-  1613  0047  042F               	iorwf	_fuzz_pressed+1,w
-  1614  0048  1D03               	btfss	3,2
-  1615  0049  288E               	goto	l985
-  1616                           
-  1617                           ;fuzz.c: 66: fuzz_down++;
-  1618  004A  3001               	movlw	1
-  1619  004B  07AC               	addwf	_fuzz_down,f
-  1620  004C  3000               	movlw	0
-  1621  004D  3DAD               	addwfc	_fuzz_down+1,f
-  1622                           
-  1623                           ;fuzz.c: 67: if (fuzz_state == 1) {
-  1624  004E  0330               	decf	_fuzz_state,w
-  1625  004F  0431               	iorwf	_fuzz_state+1,w
-  1626  0050  1D03               	btfss	3,2
-  1627  0051  287B               	goto	l975
-  1628                           
-  1629                           ;fuzz.c: 68: if (fuzz_up == 1) {
-  1630  0052  033C               	decf	_fuzz_up,w
-  1631  0053  043D               	iorwf	_fuzz_up+1,w
-  1632  0054  1D03               	btfss	3,2
-  1633  0055  285A               	goto	l149
-  1634                           
-  1635                           ;fuzz.c: 69: fuzz_toggle = 1;
-  1636  0056  3001               	movlw	1
-  1637  0057  00B2               	movwf	_fuzz_toggle
-  1638  0058  3000               	movlw	0
-  1639  0059  00B3               	movwf	_fuzz_toggle+1
-  1640  005A                     l149:	
-  1641                           
-  1642                           ;fuzz.c: 70: }
-  1643                           ;fuzz.c: 72: if (fuzz_down >= long_press_limit && feedback_state == 0 && fuzz_turning_on
+  1498                           ;incstack = 0
+  1499                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+  1500  0216  226D               	fcall	_ConfigureOscillator
+  1501                           
+  1502                           ;main.c: 30: InitApp();
+  1503  0217  2227               	fcall	_InitApp
+  1504                           
+  1505                           ;main.c: 32: initFuzz();
+  1506  0218  2246               	fcall	_initFuzz
+  1507                           
+  1508                           ;main.c: 33: initBoost();
+  1509  0219  2267               	fcall	_initBoost
+  1510  021A                     l58:	
+  1511                           ;main.c: 35: while (1) {
+  1512                           
+  1513                           
+  1514                           ;main.c: 36: updateFuzz(debounce_limit);
+  1515  021A  0020               	movlb	0	; select bank0
+  1516  021B  0837               	movf	_debounce_limit+1,w
+  1517  021C  00C5               	movwf	updateFuzz@debounce_limit+1
+  1518  021D  0836               	movf	_debounce_limit,w
+  1519  021E  00C4               	movwf	updateFuzz@debounce_limit
+  1520  021F  2021               	fcall	_updateFuzz
+  1521                           
+  1522                           ;main.c: 37: updateBoost(debounce_limit);
+  1523  0220  0020               	movlb	0	; select bank0
+  1524  0221  0837               	movf	_debounce_limit+1,w
+  1525  0222  00C5               	movwf	updateBoost@debounce_limit+1
+  1526  0223  0836               	movf	_debounce_limit,w
+  1527  0224  00C4               	movwf	updateBoost@debounce_limit
+  1528  0225  20C8               	fcall	_updateBoost
+  1529  0226  2A1A               	goto	l58
+  1530  0227                     __end_of_main:	
+  1531                           
+  1532                           	psect	text1
+  1533  0021                     __ptext1:	
+  1534 ;; *************** function _updateFuzz *****************
+  1535 ;; Defined at:
+  1536 ;;		line 44 in file "mcc_generated_files/fuzz.c"
+  1537 ;; Parameters:    Size  Location     Type
+  1538 ;;  debounce_lim    2    4[BANK0 ] int 
+  1539 ;; Auto vars:     Size  Location     Type
+  1540 ;;  fb_state        2    7[BANK0 ] int 
+  1541 ;; Return value:  Size  Location     Type
+  1542 ;;                  1    wreg      void 
+  1543 ;; Registers used:
+  1544 ;;		wreg, status,2, status,0, pclath, cstack
+  1545 ;; Tracked objects:
+  1546 ;;		On entry : 0/0
+  1547 ;;		On exit  : 0/0
+  1548 ;;		Unchanged: 0/0
+  1549 ;; Data sizes:     COMMON   BANK0   BANK1
+  1550 ;;      Params:         0       2       0
+  1551 ;;      Locals:         0       2       0
+  1552 ;;      Temps:          0       1       0
+  1553 ;;      Totals:         0       5       0
+  1554 ;;Total ram usage:        5 bytes
+  1555 ;; Hardware stack levels used:    1
+  1556 ;; Hardware stack levels required when called:    4
+  1557 ;; This function calls:
+  1558 ;;		_setFeedbackState
+  1559 ;;		_setFuzzState
+  1560 ;; This function is called by:
+  1561 ;;		_main
+  1562 ;; This function uses a non-reentrant model
+  1563 ;;
+  1564                           
+  1565                           
+  1566                           ;psect for function _updateFuzz
+  1567  0021                     _updateFuzz:	
+  1568                           
+  1569                           ;fuzz.c: 51: if (PORTAbits.RA4 == 0) {
+  1570                           
+  1571                           ;incstack = 0
+  1572                           ; Regs used in _updateFuzz: [wreg+status,2+status,0+pclath+cstack]
+  1573  0021  0020               	movlb	0	; select bank0
+  1574  0022  1A0C               	btfsc	12,4	;volatile
+  1575  0023  2834               	goto	l1003
+  1576                           
+  1577                           ;fuzz.c: 52: if (fuzz_pressed > 0) {
+  1578  0024  082B               	movf	_fuzz_pressed+1,w
+  1579  0025  3A80               	xorlw	128
+  1580  0026  00C6               	movwf	??_updateFuzz
+  1581  0027  3080               	movlw	128
+  1582  0028  0246               	subwf	??_updateFuzz,w
+  1583  0029  1D03               	skipz
+  1584  002A  282D               	goto	u575
+  1585  002B  3001               	movlw	1
+  1586  002C  022A               	subwf	_fuzz_pressed,w
+  1587  002D                     u575:	
+  1588  002D  1C03               	skipc
+  1589  002E  2845               	goto	l1007
+  1590                           
+  1591                           ;fuzz.c: 53: fuzz_pressed--;
+  1592  002F  30FF               	movlw	255
+  1593  0030  0020               	movlb	0	; select bank0
+  1594  0031  07AA               	addwf	_fuzz_pressed,f
+  1595  0032  30FF               	movlw	255
+  1596  0033  2844               	goto	L1
+  1597  0034                     l1003:	
+  1598                           ;fuzz.c: 54: }
+  1599                           ;fuzz.c: 55: } else if (fuzz_pressed < debounce_limit) {
+  1600                           
+  1601  0034  082B               	movf	_fuzz_pressed+1,w
+  1602  0035  3A80               	xorlw	128
+  1603  0036  00C6               	movwf	??_updateFuzz
+  1604  0037  0845               	movf	updateFuzz@debounce_limit+1,w
+  1605  0038  3A80               	xorlw	128
+  1606  0039  0246               	subwf	??_updateFuzz,w
+  1607  003A  1D03               	skipz
+  1608  003B  283E               	goto	u585
+  1609  003C  0844               	movf	updateFuzz@debounce_limit,w
+  1610  003D  022A               	subwf	_fuzz_pressed,w
+  1611  003E                     u585:	
+  1612  003E  1803               	skipnc
+  1613  003F  2845               	goto	l1007
+  1614                           
+  1615                           ;fuzz.c: 56: fuzz_pressed++;
+  1616  0040  3001               	movlw	1
+  1617  0041  0020               	movlb	0	; select bank0
+  1618  0042  07AA               	addwf	_fuzz_pressed,f
+  1619  0043  3000               	movlw	0
+  1620  0044                     L1:	
+  1621  0044  3DAB               	addwfc	_fuzz_pressed+1,f
+  1622  0045                     l1007:	
+  1623                           
+  1624                           ;fuzz.c: 58: }
+  1625                           ;fuzz.c: 64: if (fuzz_pressed == 0) {
+  1626  0045  0020               	movlb	0	; select bank0
+  1627  0046  082A               	movf	_fuzz_pressed,w
+  1628  0047  042B               	iorwf	_fuzz_pressed+1,w
+  1629  0048  1D03               	btfss	3,2
+  1630  0049  288F               	goto	l1037
+  1631                           
+  1632                           ;fuzz.c: 66: fuzz_down++;
+  1633  004A  3001               	movlw	1
+  1634  004B  07A8               	addwf	_fuzz_down,f
+  1635  004C  3000               	movlw	0
+  1636  004D  3DA9               	addwfc	_fuzz_down+1,f
+  1637                           
+  1638                           ;fuzz.c: 67: if (fuzz_state == 1) {
+  1639  004E  033A               	decf	_fuzz_state,w
+  1640  004F  043B               	iorwf	_fuzz_state+1,w
+  1641  0050  1D03               	btfss	3,2
+  1642  0051  287C               	goto	l1027
+  1643                           
+  1644                           ;fuzz.c: 68: if (fuzz_up == 1) {
+  1645  0052  033C               	decf	_fuzz_up,w
+  1646  0053  043D               	iorwf	_fuzz_up+1,w
+  1647  0054  1D03               	btfss	3,2
+  1648  0055  285A               	goto	l151
+  1649                           
+  1650                           ;fuzz.c: 69: fuzz_toggle = 1;
+  1651  0056  3001               	movlw	1
+  1652  0057  00AC               	movwf	_fuzz_toggle
+  1653  0058  3000               	movlw	0
+  1654  0059  00AD               	movwf	_fuzz_toggle+1
+  1655  005A                     l151:	
+  1656                           
+  1657                           ;fuzz.c: 70: }
+  1658                           ;fuzz.c: 72: if (fuzz_down >= long_press_limit && feedback_state == 0 && fuzz_turning_on
       +                           == 0) {
-  1644  005A  082D               	movf	_fuzz_down+1,w
-  1645  005B  3A80               	xorlw	128
-  1646  005C  00F5               	movwf	??_updateFuzz
-  1647  005D  083F               	movf	_long_press_limit+1,w
-  1648  005E  3A80               	xorlw	128
-  1649  005F  0275               	subwf	??_updateFuzz,w
-  1650  0060  1D03               	skipz
-  1651  0061  2864               	goto	u545
-  1652  0062  083E               	movf	_long_press_limit,w
-  1653  0063  022C               	subwf	_fuzz_down,w
-  1654  0064                     u545:	
-  1655  0064  1C03               	skipc
-  1656  0065  288A               	goto	l983
-  1657  0066  0020               	movlb	0	; select bank0
-  1658  0067  082A               	movf	_feedback_state,w
-  1659  0068  042B               	iorwf	_feedback_state+1,w
-  1660  0069  1D03               	btfss	3,2
-  1661  006A  288A               	goto	l983
-  1662  006B  0834               	movf	_fuzz_turning_on,w
-  1663  006C  0435               	iorwf	_fuzz_turning_on+1,w
-  1664  006D  1D03               	btfss	3,2
-  1665  006E  288A               	goto	l983
-  1666                           
-  1667                           ;fuzz.c: 74: fuzz_down = long_press_limit;
-  1668  006F  083F               	movf	_long_press_limit+1,w
-  1669  0070  00AD               	movwf	_fuzz_down+1
-  1670  0071  083E               	movf	_long_press_limit,w
-  1671  0072  00AC               	movwf	_fuzz_down
-  1672                           
-  1673                           ;fuzz.c: 75: LATAbits.LATA2 = 0;
-  1674  0073  0022               	movlb	2	; select bank2
-  1675  0074  110C               	bcf	12,2	;volatile
-  1676                           
-  1677                           ;fuzz.c: 76: setFeedbackState(1);
-  1678  0075  3001               	movlw	1
-  1679  0076  00F1               	movwf	setFeedbackState@f_state
-  1680  0077  3000               	movlw	0
-  1681  0078  00F2               	movwf	setFeedbackState@f_state+1
-  1682  0079  21BC               	fcall	_setFeedbackState
-  1683                           
-  1684                           ;fuzz.c: 77: }
-  1685                           ;fuzz.c: 78: } else {
-  1686  007A  288A               	goto	l983
-  1687  007B                     l975:	
-  1688                           
-  1689                           ;fuzz.c: 80: fuzz_turning_on = 1;
-  1690  007B  3001               	movlw	1
-  1691  007C  0020               	movlb	0	; select bank0
-  1692  007D  00B4               	movwf	_fuzz_turning_on
-  1693  007E  3000               	movlw	0
-  1694  007F  00B5               	movwf	_fuzz_turning_on+1
-  1695                           
-  1696                           ;fuzz.c: 81: fuzz_toggle = 0;
-  1697  0080  01B2               	clrf	_fuzz_toggle
-  1698  0081  01B3               	clrf	_fuzz_toggle+1
+  1659  005A  0829               	movf	_fuzz_down+1,w
+  1660  005B  3A80               	xorlw	128
+  1661  005C  00C6               	movwf	??_updateFuzz
+  1662  005D  083F               	movf	_long_press_limit+1,w
+  1663  005E  3A80               	xorlw	128
+  1664  005F  0246               	subwf	??_updateFuzz,w
+  1665  0060  1D03               	skipz
+  1666  0061  2864               	goto	u625
+  1667  0062  083E               	movf	_long_press_limit,w
+  1668  0063  0228               	subwf	_fuzz_down,w
+  1669  0064                     u625:	
+  1670  0064  1C03               	skipc
+  1671  0065  288B               	goto	l1035
+  1672  0066  0020               	movlb	0	; select bank0
+  1673  0067  0838               	movf	_feedback_state,w
+  1674  0068  0439               	iorwf	_feedback_state+1,w
+  1675  0069  1D03               	btfss	3,2
+  1676  006A  288B               	goto	l1035
+  1677  006B  082E               	movf	_fuzz_turning_on,w
+  1678  006C  042F               	iorwf	_fuzz_turning_on+1,w
+  1679  006D  1D03               	btfss	3,2
+  1680  006E  288B               	goto	l1035
+  1681                           
+  1682                           ;fuzz.c: 74: fuzz_down = long_press_limit;
+  1683  006F  083F               	movf	_long_press_limit+1,w
+  1684  0070  00A9               	movwf	_fuzz_down+1
+  1685  0071  083E               	movf	_long_press_limit,w
+  1686  0072  00A8               	movwf	_fuzz_down
+  1687                           
+  1688                           ;fuzz.c: 75: LATAbits.LATA2 = 0;
+  1689  0073  0022               	movlb	2	; select bank2
+  1690  0074  110C               	bcf	12,2	;volatile
+  1691                           
+  1692                           ;fuzz.c: 76: setFeedbackState(1);
+  1693  0075  3001               	movlw	1
+  1694  0076  0020               	movlb	0	; select bank0
+  1695  0077  00C2               	movwf	setFeedbackState@f_state
+  1696  0078  3000               	movlw	0
+  1697  0079  00C3               	movwf	setFeedbackState@f_state+1
+  1698  007A  2157               	fcall	_setFeedbackState
   1699                           
-  1700                           ;fuzz.c: 82: setFuzzState(1);
-  1701  0082  3001               	movlw	1
-  1702  0083  00F1               	movwf	setFuzzState@f_state
-  1703  0084  3000               	movlw	0
-  1704  0085  00F2               	movwf	setFuzzState@f_state+1
-  1705  0086  21A8               	fcall	_setFuzzState
-  1706                           
-  1707                           ;fuzz.c: 83: feedback_state = 0;
-  1708  0087  0020               	movlb	0	; select bank0
-  1709  0088  01AA               	clrf	_feedback_state
-  1710  0089  01AB               	clrf	_feedback_state+1
-  1711  008A                     l983:	
-  1712                           
-  1713                           ;fuzz.c: 84: }
-  1714                           ;fuzz.c: 87: fuzz_up = 0;
-  1715  008A  0020               	movlb	0	; select bank0
-  1716  008B  01BC               	clrf	_fuzz_up
-  1717  008C  01BD               	clrf	_fuzz_up+1
-  1718                           
-  1719                           ;fuzz.c: 88: } else if (fuzz_pressed >= debounce_limit) {
-  1720  008D  0008               	return
-  1721  008E                     l985:	
-  1722  008E  082F               	movf	_fuzz_pressed+1,w
-  1723  008F  3A80               	xorlw	128
-  1724  0090  00F5               	movwf	??_updateFuzz
-  1725  0091  0874               	movf	updateFuzz@debounce_limit+1,w
-  1726  0092  3A80               	xorlw	128
-  1727  0093  0275               	subwf	??_updateFuzz,w
-  1728  0094  1D03               	skipz
-  1729  0095  2898               	goto	u575
-  1730  0096  0873               	movf	updateFuzz@debounce_limit,w
-  1731  0097  022E               	subwf	_fuzz_pressed,w
-  1732  0098                     u575:	
-  1733  0098  1C03               	skipc
-  1734  0099  0008               	return
-  1735                           
-  1736                           ;fuzz.c: 91: setFeedbackState(0);
-  1737  009A  3000               	movlw	0
-  1738  009B  00F1               	movwf	setFeedbackState@f_state
-  1739  009C  00F2               	movwf	setFeedbackState@f_state+1
-  1740  009D  21BC               	fcall	_setFeedbackState
-  1741                           
-  1742                           ;fuzz.c: 92: if (fuzz_toggle == 1 && feedback_state == 0) {
-  1743  009E  0020               	movlb	0	; select bank0
-  1744  009F  0332               	decf	_fuzz_toggle,w
-  1745  00A0  0433               	iorwf	_fuzz_toggle+1,w
-  1746  00A1  1D03               	btfss	3,2
-  1747  00A2  28AB               	goto	l995
-  1748  00A3  082A               	movf	_feedback_state,w
-  1749  00A4  042B               	iorwf	_feedback_state+1,w
-  1750  00A5  1D03               	btfss	3,2
-  1751  00A6  28AB               	goto	l995
-  1752                           
-  1753                           ;fuzz.c: 93: setFuzzState(0);
-  1754  00A7  3000               	movlw	0
-  1755  00A8  00F1               	movwf	setFuzzState@f_state
-  1756  00A9  00F2               	movwf	setFuzzState@f_state+1
-  1757  00AA  21A8               	fcall	_setFuzzState
-  1758  00AB                     l995:	
-  1759                           
-  1760                           ;fuzz.c: 94: }
-  1761                           ;fuzz.c: 95: LATAbits.LATA2 = fuzz_state;
-  1762  00AB  0020               	movlb	0	; select bank0
-  1763  00AC  0C30               	rrf	_fuzz_state,w
-  1764  00AD  0022               	movlb	2	; select bank2
-  1765  00AE  1C03               	skipc
-  1766  00AF  110C               	bcf	12,2	;volatile
-  1767  00B0  1803               	skipnc
-  1768  00B1  150C               	bsf	12,2	;volatile
-  1769                           
-  1770                           ;fuzz.c: 96: fuzz_turning_on = 0;
-  1771  00B2  0020               	movlb	0	; select bank0
-  1772  00B3  01B4               	clrf	_fuzz_turning_on
-  1773  00B4  01B5               	clrf	_fuzz_turning_on+1
-  1774                           
-  1775                           ;fuzz.c: 97: fuzz_toggle = 0;
-  1776  00B5  01B2               	clrf	_fuzz_toggle
-  1777  00B6  01B3               	clrf	_fuzz_toggle+1
-  1778                           
-  1779                           ;fuzz.c: 98: fuzz_up = 1;
-  1780  00B7  3001               	movlw	1
-  1781  00B8  00BC               	movwf	_fuzz_up
-  1782  00B9  3000               	movlw	0
-  1783  00BA  00BD               	movwf	_fuzz_up+1
-  1784                           
-  1785                           ;fuzz.c: 99: fuzz_down = 0;
-  1786  00BB  01AC               	clrf	_fuzz_down
-  1787  00BC  01AD               	clrf	_fuzz_down+1
-  1788                           
-  1789                           ;fuzz.c: 100: fuzz_pressed = debounce_limit;
-  1790  00BD  0874               	movf	updateFuzz@debounce_limit+1,w
-  1791  00BE  00AF               	movwf	_fuzz_pressed+1
-  1792  00BF  0873               	movf	updateFuzz@debounce_limit,w
-  1793  00C0  00AE               	movwf	_fuzz_pressed
-  1794  00C1  0008               	return
-  1795  00C2                     __end_of_updateFuzz:	
-  1796                           
-  1797                           	psect	text2
-  1798  00C2                     __ptext2:	
-  1799 ;; *************** function _updateBoost *****************
-  1800 ;; Defined at:
-  1801 ;;		line 26 in file "mcc_generated_files/boost.c"
-  1802 ;; Parameters:    Size  Location     Type
-  1803 ;;  debounce_lim    2    4[BANK0 ] int 
-  1804 ;; Auto vars:     Size  Location     Type
-  1805 ;;		None
-  1806 ;; Return value:  Size  Location     Type
-  1807 ;;                  1    wreg      void 
-  1808 ;; Registers used:
-  1809 ;;		wreg, status,2, status,0, pclath, cstack
-  1810 ;; Tracked objects:
-  1811 ;;		On entry : 0/0
-  1812 ;;		On exit  : 0/0
-  1813 ;;		Unchanged: 0/0
-  1814 ;; Data sizes:     COMMON   BANK0   BANK1
-  1815 ;;      Params:         0       2       0
-  1816 ;;      Locals:         0       0       0
-  1817 ;;      Temps:          0       2       0
-  1818 ;;      Totals:         0       4       0
-  1819 ;;Total ram usage:        4 bytes
-  1820 ;; Hardware stack levels used:    1
-  1821 ;; Hardware stack levels required when called:    4
-  1822 ;; This function calls:
-  1823 ;;		_setBoostState
-  1824 ;; This function is called by:
-  1825 ;;		_main
-  1826 ;; This function uses a non-reentrant model
-  1827 ;;
-  1828                           
-  1829                           
-  1830                           ;psect for function _updateBoost
-  1831  00C2                     _updateBoost:	
-  1832                           
-  1833                           ;boost.c: 33: if (PORTAbits.RA5 == 0) {
-  1834                           
-  1835                           ;incstack = 0
-  1836                           ; Regs used in _updateBoost: [wreg+status,2+status,0+pclath+cstack]
-  1837  00C2  0020               	movlb	0	; select bank0
-  1838  00C3  1A8C               	btfsc	12,5	;volatile
-  1839  00C4  28D5               	goto	l1013
-  1840                           
-  1841                           ;boost.c: 34: if (boost_pressed > 0) {
-  1842  00C5  0827               	movf	_boost_pressed+1,w
-  1843  00C6  3A80               	xorlw	128
-  1844  00C7  00C6               	movwf	??_updateBoost
-  1845  00C8  3080               	movlw	128
-  1846  00C9  0246               	subwf	??_updateBoost,w
-  1847  00CA  1D03               	skipz
-  1848  00CB  28CE               	goto	u615
-  1849  00CC  3001               	movlw	1
-  1850  00CD  0226               	subwf	_boost_pressed,w
-  1851  00CE                     u615:	
-  1852  00CE  1C03               	skipc
-  1853  00CF  28E6               	goto	l1017
-  1854                           
-  1855                           ;boost.c: 35: boost_pressed--;
-  1856  00D0  30FF               	movlw	255
-  1857  00D1  0020               	movlb	0	; select bank0
-  1858  00D2  07A6               	addwf	_boost_pressed,f
-  1859  00D3  30FF               	movlw	255
-  1860  00D4  28E5               	goto	L2
-  1861  00D5                     l1013:	
-  1862                           ;boost.c: 36: }
-  1863                           ;boost.c: 37: } else if (boost_pressed < debounce_limit) {
-  1864                           
-  1865  00D5  0827               	movf	_boost_pressed+1,w
-  1866  00D6  3A80               	xorlw	128
-  1867  00D7  00C6               	movwf	??_updateBoost
-  1868  00D8  0845               	movf	updateBoost@debounce_limit+1,w
-  1869  00D9  3A80               	xorlw	128
-  1870  00DA  0246               	subwf	??_updateBoost,w
-  1871  00DB  1D03               	skipz
-  1872  00DC  28DF               	goto	u625
-  1873  00DD  0844               	movf	updateBoost@debounce_limit,w
-  1874  00DE  0226               	subwf	_boost_pressed,w
-  1875  00DF                     u625:	
-  1876  00DF  1803               	skipnc
-  1877  00E0  28E6               	goto	l1017
-  1878                           
-  1879                           ;boost.c: 38: boost_pressed++;
-  1880  00E1  3001               	movlw	1
-  1881  00E2  0020               	movlb	0	; select bank0
-  1882  00E3  07A6               	addwf	_boost_pressed,f
-  1883  00E4  3000               	movlw	0
-  1884  00E5                     L2:	
-  1885  00E5  3DA7               	addwfc	_boost_pressed+1,f
-  1886  00E6                     l1017:	
+  1700                           ;fuzz.c: 77: }
+  1701                           ;fuzz.c: 78: } else {
+  1702  007B  288B               	goto	l1035
+  1703  007C                     l1027:	
+  1704                           
+  1705                           ;fuzz.c: 80: fuzz_turning_on = 1;
+  1706  007C  3001               	movlw	1
+  1707  007D  0020               	movlb	0	; select bank0
+  1708  007E  00AE               	movwf	_fuzz_turning_on
+  1709  007F  3000               	movlw	0
+  1710  0080  00AF               	movwf	_fuzz_turning_on+1
+  1711                           
+  1712                           ;fuzz.c: 81: fuzz_toggle = 0;
+  1713  0081  01AC               	clrf	_fuzz_toggle
+  1714  0082  01AD               	clrf	_fuzz_toggle+1
+  1715                           
+  1716                           ;fuzz.c: 82: setFuzzState(1);
+  1717  0083  3001               	movlw	1
+  1718  0084  00C2               	movwf	setFuzzState@f_state
+  1719  0085  3000               	movlw	0
+  1720  0086  00C3               	movwf	setFuzzState@f_state+1
+  1721  0087  2123               	fcall	_setFuzzState
+  1722                           
+  1723                           ;fuzz.c: 83: feedback_state = 0;
+  1724  0088  0020               	movlb	0	; select bank0
+  1725  0089  01B8               	clrf	_feedback_state
+  1726  008A  01B9               	clrf	_feedback_state+1
+  1727  008B                     l1035:	
+  1728                           
+  1729                           ;fuzz.c: 84: }
+  1730                           ;fuzz.c: 87: fuzz_up = 0;
+  1731  008B  0020               	movlb	0	; select bank0
+  1732  008C  01BC               	clrf	_fuzz_up
+  1733  008D  01BD               	clrf	_fuzz_up+1
+  1734                           
+  1735                           ;fuzz.c: 88: } else if (fuzz_pressed >= debounce_limit) {
+  1736  008E  0008               	return
+  1737  008F                     l1037:	
+  1738  008F  082B               	movf	_fuzz_pressed+1,w
+  1739  0090  3A80               	xorlw	128
+  1740  0091  00C6               	movwf	??_updateFuzz
+  1741  0092  0845               	movf	updateFuzz@debounce_limit+1,w
+  1742  0093  3A80               	xorlw	128
+  1743  0094  0246               	subwf	??_updateFuzz,w
+  1744  0095  1D03               	skipz
+  1745  0096  2899               	goto	u655
+  1746  0097  0844               	movf	updateFuzz@debounce_limit,w
+  1747  0098  022A               	subwf	_fuzz_pressed,w
+  1748  0099                     u655:	
+  1749  0099  1C03               	skipc
+  1750  009A  0008               	return
+  1751                           
+  1752                           ;fuzz.c: 89: int fb_state = feedback_state;
+  1753  009B  0020               	movlb	0	; select bank0
+  1754  009C  0839               	movf	_feedback_state+1,w
+  1755  009D  00C8               	movwf	updateFuzz@fb_state+1
+  1756  009E  0838               	movf	_feedback_state,w
+  1757  009F  00C7               	movwf	updateFuzz@fb_state
+  1758                           
+  1759                           ;fuzz.c: 90: if (fuzz_toggle == 1 && fb_state == 0) {
+  1760  00A0  032C               	decf	_fuzz_toggle,w
+  1761  00A1  042D               	iorwf	_fuzz_toggle+1,w
+  1762  00A2  1D03               	btfss	3,2
+  1763  00A3  28AC               	goto	l1047
+  1764  00A4  0847               	movf	updateFuzz@fb_state,w
+  1765  00A5  0448               	iorwf	updateFuzz@fb_state+1,w
+  1766  00A6  1D03               	btfss	3,2
+  1767  00A7  28AC               	goto	l1047
+  1768                           
+  1769                           ;fuzz.c: 91: setFuzzState(0);
+  1770  00A8  3000               	movlw	0
+  1771  00A9  00C2               	movwf	setFuzzState@f_state
+  1772  00AA  00C3               	movwf	setFuzzState@f_state+1
+  1773  00AB  2123               	fcall	_setFuzzState
+  1774  00AC                     l1047:	
+  1775                           
+  1776                           ;fuzz.c: 92: }
+  1777                           ;fuzz.c: 93: LATAbits.LATA2 = fuzz_state;
+  1778  00AC  0020               	movlb	0	; select bank0
+  1779  00AD  0C3A               	rrf	_fuzz_state,w
+  1780  00AE  0022               	movlb	2	; select bank2
+  1781  00AF  1C03               	skipc
+  1782  00B0  110C               	bcf	12,2	;volatile
+  1783  00B1  1803               	skipnc
+  1784  00B2  150C               	bsf	12,2	;volatile
+  1785                           
+  1786                           ;fuzz.c: 95: setFeedbackState(0);
+  1787  00B3  3000               	movlw	0
+  1788  00B4  0020               	movlb	0	; select bank0
+  1789  00B5  00C2               	movwf	setFeedbackState@f_state
+  1790  00B6  00C3               	movwf	setFeedbackState@f_state+1
+  1791  00B7  2157               	fcall	_setFeedbackState
+  1792                           
+  1793                           ;fuzz.c: 96: fuzz_turning_on = 0;
+  1794  00B8  0020               	movlb	0	; select bank0
+  1795  00B9  01AE               	clrf	_fuzz_turning_on
+  1796  00BA  01AF               	clrf	_fuzz_turning_on+1
+  1797                           
+  1798                           ;fuzz.c: 97: fuzz_toggle = 0;
+  1799  00BB  01AC               	clrf	_fuzz_toggle
+  1800  00BC  01AD               	clrf	_fuzz_toggle+1
+  1801                           
+  1802                           ;fuzz.c: 98: fuzz_up = 1;
+  1803  00BD  3001               	movlw	1
+  1804  00BE  00BC               	movwf	_fuzz_up
+  1805  00BF  3000               	movlw	0
+  1806  00C0  00BD               	movwf	_fuzz_up+1
+  1807                           
+  1808                           ;fuzz.c: 99: fuzz_down = 0;
+  1809  00C1  01A8               	clrf	_fuzz_down
+  1810  00C2  01A9               	clrf	_fuzz_down+1
+  1811                           
+  1812                           ;fuzz.c: 100: fuzz_pressed = debounce_limit;
+  1813  00C3  0845               	movf	updateFuzz@debounce_limit+1,w
+  1814  00C4  00AB               	movwf	_fuzz_pressed+1
+  1815  00C5  0844               	movf	updateFuzz@debounce_limit,w
+  1816  00C6  00AA               	movwf	_fuzz_pressed
+  1817  00C7  0008               	return
+  1818  00C8                     __end_of_updateFuzz:	
+  1819                           
+  1820                           	psect	text2
+  1821  00C8                     __ptext2:	
+  1822 ;; *************** function _updateBoost *****************
+  1823 ;; Defined at:
+  1824 ;;		line 26 in file "mcc_generated_files/boost.c"
+  1825 ;; Parameters:    Size  Location     Type
+  1826 ;;  debounce_lim    2    4[BANK0 ] int 
+  1827 ;; Auto vars:     Size  Location     Type
+  1828 ;;		None
+  1829 ;; Return value:  Size  Location     Type
+  1830 ;;                  1    wreg      void 
+  1831 ;; Registers used:
+  1832 ;;		wreg, status,2, status,0, pclath, cstack
+  1833 ;; Tracked objects:
+  1834 ;;		On entry : 0/0
+  1835 ;;		On exit  : 0/0
+  1836 ;;		Unchanged: 0/0
+  1837 ;; Data sizes:     COMMON   BANK0   BANK1
+  1838 ;;      Params:         0       2       0
+  1839 ;;      Locals:         0       0       0
+  1840 ;;      Temps:          0       2       0
+  1841 ;;      Totals:         0       4       0
+  1842 ;;Total ram usage:        4 bytes
+  1843 ;; Hardware stack levels used:    1
+  1844 ;; Hardware stack levels required when called:    4
+  1845 ;; This function calls:
+  1846 ;;		_setBoostState
+  1847 ;; This function is called by:
+  1848 ;;		_main
+  1849 ;; This function uses a non-reentrant model
+  1850 ;;
+  1851                           
+  1852                           
+  1853                           ;psect for function _updateBoost
+  1854  00C8                     _updateBoost:	
+  1855                           
+  1856                           ;boost.c: 33: if (PORTAbits.RA5 == 0) {
+  1857                           
+  1858                           ;incstack = 0
+  1859                           ; Regs used in _updateBoost: [wreg+status,2+status,0+pclath+cstack]
+  1860  00C8  0020               	movlb	0	; select bank0
+  1861  00C9  1A8C               	btfsc	12,5	;volatile
+  1862  00CA  28DB               	goto	l1067
+  1863                           
+  1864                           ;boost.c: 34: if (boost_pressed > 0) {
+  1865  00CB  0827               	movf	_boost_pressed+1,w
+  1866  00CC  3A80               	xorlw	128
+  1867  00CD  00C6               	movwf	??_updateBoost
+  1868  00CE  3080               	movlw	128
+  1869  00CF  0246               	subwf	??_updateBoost,w
+  1870  00D0  1D03               	skipz
+  1871  00D1  28D4               	goto	u695
+  1872  00D2  3001               	movlw	1
+  1873  00D3  0226               	subwf	_boost_pressed,w
+  1874  00D4                     u695:	
+  1875  00D4  1C03               	skipc
+  1876  00D5  28EC               	goto	l1071
+  1877                           
+  1878                           ;boost.c: 35: boost_pressed--;
+  1879  00D6  30FF               	movlw	255
+  1880  00D7  0020               	movlb	0	; select bank0
+  1881  00D8  07A6               	addwf	_boost_pressed,f
+  1882  00D9  30FF               	movlw	255
+  1883  00DA  28EB               	goto	L2
+  1884  00DB                     l1067:	
+  1885                           ;boost.c: 36: }
+  1886                           ;boost.c: 37: } else if (boost_pressed < debounce_limit) {
   1887                           
-  1888                           ;boost.c: 39: }
-  1889                           ;boost.c: 45: if (boost_pressed == 0) {
-  1890  00E6  0020               	movlb	0	; select bank0
-  1891  00E7  0826               	movf	_boost_pressed,w
-  1892  00E8  0427               	iorwf	_boost_pressed+1,w
-  1893  00E9  1D03               	btfss	3,2
-  1894  00EA  2905               	goto	l1027
-  1895                           
-  1896                           ;boost.c: 46: boost_down = 1;
-  1897  00EB  3001               	movlw	1
-  1898  00EC  00A4               	movwf	_boost_down
-  1899  00ED  3000               	movlw	0
-  1900  00EE  00A5               	movwf	_boost_down+1
+  1888  00DB  0827               	movf	_boost_pressed+1,w
+  1889  00DC  3A80               	xorlw	128
+  1890  00DD  00C6               	movwf	??_updateBoost
+  1891  00DE  0845               	movf	updateBoost@debounce_limit+1,w
+  1892  00DF  3A80               	xorlw	128
+  1893  00E0  0246               	subwf	??_updateBoost,w
+  1894  00E1  1D03               	skipz
+  1895  00E2  28E5               	goto	u705
+  1896  00E3  0844               	movf	updateBoost@debounce_limit,w
+  1897  00E4  0226               	subwf	_boost_pressed,w
+  1898  00E5                     u705:	
+  1899  00E5  1803               	skipnc
+  1900  00E6  28EC               	goto	l1071
   1901                           
-  1902                           ;boost.c: 47: if (boost_up == 1) {
-  1903  00EF  0338               	decf	_boost_up,w
-  1904  00F0  0439               	iorwf	_boost_up+1,w
-  1905  00F1  1D03               	btfss	3,2
-  1906  00F2  2901               	goto	l1025
-  1907                           
-  1908                           ;boost.c: 48: setBoostState(!boost_state);
-  1909  00F3  0828               	movf	_boost_state,w
-  1910  00F4  0429               	iorwf	_boost_state+1,w
-  1911  00F5  1D03               	btfss	3,2
-  1912  00F6  28F9               	goto	u650
-  1913  00F7  3001               	movlw	1
-  1914  00F8  28FA               	goto	u660
-  1915  00F9                     u650:	
-  1916  00F9  3000               	movlw	0
-  1917  00FA                     u660:	
-  1918  00FA  00C6               	movwf	??_updateBoost
-  1919  00FB  01C7               	clrf	??_updateBoost+1
-  1920  00FC  0846               	movf	??_updateBoost,w
-  1921  00FD  00C2               	movwf	setBoostState@f_state
-  1922  00FE  0847               	movf	??_updateBoost+1,w
-  1923  00FF  00C3               	movwf	setBoostState@f_state+1
-  1924  0100  211D               	fcall	_setBoostState
-  1925  0101                     l1025:	
-  1926                           
-  1927                           ;boost.c: 49: }
-  1928                           ;boost.c: 50: boost_up = 0;
-  1929  0101  0020               	movlb	0	; select bank0
-  1930  0102  01B8               	clrf	_boost_up
-  1931  0103  01B9               	clrf	_boost_up+1
-  1932                           
-  1933                           ;boost.c: 51: } else if (boost_pressed >= debounce_limit) {
-  1934  0104  0008               	return
-  1935  0105                     l1027:	
-  1936  0105  0827               	movf	_boost_pressed+1,w
-  1937  0106  3A80               	xorlw	128
-  1938  0107  00C6               	movwf	??_updateBoost
-  1939  0108  0845               	movf	updateBoost@debounce_limit+1,w
-  1940  0109  3A80               	xorlw	128
-  1941  010A  0246               	subwf	??_updateBoost,w
-  1942  010B  1D03               	skipz
-  1943  010C  290F               	goto	u675
-  1944  010D  0844               	movf	updateBoost@debounce_limit,w
-  1945  010E  0226               	subwf	_boost_pressed,w
-  1946  010F                     u675:	
-  1947  010F  1C03               	skipc
-  1948  0110  0008               	return
+  1902                           ;boost.c: 38: boost_pressed++;
+  1903  00E7  3001               	movlw	1
+  1904  00E8  0020               	movlb	0	; select bank0
+  1905  00E9  07A6               	addwf	_boost_pressed,f
+  1906  00EA  3000               	movlw	0
+  1907  00EB                     L2:	
+  1908  00EB  3DA7               	addwfc	_boost_pressed+1,f
+  1909  00EC                     l1071:	
+  1910                           
+  1911                           ;boost.c: 39: }
+  1912                           ;boost.c: 45: if (boost_pressed == 0) {
+  1913  00EC  0020               	movlb	0	; select bank0
+  1914  00ED  0826               	movf	_boost_pressed,w
+  1915  00EE  0427               	iorwf	_boost_pressed+1,w
+  1916  00EF  1D03               	btfss	3,2
+  1917  00F0  290B               	goto	l1081
+  1918                           
+  1919                           ;boost.c: 46: boost_down = 1;
+  1920  00F1  3001               	movlw	1
+  1921  00F2  00A4               	movwf	_boost_down
+  1922  00F3  3000               	movlw	0
+  1923  00F4  00A5               	movwf	_boost_down+1
+  1924                           
+  1925                           ;boost.c: 47: if (boost_up == 1) {
+  1926  00F5  0334               	decf	_boost_up,w
+  1927  00F6  0435               	iorwf	_boost_up+1,w
+  1928  00F7  1D03               	btfss	3,2
+  1929  00F8  2907               	goto	l1079
+  1930                           
+  1931                           ;boost.c: 48: setBoostState(!boost_state);
+  1932  00F9  0832               	movf	_boost_state,w
+  1933  00FA  0433               	iorwf	_boost_state+1,w
+  1934  00FB  1D03               	btfss	3,2
+  1935  00FC  28FF               	goto	u730
+  1936  00FD  3001               	movlw	1
+  1937  00FE  2900               	goto	u740
+  1938  00FF                     u730:	
+  1939  00FF  3000               	movlw	0
+  1940  0100                     u740:	
+  1941  0100  00C6               	movwf	??_updateBoost
+  1942  0101  01C7               	clrf	??_updateBoost+1
+  1943  0102  0846               	movf	??_updateBoost,w
+  1944  0103  00C2               	movwf	setBoostState@f_state
+  1945  0104  0847               	movf	??_updateBoost+1,w
+  1946  0105  00C3               	movwf	setBoostState@f_state+1
+  1947  0106  218B               	fcall	_setBoostState
+  1948  0107                     l1079:	
   1949                           
-  1950                           ;boost.c: 52: boost_up = 1;
-  1951  0111  3001               	movlw	1
-  1952  0112  0020               	movlb	0	; select bank0
-  1953  0113  00B8               	movwf	_boost_up
-  1954  0114  3000               	movlw	0
-  1955  0115  00B9               	movwf	_boost_up+1
-  1956                           
-  1957                           ;boost.c: 53: boost_down = 0;
-  1958  0116  01A4               	clrf	_boost_down
-  1959  0117  01A5               	clrf	_boost_down+1
-  1960                           
-  1961                           ;boost.c: 54: boost_pressed = debounce_limit;
-  1962  0118  0845               	movf	updateBoost@debounce_limit+1,w
-  1963  0119  00A7               	movwf	_boost_pressed+1
-  1964  011A  0844               	movf	updateBoost@debounce_limit,w
-  1965  011B  00A6               	movwf	_boost_pressed
-  1966  011C  0008               	return
-  1967  011D                     __end_of_updateBoost:	
-  1968                           
-  1969                           	psect	text3
-  1970  01FC                     __ptext3:	
-  1971 ;; *************** function _initFuzz *****************
-  1972 ;; Defined at:
-  1973 ;;		line 27 in file "mcc_generated_files/fuzz.c"
-  1974 ;; Parameters:    Size  Location     Type
-  1975 ;;		None
-  1976 ;; Auto vars:     Size  Location     Type
-  1977 ;;		None
-  1978 ;; Return value:  Size  Location     Type
-  1979 ;;                  1    wreg      void 
-  1980 ;; Registers used:
-  1981 ;;		wreg, status,2, status,0, pclath, cstack
-  1982 ;; Tracked objects:
-  1983 ;;		On entry : 0/0
-  1984 ;;		On exit  : 0/0
-  1985 ;;		Unchanged: 0/0
-  1986 ;; Data sizes:     COMMON   BANK0   BANK1
-  1987 ;;      Params:         0       0       0
-  1988 ;;      Locals:         0       0       0
-  1989 ;;      Temps:          0       0       0
-  1990 ;;      Totals:         0       0       0
-  1991 ;;Total ram usage:        0 bytes
-  1992 ;; Hardware stack levels used:    1
-  1993 ;; Hardware stack levels required when called:    2
-  1994 ;; This function calls:
-  1995 ;;		_setFeedbackState
-  1996 ;;		_setFuzzState
-  1997 ;; This function is called by:
-  1998 ;;		_main
-  1999 ;; This function uses a non-reentrant model
-  2000 ;;
-  2001                           
-  2002                           
-  2003                           ;psect for function _initFuzz
-  2004  01FC                     _initFuzz:	
-  2005                           
-  2006                           ;fuzz.c: 32: setFuzzState(0);
-  2007                           
-  2008                           ;incstack = 0
-  2009                           ; Regs used in _initFuzz: [wreg+status,2+status,0+pclath+cstack]
-  2010  01FC  3000               	movlw	0
-  2011  01FD  00F1               	movwf	setFuzzState@f_state
-  2012  01FE  00F2               	movwf	setFuzzState@f_state+1
-  2013  01FF  21A8               	fcall	_setFuzzState
-  2014                           
-  2015                           ;fuzz.c: 40: setFeedbackState(0);
-  2016  0200  3000               	movlw	0
-  2017  0201  00F1               	movwf	setFeedbackState@f_state
-  2018  0202  00F2               	movwf	setFeedbackState@f_state+1
-  2019  0203  21BC               	fcall	_setFeedbackState
-  2020  0204  0008               	return
-  2021  0205                     __end_of_initFuzz:	
-  2022                           
-  2023                           	psect	text4
-  2024  01A8                     __ptext4:	
-  2025 ;; *************** function _setFuzzState *****************
-  2026 ;; Defined at:
-  2027 ;;		line 104 in file "mcc_generated_files/fuzz.c"
-  2028 ;; Parameters:    Size  Location     Type
-  2029 ;;  f_state         2    1[COMMON] int 
-  2030 ;; Auto vars:     Size  Location     Type
-  2031 ;;		None
-  2032 ;; Return value:  Size  Location     Type
-  2033 ;;                  1    wreg      void 
-  2034 ;; Registers used:
-  2035 ;;		wreg, status,0
-  2036 ;; Tracked objects:
-  2037 ;;		On entry : 0/0
-  2038 ;;		On exit  : 0/0
-  2039 ;;		Unchanged: 0/0
-  2040 ;; Data sizes:     COMMON   BANK0   BANK1
-  2041 ;;      Params:         2       0       0
-  2042 ;;      Locals:         0       0       0
-  2043 ;;      Temps:          0       0       0
-  2044 ;;      Totals:         2       0       0
-  2045 ;;Total ram usage:        2 bytes
-  2046 ;; Hardware stack levels used:    1
-  2047 ;; Hardware stack levels required when called:    1
-  2048 ;; This function calls:
-  2049 ;;		Nothing
-  2050 ;; This function is called by:
-  2051 ;;		_initFuzz
-  2052 ;;		_updateFuzz
-  2053 ;; This function uses a non-reentrant model
-  2054 ;;
-  2055                           
-  2056                           
-  2057                           ;psect for function _setFuzzState
-  2058  01A8                     _setFuzzState:	
-  2059                           
-  2060                           ;fuzz.c: 105: if (fuzz_state == f_state) {return;}
-  2061                           
-  2062                           ;incstack = 0
-  2063                           ; Regs used in _setFuzzState: [wreg+status,0]
-  2064  01A8  0872               	movf	setFuzzState@f_state+1,w
-  2065  01A9  0020               	movlb	0	; select bank0
-  2066  01AA  0631               	xorwf	_fuzz_state+1,w
-  2067  01AB  1D03               	skipz
-  2068  01AC  29AF               	goto	u435
-  2069  01AD  0871               	movf	setFuzzState@f_state,w
-  2070  01AE  0630               	xorwf	_fuzz_state,w
-  2071  01AF                     u435:	
-  2072  01AF  1903               	btfsc	3,2
-  2073  01B0  0008               	return
-  2074                           
-  2075                           ;fuzz.c: 106: fuzz_state = f_state;
-  2076  01B1  0872               	movf	setFuzzState@f_state+1,w
-  2077  01B2  00B1               	movwf	_fuzz_state+1
-  2078  01B3  0871               	movf	setFuzzState@f_state,w
-  2079  01B4  00B0               	movwf	_fuzz_state
+  1950                           ;boost.c: 49: }
+  1951                           ;boost.c: 50: boost_up = 0;
+  1952  0107  0020               	movlb	0	; select bank0
+  1953  0108  01B4               	clrf	_boost_up
+  1954  0109  01B5               	clrf	_boost_up+1
+  1955                           
+  1956                           ;boost.c: 51: } else if (boost_pressed >= debounce_limit) {
+  1957  010A  0008               	return
+  1958  010B                     l1081:	
+  1959  010B  0827               	movf	_boost_pressed+1,w
+  1960  010C  3A80               	xorlw	128
+  1961  010D  00C6               	movwf	??_updateBoost
+  1962  010E  0845               	movf	updateBoost@debounce_limit+1,w
+  1963  010F  3A80               	xorlw	128
+  1964  0110  0246               	subwf	??_updateBoost,w
+  1965  0111  1D03               	skipz
+  1966  0112  2915               	goto	u755
+  1967  0113  0844               	movf	updateBoost@debounce_limit,w
+  1968  0114  0226               	subwf	_boost_pressed,w
+  1969  0115                     u755:	
+  1970  0115  1C03               	skipc
+  1971  0116  0008               	return
+  1972                           
+  1973                           ;boost.c: 52: boost_up = 1;
+  1974  0117  3001               	movlw	1
+  1975  0118  0020               	movlb	0	; select bank0
+  1976  0119  00B4               	movwf	_boost_up
+  1977  011A  3000               	movlw	0
+  1978  011B  00B5               	movwf	_boost_up+1
+  1979                           
+  1980                           ;boost.c: 53: boost_down = 0;
+  1981  011C  01A4               	clrf	_boost_down
+  1982  011D  01A5               	clrf	_boost_down+1
+  1983                           
+  1984                           ;boost.c: 54: boost_pressed = debounce_limit;
+  1985  011E  0845               	movf	updateBoost@debounce_limit+1,w
+  1986  011F  00A7               	movwf	_boost_pressed+1
+  1987  0120  0844               	movf	updateBoost@debounce_limit,w
+  1988  0121  00A6               	movwf	_boost_pressed
+  1989  0122  0008               	return
+  1990  0123                     __end_of_updateBoost:	
+  1991                           
+  1992                           	psect	text3
+  1993  0246                     __ptext3:	
+  1994 ;; *************** function _initFuzz *****************
+  1995 ;; Defined at:
+  1996 ;;		line 27 in file "mcc_generated_files/fuzz.c"
+  1997 ;; Parameters:    Size  Location     Type
+  1998 ;;		None
+  1999 ;; Auto vars:     Size  Location     Type
+  2000 ;;		None
+  2001 ;; Return value:  Size  Location     Type
+  2002 ;;                  1    wreg      void 
+  2003 ;; Registers used:
+  2004 ;;		wreg, status,2, status,0, pclath, cstack
+  2005 ;; Tracked objects:
+  2006 ;;		On entry : 0/0
+  2007 ;;		On exit  : 0/0
+  2008 ;;		Unchanged: 0/0
+  2009 ;; Data sizes:     COMMON   BANK0   BANK1
+  2010 ;;      Params:         0       0       0
+  2011 ;;      Locals:         0       0       0
+  2012 ;;      Temps:          0       0       0
+  2013 ;;      Totals:         0       0       0
+  2014 ;;Total ram usage:        0 bytes
+  2015 ;; Hardware stack levels used:    1
+  2016 ;; Hardware stack levels required when called:    4
+  2017 ;; This function calls:
+  2018 ;;		_setFeedbackState
+  2019 ;;		_setFuzzState
+  2020 ;; This function is called by:
+  2021 ;;		_main
+  2022 ;; This function uses a non-reentrant model
+  2023 ;;
+  2024                           
+  2025                           
+  2026                           ;psect for function _initFuzz
+  2027  0246                     _initFuzz:	
+  2028                           
+  2029                           ;fuzz.c: 32: setFuzzState(0);
+  2030                           
+  2031                           ;incstack = 0
+  2032                           ; Regs used in _initFuzz: [wreg+status,2+status,0+pclath+cstack]
+  2033  0246  3000               	movlw	0
+  2034  0247  0020               	movlb	0	; select bank0
+  2035  0248  00C2               	movwf	setFuzzState@f_state
+  2036  0249  00C3               	movwf	setFuzzState@f_state+1
+  2037  024A  2123               	fcall	_setFuzzState
+  2038                           
+  2039                           ;fuzz.c: 40: setFeedbackState(0);
+  2040  024B  3000               	movlw	0
+  2041  024C  0020               	movlb	0	; select bank0
+  2042  024D  00C2               	movwf	setFeedbackState@f_state
+  2043  024E  00C3               	movwf	setFeedbackState@f_state+1
+  2044  024F  2157               	fcall	_setFeedbackState
+  2045  0250  0008               	return
+  2046  0251                     __end_of_initFuzz:	
+  2047                           
+  2048                           	psect	text4
+  2049  0123                     __ptext4:	
+  2050 ;; *************** function _setFuzzState *****************
+  2051 ;; Defined at:
+  2052 ;;		line 104 in file "mcc_generated_files/fuzz.c"
+  2053 ;; Parameters:    Size  Location     Type
+  2054 ;;  f_state         2    2[BANK0 ] int 
+  2055 ;; Auto vars:     Size  Location     Type
+  2056 ;;		None
+  2057 ;; Return value:  Size  Location     Type
+  2058 ;;                  1    wreg      void 
+  2059 ;; Registers used:
+  2060 ;;		wreg, status,2, status,0, pclath, cstack
+  2061 ;; Tracked objects:
+  2062 ;;		On entry : 0/0
+  2063 ;;		On exit  : 0/0
+  2064 ;;		Unchanged: 0/0
+  2065 ;; Data sizes:     COMMON   BANK0   BANK1
+  2066 ;;      Params:         0       2       0
+  2067 ;;      Locals:         0       0       0
+  2068 ;;      Temps:          0       0       0
+  2069 ;;      Totals:         0       2       0
+  2070 ;;Total ram usage:        2 bytes
+  2071 ;; Hardware stack levels used:    1
+  2072 ;; Hardware stack levels required when called:    3
+  2073 ;; This function calls:
+  2074 ;;		_wait_ms
+  2075 ;; This function is called by:
+  2076 ;;		_initFuzz
+  2077 ;;		_updateFuzz
+  2078 ;; This function uses a non-reentrant model
+  2079 ;;
   2080                           
-  2081                           ;fuzz.c: 107: LATAbits.LATA2 = f_state;
-  2082  01B5  0C71               	rrf	setFuzzState@f_state,w
-  2083  01B6  0022               	movlb	2	; select bank2
-  2084  01B7  1C03               	skipc
-  2085  01B8  110C               	bcf	12,2	;volatile
-  2086  01B9  1803               	skipnc
-  2087  01BA  150C               	bsf	12,2	;volatile
-  2088  01BB  0008               	return
-  2089  01BC                     __end_of_setFuzzState:	
-  2090                           
-  2091                           	psect	text5
-  2092  01BC                     __ptext5:	
-  2093 ;; *************** function _setFeedbackState *****************
-  2094 ;; Defined at:
-  2095 ;;		line 121 in file "mcc_generated_files/fuzz.c"
-  2096 ;; Parameters:    Size  Location     Type
-  2097 ;;  f_state         2    1[COMMON] int 
-  2098 ;; Auto vars:     Size  Location     Type
-  2099 ;;		None
-  2100 ;; Return value:  Size  Location     Type
-  2101 ;;                  1    wreg      void 
-  2102 ;; Registers used:
-  2103 ;;		wreg, status,0
-  2104 ;; Tracked objects:
-  2105 ;;		On entry : 0/0
-  2106 ;;		On exit  : 0/0
-  2107 ;;		Unchanged: 0/0
-  2108 ;; Data sizes:     COMMON   BANK0   BANK1
-  2109 ;;      Params:         2       0       0
-  2110 ;;      Locals:         0       0       0
-  2111 ;;      Temps:          0       0       0
-  2112 ;;      Totals:         2       0       0
-  2113 ;;Total ram usage:        2 bytes
-  2114 ;; Hardware stack levels used:    1
-  2115 ;; Hardware stack levels required when called:    1
-  2116 ;; This function calls:
-  2117 ;;		Nothing
-  2118 ;; This function is called by:
-  2119 ;;		_initFuzz
-  2120 ;;		_updateFuzz
-  2121 ;; This function uses a non-reentrant model
-  2122 ;;
-  2123                           
-  2124                           
-  2125                           ;psect for function _setFeedbackState
-  2126  01BC                     _setFeedbackState:	
-  2127                           
-  2128                           ;fuzz.c: 122: if (feedback_state == f_state) {return;}
-  2129                           
-  2130                           ;incstack = 0
-  2131                           ; Regs used in _setFeedbackState: [wreg+status,0]
-  2132  01BC  0872               	movf	setFeedbackState@f_state+1,w
-  2133  01BD  0020               	movlb	0	; select bank0
-  2134  01BE  062B               	xorwf	_feedback_state+1,w
-  2135  01BF  1D03               	skipz
-  2136  01C0  29C3               	goto	u445
-  2137  01C1  0871               	movf	setFeedbackState@f_state,w
-  2138  01C2  062A               	xorwf	_feedback_state,w
-  2139  01C3                     u445:	
-  2140  01C3  1903               	btfsc	3,2
-  2141  01C4  0008               	return
-  2142                           
-  2143                           ;fuzz.c: 123: feedback_state = f_state;
-  2144  01C5  0872               	movf	setFeedbackState@f_state+1,w
-  2145  01C6  00AB               	movwf	_feedback_state+1
-  2146  01C7  0871               	movf	setFeedbackState@f_state,w
-  2147  01C8  00AA               	movwf	_feedback_state
+  2081                           
+  2082                           ;psect for function _setFuzzState
+  2083  0123                     _setFuzzState:	
+  2084                           
+  2085                           ;fuzz.c: 105: if (fuzz_state == f_state) {return;}
+  2086                           
+  2087                           ;incstack = 0
+  2088                           ; Regs used in _setFuzzState: [wreg+status,2+status,0+pclath+cstack]
+  2089  0123  0020               	movlb	0	; select bank0
+  2090  0124  0843               	movf	setFuzzState@f_state+1,w
+  2091  0125  063B               	xorwf	_fuzz_state+1,w
+  2092  0126  1D03               	skipz
+  2093  0127  292A               	goto	u475
+  2094  0128  0842               	movf	setFuzzState@f_state,w
+  2095  0129  063A               	xorwf	_fuzz_state,w
+  2096  012A                     u475:	
+  2097  012A  1903               	btfsc	3,2
+  2098  012B  0008               	return
+  2099                           
+  2100                           ;fuzz.c: 106: fuzz_state = f_state;
+  2101  012C  0843               	movf	setFuzzState@f_state+1,w
+  2102  012D  00BB               	movwf	_fuzz_state+1
+  2103  012E  0842               	movf	setFuzzState@f_state,w
+  2104  012F  00BA               	movwf	_fuzz_state
+  2105                           
+  2106                           ;fuzz.c: 107: LATAbits.LATA2 = f_state;
+  2107  0130  0C42               	rrf	setFuzzState@f_state,w
+  2108  0131  0022               	movlb	2	; select bank2
+  2109  0132  1C03               	skipc
+  2110  0133  110C               	bcf	12,2	;volatile
+  2111  0134  1803               	skipnc
+  2112  0135  150C               	bsf	12,2	;volatile
+  2113                           
+  2114                           ;fuzz.c: 108: LATCbits.LATC2 = f_state;
+  2115  0136  0020               	movlb	0	; select bank0
+  2116  0137  0C42               	rrf	setFuzzState@f_state,w
+  2117  0138  0022               	movlb	2	; select bank2
+  2118  0139  1C03               	skipc
+  2119  013A  110E               	bcf	14,2	;volatile
+  2120  013B  1803               	skipnc
+  2121  013C  150E               	bsf	14,2	;volatile
+  2122                           
+  2123                           ;fuzz.c: 109: LATCbits.LATC1 = !f_state;
+  2124  013D  0020               	movlb	0	; select bank0
+  2125  013E  0842               	movf	setFuzzState@f_state,w
+  2126  013F  0443               	iorwf	setFuzzState@f_state+1,w
+  2127  0140  1D03               	btfss	3,2
+  2128  0141  2945               	goto	u480
+  2129  0142  0022               	movlb	2	; select bank2
+  2130  0143  148E               	bsf	14,1	;volatile
+  2131  0144  2947               	goto	l937
+  2132  0145                     u480:	
+  2133  0145  0022               	movlb	2	; select bank2
+  2134  0146  108E               	bcf	14,1	;volatile
+  2135  0147                     l937:	
+  2136                           
+  2137                           ;fuzz.c: 111: wait_ms(20);
+  2138  0147  3014               	movlw	20
+  2139  0148  0020               	movlb	0	; select bank0
+  2140  0149  00C0               	movwf	wait_ms@time
+  2141  014A  3000               	movlw	0
+  2142  014B  00C1               	movwf	wait_ms@time+1
+  2143  014C  21EE               	fcall	_wait_ms
+  2144                           
+  2145                           ;fuzz.c: 113: LATCbits.LATC2 = 0;
+  2146  014D  0022               	movlb	2	; select bank2
+  2147  014E  110E               	bcf	14,2	;volatile
   2148                           
-  2149                           ;fuzz.c: 124: LATCbits.LATC3 = f_state;
-  2150  01C9  0C71               	rrf	setFeedbackState@f_state,w
-  2151  01CA  0022               	movlb	2	; select bank2
-  2152  01CB  1C03               	skipc
-  2153  01CC  118E               	bcf	14,3	;volatile
-  2154  01CD  1803               	skipnc
-  2155  01CE  158E               	bsf	14,3	;volatile
-  2156  01CF  0008               	return
-  2157  01D0                     __end_of_setFeedbackState:	
-  2158                           
-  2159                           	psect	text6
-  2160  0219                     __ptext6:	
-  2161 ;; *************** function _initBoost *****************
-  2162 ;; Defined at:
-  2163 ;;		line 22 in file "mcc_generated_files/boost.c"
-  2164 ;; Parameters:    Size  Location     Type
-  2165 ;;		None
-  2166 ;; Auto vars:     Size  Location     Type
-  2167 ;;		None
-  2168 ;; Return value:  Size  Location     Type
-  2169 ;;                  1    wreg      void 
-  2170 ;; Registers used:
-  2171 ;;		wreg, status,2, status,0, pclath, cstack
-  2172 ;; Tracked objects:
-  2173 ;;		On entry : 0/0
-  2174 ;;		On exit  : 0/0
-  2175 ;;		Unchanged: 0/0
-  2176 ;; Data sizes:     COMMON   BANK0   BANK1
-  2177 ;;      Params:         0       0       0
-  2178 ;;      Locals:         0       0       0
-  2179 ;;      Temps:          0       0       0
-  2180 ;;      Totals:         0       0       0
-  2181 ;;Total ram usage:        0 bytes
-  2182 ;; Hardware stack levels used:    1
-  2183 ;; Hardware stack levels required when called:    4
-  2184 ;; This function calls:
-  2185 ;;		_setBoostState
-  2186 ;; This function is called by:
-  2187 ;;		_main
-  2188 ;; This function uses a non-reentrant model
-  2189 ;;
-  2190                           
-  2191                           
-  2192                           ;psect for function _initBoost
-  2193  0219                     _initBoost:	
+  2149                           ;fuzz.c: 114: LATCbits.LATC1 = 0;
+  2150  014F  108E               	bcf	14,1	;volatile
+  2151                           
+  2152                           ;fuzz.c: 117: wait_ms(20);
+  2153  0150  3014               	movlw	20
+  2154  0151  0020               	movlb	0	; select bank0
+  2155  0152  00C0               	movwf	wait_ms@time
+  2156  0153  3000               	movlw	0
+  2157  0154  00C1               	movwf	wait_ms@time+1
+  2158  0155  21EE               	fcall	_wait_ms
+  2159  0156  0008               	return
+  2160  0157                     __end_of_setFuzzState:	
+  2161                           
+  2162                           	psect	text5
+  2163  0157                     __ptext5:	
+  2164 ;; *************** function _setFeedbackState *****************
+  2165 ;; Defined at:
+  2166 ;;		line 121 in file "mcc_generated_files/fuzz.c"
+  2167 ;; Parameters:    Size  Location     Type
+  2168 ;;  f_state         2    2[BANK0 ] int 
+  2169 ;; Auto vars:     Size  Location     Type
+  2170 ;;		None
+  2171 ;; Return value:  Size  Location     Type
+  2172 ;;                  1    wreg      void 
+  2173 ;; Registers used:
+  2174 ;;		wreg, status,2, status,0, pclath, cstack
+  2175 ;; Tracked objects:
+  2176 ;;		On entry : 0/0
+  2177 ;;		On exit  : 0/0
+  2178 ;;		Unchanged: 0/0
+  2179 ;; Data sizes:     COMMON   BANK0   BANK1
+  2180 ;;      Params:         0       2       0
+  2181 ;;      Locals:         0       0       0
+  2182 ;;      Temps:          0       0       0
+  2183 ;;      Totals:         0       2       0
+  2184 ;;Total ram usage:        2 bytes
+  2185 ;; Hardware stack levels used:    1
+  2186 ;; Hardware stack levels required when called:    3
+  2187 ;; This function calls:
+  2188 ;;		_wait_ms
+  2189 ;; This function is called by:
+  2190 ;;		_initFuzz
+  2191 ;;		_updateFuzz
+  2192 ;; This function uses a non-reentrant model
+  2193 ;;
   2194                           
-  2195                           ;boost.c: 23: setBoostState(0);
-  2196                           
-  2197                           ;incstack = 0
-  2198                           ; Regs used in _initBoost: [wreg+status,2+status,0+pclath+cstack]
-  2199  0219  3000               	movlw	0
-  2200  021A  0020               	movlb	0	; select bank0
-  2201  021B  00C2               	movwf	setBoostState@f_state
-  2202  021C  00C3               	movwf	setBoostState@f_state+1
-  2203  021D  211D               	fcall	_setBoostState
-  2204  021E  0008               	return
-  2205  021F                     __end_of_initBoost:	
-  2206                           
-  2207                           	psect	text7
-  2208  011D                     __ptext7:	
-  2209 ;; *************** function _setBoostState *****************
-  2210 ;; Defined at:
-  2211 ;;		line 61 in file "mcc_generated_files/boost.c"
-  2212 ;; Parameters:    Size  Location     Type
-  2213 ;;  f_state         2    2[BANK0 ] int 
-  2214 ;; Auto vars:     Size  Location     Type
-  2215 ;;		None
-  2216 ;; Return value:  Size  Location     Type
-  2217 ;;                  1    wreg      void 
-  2218 ;; Registers used:
-  2219 ;;		wreg, status,2, status,0, pclath, cstack
-  2220 ;; Tracked objects:
-  2221 ;;		On entry : 0/0
-  2222 ;;		On exit  : 0/0
-  2223 ;;		Unchanged: 0/0
-  2224 ;; Data sizes:     COMMON   BANK0   BANK1
-  2225 ;;      Params:         0       2       0
-  2226 ;;      Locals:         0       0       0
-  2227 ;;      Temps:          0       0       0
-  2228 ;;      Totals:         0       2       0
-  2229 ;;Total ram usage:        2 bytes
-  2230 ;; Hardware stack levels used:    1
-  2231 ;; Hardware stack levels required when called:    3
-  2232 ;; This function calls:
-  2233 ;;		_wait_ms
-  2234 ;; This function is called by:
-  2235 ;;		_initBoost
-  2236 ;;		_updateBoost
-  2237 ;; This function uses a non-reentrant model
-  2238 ;;
-  2239                           
-  2240                           
-  2241                           ;psect for function _setBoostState
-  2242  011D                     _setBoostState:	
-  2243                           
-  2244                           ;boost.c: 62: if (boost_state == f_state) {return;}
-  2245                           
-  2246                           ;incstack = 0
-  2247                           ; Regs used in _setBoostState: [wreg+status,2+status,0+pclath+cstack]
-  2248  011D  0020               	movlb	0	; select bank0
-  2249  011E  0843               	movf	setBoostState@f_state+1,w
-  2250  011F  0629               	xorwf	_boost_state+1,w
-  2251  0120  1D03               	skipz
-  2252  0121  2924               	goto	u455
-  2253  0122  0842               	movf	setBoostState@f_state,w
-  2254  0123  0628               	xorwf	_boost_state,w
-  2255  0124                     u455:	
-  2256  0124  1903               	btfsc	3,2
-  2257  0125  0008               	return
+  2195                           
+  2196                           ;psect for function _setFeedbackState
+  2197  0157                     _setFeedbackState:	
+  2198                           
+  2199                           ;fuzz.c: 122: if (feedback_state == f_state) {return;}
+  2200                           
+  2201                           ;incstack = 0
+  2202                           ; Regs used in _setFeedbackState: [wreg+status,2+status,0+pclath+cstack]
+  2203  0157  0020               	movlb	0	; select bank0
+  2204  0158  0843               	movf	setFeedbackState@f_state+1,w
+  2205  0159  0639               	xorwf	_feedback_state+1,w
+  2206  015A  1D03               	skipz
+  2207  015B  295E               	goto	u505
+  2208  015C  0842               	movf	setFeedbackState@f_state,w
+  2209  015D  0638               	xorwf	_feedback_state,w
+  2210  015E                     u505:	
+  2211  015E  1903               	btfsc	3,2
+  2212  015F  0008               	return
+  2213                           
+  2214                           ;fuzz.c: 123: feedback_state = f_state;
+  2215  0160  0843               	movf	setFeedbackState@f_state+1,w
+  2216  0161  00B9               	movwf	_feedback_state+1
+  2217  0162  0842               	movf	setFeedbackState@f_state,w
+  2218  0163  00B8               	movwf	_feedback_state
+  2219                           
+  2220                           ;fuzz.c: 124: LATCbits.LATC3 = f_state;
+  2221  0164  0C42               	rrf	setFeedbackState@f_state,w
+  2222  0165  0022               	movlb	2	; select bank2
+  2223  0166  1C03               	skipc
+  2224  0167  118E               	bcf	14,3	;volatile
+  2225  0168  1803               	skipnc
+  2226  0169  158E               	bsf	14,3	;volatile
+  2227                           
+  2228                           ;fuzz.c: 125: LATAbits.LATA0 = f_state;
+  2229  016A  0020               	movlb	0	; select bank0
+  2230  016B  0C42               	rrf	setFeedbackState@f_state,w
+  2231  016C  0022               	movlb	2	; select bank2
+  2232  016D  1C03               	skipc
+  2233  016E  100C               	bcf	12,0	;volatile
+  2234  016F  1803               	skipnc
+  2235  0170  140C               	bsf	12,0	;volatile
+  2236                           
+  2237                           ;fuzz.c: 126: LATAbits.LATA1 = !f_state;
+  2238  0171  0020               	movlb	0	; select bank0
+  2239  0172  0842               	movf	setFeedbackState@f_state,w
+  2240  0173  0443               	iorwf	setFeedbackState@f_state+1,w
+  2241  0174  1D03               	btfss	3,2
+  2242  0175  2979               	goto	u510
+  2243  0176  0022               	movlb	2	; select bank2
+  2244  0177  148C               	bsf	12,1	;volatile
+  2245  0178  297B               	goto	l957
+  2246  0179                     u510:	
+  2247  0179  0022               	movlb	2	; select bank2
+  2248  017A  108C               	bcf	12,1	;volatile
+  2249  017B                     l957:	
+  2250                           
+  2251                           ;fuzz.c: 128: wait_ms(20);
+  2252  017B  3014               	movlw	20
+  2253  017C  0020               	movlb	0	; select bank0
+  2254  017D  00C0               	movwf	wait_ms@time
+  2255  017E  3000               	movlw	0
+  2256  017F  00C1               	movwf	wait_ms@time+1
+  2257  0180  21EE               	fcall	_wait_ms
   2258                           
-  2259                           ;boost.c: 63: boost_state = f_state;
-  2260  0126  0843               	movf	setBoostState@f_state+1,w
-  2261  0127  00A9               	movwf	_boost_state+1
-  2262  0128  0842               	movf	setBoostState@f_state,w
-  2263  0129  00A8               	movwf	_boost_state
-  2264                           
-  2265                           ;boost.c: 64: LATCbits.LATC5 = f_state;
-  2266  012A  0C42               	rrf	setBoostState@f_state,w
-  2267  012B  0022               	movlb	2	; select bank2
-  2268  012C  1C03               	skipc
-  2269  012D  128E               	bcf	14,5	;volatile
-  2270  012E  1803               	skipnc
-  2271  012F  168E               	bsf	14,5	;volatile
-  2272                           
-  2273                           ;boost.c: 65: LATCbits.LATC0 = f_state;
-  2274  0130  0020               	movlb	0	; select bank0
-  2275  0131  0C42               	rrf	setBoostState@f_state,w
-  2276  0132  0022               	movlb	2	; select bank2
-  2277  0133  1C03               	skipc
-  2278  0134  100E               	bcf	14,0	;volatile
-  2279  0135  1803               	skipnc
-  2280  0136  140E               	bsf	14,0	;volatile
-  2281                           
-  2282                           ;boost.c: 66: LATCbits.LATC4 = !f_state;
-  2283  0137  0020               	movlb	0	; select bank0
-  2284  0138  0842               	movf	setBoostState@f_state,w
-  2285  0139  0443               	iorwf	setBoostState@f_state+1,w
-  2286  013A  1D03               	btfss	3,2
-  2287  013B  293F               	goto	u460
-  2288  013C  0022               	movlb	2	; select bank2
-  2289  013D  160E               	bsf	14,4	;volatile
-  2290  013E  2941               	goto	l925
-  2291  013F                     u460:	
-  2292  013F  0022               	movlb	2	; select bank2
-  2293  0140  120E               	bcf	14,4	;volatile
-  2294  0141                     l925:	
-  2295                           
-  2296                           ;boost.c: 68: wait_ms(10);
-  2297  0141  300A               	movlw	10
-  2298  0142  0020               	movlb	0	; select bank0
-  2299  0143  00C0               	movwf	wait_ms@time
-  2300  0144  3000               	movlw	0
-  2301  0145  00C1               	movwf	wait_ms@time+1
-  2302  0146  2180               	fcall	_wait_ms
-  2303                           
-  2304                           ;boost.c: 70: LATCbits.LATC0 = 0;
-  2305  0147  0022               	movlb	2	; select bank2
-  2306  0148  100E               	bcf	14,0	;volatile
+  2259                           ;fuzz.c: 130: LATAbits.LATA0 = 0;
+  2260  0181  0022               	movlb	2	; select bank2
+  2261  0182  100C               	bcf	12,0	;volatile
+  2262                           
+  2263                           ;fuzz.c: 131: LATAbits.LATA1 = 0;
+  2264  0183  108C               	bcf	12,1	;volatile
+  2265                           
+  2266                           ;fuzz.c: 134: wait_ms(20);
+  2267  0184  3014               	movlw	20
+  2268  0185  0020               	movlb	0	; select bank0
+  2269  0186  00C0               	movwf	wait_ms@time
+  2270  0187  3000               	movlw	0
+  2271  0188  00C1               	movwf	wait_ms@time+1
+  2272  0189  21EE               	fcall	_wait_ms
+  2273  018A  0008               	return
+  2274  018B                     __end_of_setFeedbackState:	
+  2275                           
+  2276                           	psect	text6
+  2277  0267                     __ptext6:	
+  2278 ;; *************** function _initBoost *****************
+  2279 ;; Defined at:
+  2280 ;;		line 22 in file "mcc_generated_files/boost.c"
+  2281 ;; Parameters:    Size  Location     Type
+  2282 ;;		None
+  2283 ;; Auto vars:     Size  Location     Type
+  2284 ;;		None
+  2285 ;; Return value:  Size  Location     Type
+  2286 ;;                  1    wreg      void 
+  2287 ;; Registers used:
+  2288 ;;		wreg, status,2, status,0, pclath, cstack
+  2289 ;; Tracked objects:
+  2290 ;;		On entry : 0/0
+  2291 ;;		On exit  : 0/0
+  2292 ;;		Unchanged: 0/0
+  2293 ;; Data sizes:     COMMON   BANK0   BANK1
+  2294 ;;      Params:         0       0       0
+  2295 ;;      Locals:         0       0       0
+  2296 ;;      Temps:          0       0       0
+  2297 ;;      Totals:         0       0       0
+  2298 ;;Total ram usage:        0 bytes
+  2299 ;; Hardware stack levels used:    1
+  2300 ;; Hardware stack levels required when called:    4
+  2301 ;; This function calls:
+  2302 ;;		_setBoostState
+  2303 ;; This function is called by:
+  2304 ;;		_main
+  2305 ;; This function uses a non-reentrant model
+  2306 ;;
   2307                           
-  2308                           ;boost.c: 71: LATCbits.LATC4 = 0;
-  2309  0149  120E               	bcf	14,4	;volatile
-  2310                           
-  2311                           ;boost.c: 73: wait_ms(10);
-  2312  014A  300A               	movlw	10
-  2313  014B  0020               	movlb	0	; select bank0
-  2314  014C  00C0               	movwf	wait_ms@time
-  2315  014D  3000               	movlw	0
-  2316  014E  00C1               	movwf	wait_ms@time+1
-  2317  014F  2180               	fcall	_wait_ms
-  2318  0150  0008               	return
-  2319  0151                     __end_of_setBoostState:	
-  2320                           
-  2321                           	psect	text8
-  2322  0180                     __ptext8:	
-  2323 ;; *************** function _wait_ms *****************
-  2324 ;; Defined at:
-  2325 ;;		line 23 in file "system.c"
-  2326 ;; Parameters:    Size  Location     Type
-  2327 ;;  time            2    0[BANK0 ] unsigned int 
-  2328 ;; Auto vars:     Size  Location     Type
-  2329 ;;		None
-  2330 ;; Return value:  Size  Location     Type
-  2331 ;;                  1    wreg      void 
-  2332 ;; Registers used:
-  2333 ;;		wreg, status,2, status,0, pclath, cstack
-  2334 ;; Tracked objects:
-  2335 ;;		On entry : 0/0
-  2336 ;;		On exit  : 0/0
-  2337 ;;		Unchanged: 0/0
-  2338 ;; Data sizes:     COMMON   BANK0   BANK1
-  2339 ;;      Params:         0       2       0
-  2340 ;;      Locals:         0       0       0
-  2341 ;;      Temps:          0       0       0
-  2342 ;;      Totals:         0       2       0
-  2343 ;;Total ram usage:        2 bytes
-  2344 ;; Hardware stack levels used:    1
-  2345 ;; Hardware stack levels required when called:    2
-  2346 ;; This function calls:
-  2347 ;;		___lmul
-  2348 ;; This function is called by:
-  2349 ;;		_setBoostState
-  2350 ;; This function uses a non-reentrant model
-  2351 ;;
-  2352                           
-  2353                           
-  2354                           ;psect for function _wait_ms
-  2355  0180                     _wait_ms:	
+  2308                           
+  2309                           ;psect for function _initBoost
+  2310  0267                     _initBoost:	
+  2311                           
+  2312                           ;boost.c: 23: setBoostState(0);
+  2313                           
+  2314                           ;incstack = 0
+  2315                           ; Regs used in _initBoost: [wreg+status,2+status,0+pclath+cstack]
+  2316  0267  3000               	movlw	0
+  2317  0268  0020               	movlb	0	; select bank0
+  2318  0269  00C2               	movwf	setBoostState@f_state
+  2319  026A  00C3               	movwf	setBoostState@f_state+1
+  2320  026B  218B               	fcall	_setBoostState
+  2321  026C  0008               	return
+  2322  026D                     __end_of_initBoost:	
+  2323                           
+  2324                           	psect	text7
+  2325  018B                     __ptext7:	
+  2326 ;; *************** function _setBoostState *****************
+  2327 ;; Defined at:
+  2328 ;;		line 61 in file "mcc_generated_files/boost.c"
+  2329 ;; Parameters:    Size  Location     Type
+  2330 ;;  f_state         2    2[BANK0 ] int 
+  2331 ;; Auto vars:     Size  Location     Type
+  2332 ;;		None
+  2333 ;; Return value:  Size  Location     Type
+  2334 ;;                  1    wreg      void 
+  2335 ;; Registers used:
+  2336 ;;		wreg, status,2, status,0, pclath, cstack
+  2337 ;; Tracked objects:
+  2338 ;;		On entry : 0/0
+  2339 ;;		On exit  : 0/0
+  2340 ;;		Unchanged: 0/0
+  2341 ;; Data sizes:     COMMON   BANK0   BANK1
+  2342 ;;      Params:         0       2       0
+  2343 ;;      Locals:         0       0       0
+  2344 ;;      Temps:          0       0       0
+  2345 ;;      Totals:         0       2       0
+  2346 ;;Total ram usage:        2 bytes
+  2347 ;; Hardware stack levels used:    1
+  2348 ;; Hardware stack levels required when called:    3
+  2349 ;; This function calls:
+  2350 ;;		_wait_ms
+  2351 ;; This function is called by:
+  2352 ;;		_initBoost
+  2353 ;;		_updateBoost
+  2354 ;; This function uses a non-reentrant model
+  2355 ;;
   2356                           
-  2357                           ;system.c: 25: static long timel = 0;
-  2358                           ;system.c: 26: timel = time * 1000l;
-  2359                           
-  2360                           ;incstack = 0
-  2361                           ; Regs used in _wait_ms: [wreg+status,2+status,0+pclath+cstack]
-  2362  0180  0020               	movlb	0	; select bank0
-  2363  0181  0840               	movf	wait_ms@time,w
-  2364  0182  00F1               	movwf	___lmul@multiplier
-  2365  0183  0841               	movf	wait_ms@time+1,w
-  2366  0184  00F2               	movwf	___lmul@multiplier+1
-  2367  0185  01F3               	clrf	___lmul@multiplier+2
-  2368  0186  01F4               	clrf	___lmul@multiplier+3
-  2369  0187  3000               	movlw	0
-  2370  0188  00F8               	movwf	___lmul@multiplicand+3
-  2371  0189  3000               	movlw	0
-  2372  018A  00F7               	movwf	___lmul@multiplicand+2
-  2373  018B  3003               	movlw	3
-  2374  018C  00F6               	movwf	___lmul@multiplicand+1
-  2375  018D  30E8               	movlw	232
-  2376  018E  00F5               	movwf	___lmul@multiplicand
-  2377  018F  2151               	fcall	___lmul
-  2378  0190  0874               	movf	?___lmul+3,w
-  2379  0191  0020               	movlb	0	; select bank0
-  2380  0192  00A3               	movwf	wait_ms@timel+3
-  2381  0193  0873               	movf	?___lmul+2,w
-  2382  0194  00A2               	movwf	wait_ms@timel+2
-  2383  0195  0872               	movf	?___lmul+1,w
-  2384  0196  00A1               	movwf	wait_ms@timel+1
-  2385  0197  0871               	movf	?___lmul,w
-  2386  0198  00A0               	movwf	wait_ms@timel
-  2387  0199                     l73:	
-  2388                           ;system.c: 27: for( ; timel; timel--);
+  2357                           
+  2358                           ;psect for function _setBoostState
+  2359  018B                     _setBoostState:	
+  2360                           
+  2361                           ;boost.c: 62: if (boost_state == f_state) {return;}
+  2362                           
+  2363                           ;incstack = 0
+  2364                           ; Regs used in _setBoostState: [wreg+status,2+status,0+pclath+cstack]
+  2365  018B  0020               	movlb	0	; select bank0
+  2366  018C  0843               	movf	setBoostState@f_state+1,w
+  2367  018D  0633               	xorwf	_boost_state+1,w
+  2368  018E  1D03               	skipz
+  2369  018F  2992               	goto	u535
+  2370  0190  0842               	movf	setBoostState@f_state,w
+  2371  0191  0632               	xorwf	_boost_state,w
+  2372  0192                     u535:	
+  2373  0192  1903               	btfsc	3,2
+  2374  0193  0008               	return
+  2375                           
+  2376                           ;boost.c: 63: boost_state = f_state;
+  2377  0194  0843               	movf	setBoostState@f_state+1,w
+  2378  0195  00B3               	movwf	_boost_state+1
+  2379  0196  0842               	movf	setBoostState@f_state,w
+  2380  0197  00B2               	movwf	_boost_state
+  2381                           
+  2382                           ;boost.c: 64: LATCbits.LATC5 = f_state;
+  2383  0198  0C42               	rrf	setBoostState@f_state,w
+  2384  0199  0022               	movlb	2	; select bank2
+  2385  019A  1C03               	skipc
+  2386  019B  128E               	bcf	14,5	;volatile
+  2387  019C  1803               	skipnc
+  2388  019D  168E               	bsf	14,5	;volatile
   2389                           
-  2390  0199  0823               	movf	wait_ms@timel+3,w
-  2391  019A  0422               	iorwf	wait_ms@timel+2,w
-  2392  019B  0421               	iorwf	wait_ms@timel+1,w
-  2393  019C  0420               	iorwf	wait_ms@timel,w
-  2394  019D  1903               	btfsc	3,2
-  2395  019E  0008               	return
-  2396  019F  30FF               	movlw	255
-  2397  01A0  07A0               	addwf	wait_ms@timel,f
-  2398  01A1  30FF               	movlw	255
-  2399  01A2  3DA1               	addwfc	wait_ms@timel+1,f
-  2400  01A3  30FF               	movlw	255
-  2401  01A4  3DA2               	addwfc	wait_ms@timel+2,f
-  2402  01A5  30FF               	movlw	255
-  2403  01A6  3DA3               	addwfc	wait_ms@timel+3,f
-  2404  01A7  2999               	goto	l73
-  2405  01A8                     __end_of_wait_ms:	
-  2406                           
-  2407                           	psect	text9
-  2408  0151                     __ptext9:	
-  2409 ;; *************** function ___lmul *****************
-  2410 ;; Defined at:
-  2411 ;;		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul32.c"
-  2412 ;; Parameters:    Size  Location     Type
-  2413 ;;  multiplier      4    1[COMMON] unsigned long 
-  2414 ;;  multiplicand    4    5[COMMON] unsigned long 
-  2415 ;; Auto vars:     Size  Location     Type
-  2416 ;;  product         4    9[COMMON] unsigned long 
-  2417 ;; Return value:  Size  Location     Type
-  2418 ;;                  4    1[COMMON] unsigned long 
-  2419 ;; Registers used:
-  2420 ;;		wreg, status,2, status,0
-  2421 ;; Tracked objects:
-  2422 ;;		On entry : 0/0
-  2423 ;;		On exit  : 0/0
-  2424 ;;		Unchanged: 0/0
-  2425 ;; Data sizes:     COMMON   BANK0   BANK1
-  2426 ;;      Params:         8       0       0
-  2427 ;;      Locals:         4       0       0
-  2428 ;;      Temps:          0       0       0
-  2429 ;;      Totals:        12       0       0
-  2430 ;;Total ram usage:       12 bytes
-  2431 ;; Hardware stack levels used:    1
-  2432 ;; Hardware stack levels required when called:    1
-  2433 ;; This function calls:
-  2434 ;;		Nothing
-  2435 ;; This function is called by:
-  2436 ;;		_wait_ms
-  2437 ;; This function uses a non-reentrant model
-  2438 ;;
-  2439                           
-  2440                           
-  2441                           ;psect for function ___lmul
-  2442  0151                     ___lmul:	
-  2443                           
-  2444                           ;incstack = 0
-  2445                           ; Regs used in ___lmul: [wreg+status,2+status,0]
-  2446  0151  3000               	movlw	0
-  2447  0152  00FC               	movwf	___lmul@product+3
-  2448  0153  3000               	movlw	0
-  2449  0154  00FB               	movwf	___lmul@product+2
-  2450  0155  3000               	movlw	0
-  2451  0156  00FA               	movwf	___lmul@product+1
-  2452  0157  3000               	movlw	0
-  2453  0158  00F9               	movwf	___lmul@product
-  2454  0159                     l875:	
-  2455  0159  1C71               	btfss	___lmul@multiplier,0
-  2456  015A  2963               	goto	l879
-  2457  015B  0875               	movf	___lmul@multiplicand,w
-  2458  015C  07F9               	addwf	___lmul@product,f
-  2459  015D  0876               	movf	___lmul@multiplicand+1,w
-  2460  015E  3DFA               	addwfc	___lmul@product+1,f
-  2461  015F  0877               	movf	___lmul@multiplicand+2,w
-  2462  0160  3DFB               	addwfc	___lmul@product+2,f
-  2463  0161  0878               	movf	___lmul@multiplicand+3,w
-  2464  0162  3DFC               	addwfc	___lmul@product+3,f
-  2465  0163                     l879:	
-  2466  0163  3001               	movlw	1
-  2467  0164                     u395:	
-  2468  0164  35F5               	lslf	___lmul@multiplicand,f
-  2469  0165  0DF6               	rlf	___lmul@multiplicand+1,f
-  2470  0166  0DF7               	rlf	___lmul@multiplicand+2,f
-  2471  0167  0DF8               	rlf	___lmul@multiplicand+3,f
-  2472  0168  0B89               	decfsz	9,f
-  2473  0169  2964               	goto	u395
-  2474  016A  3001               	movlw	1
-  2475  016B                     u405:	
-  2476  016B  36F4               	lsrf	___lmul@multiplier+3,f
-  2477  016C  0CF3               	rrf	___lmul@multiplier+2,f
-  2478  016D  0CF2               	rrf	___lmul@multiplier+1,f
-  2479  016E  0CF1               	rrf	___lmul@multiplier,f
-  2480  016F  0B89               	decfsz	9,f
-  2481  0170  296B               	goto	u405
-  2482  0171  0874               	movf	___lmul@multiplier+3,w
-  2483  0172  0473               	iorwf	___lmul@multiplier+2,w
-  2484  0173  0472               	iorwf	___lmul@multiplier+1,w
-  2485  0174  0471               	iorwf	___lmul@multiplier,w
-  2486  0175  1D03               	skipz
-  2487  0176  2959               	goto	l875
-  2488  0177  087C               	movf	___lmul@product+3,w
-  2489  0178  00F4               	movwf	?___lmul+3
-  2490  0179  087B               	movf	___lmul@product+2,w
-  2491  017A  00F3               	movwf	?___lmul+2
-  2492  017B  087A               	movf	___lmul@product+1,w
-  2493  017C  00F2               	movwf	?___lmul+1
-  2494  017D  0879               	movf	___lmul@product,w
-  2495  017E  00F1               	movwf	?___lmul
-  2496  017F  0008               	return
-  2497  0180                     __end_of___lmul:	
-  2498                           
-  2499                           	psect	text10
-  2500  01E1                     __ptext10:	
-  2501 ;; *************** function _InitApp *****************
-  2502 ;; Defined at:
-  2503 ;;		line 27 in file "user.c"
-  2504 ;; Parameters:    Size  Location     Type
-  2505 ;;		None
-  2506 ;; Auto vars:     Size  Location     Type
-  2507 ;;		None
-  2508 ;; Return value:  Size  Location     Type
-  2509 ;;                  1    wreg      void 
-  2510 ;; Registers used:
-  2511 ;;		wreg, status,2, status,0, pclath, cstack
-  2512 ;; Tracked objects:
-  2513 ;;		On entry : 0/0
-  2514 ;;		On exit  : 0/0
-  2515 ;;		Unchanged: 0/0
-  2516 ;; Data sizes:     COMMON   BANK0   BANK1
-  2517 ;;      Params:         0       0       0
-  2518 ;;      Locals:         0       0       0
-  2519 ;;      Temps:          0       0       0
-  2520 ;;      Totals:         0       0       0
-  2521 ;;Total ram usage:        0 bytes
-  2522 ;; Hardware stack levels used:    1
-  2523 ;; Hardware stack levels required when called:    2
-  2524 ;; This function calls:
-  2525 ;;		_init_adc
-  2526 ;; This function is called by:
-  2527 ;;		_main
-  2528 ;; This function uses a non-reentrant model
-  2529 ;;
-  2530                           
-  2531                           
-  2532                           ;psect for function _InitApp
-  2533  01E1                     _InitApp:	
-  2534                           
-  2535                           ;user.c: 28: TRISAbits.TRISA0 = 0;
-  2536                           
-  2537                           ;incstack = 0
-  2538                           ; Regs used in _InitApp: [wreg+status,2+status,0+pclath+cstack]
-  2539  01E1  0021               	movlb	1	; select bank1
-  2540  01E2  100C               	bcf	12,0	;volatile
-  2541                           
-  2542                           ;user.c: 29: TRISAbits.TRISA1 = 0;
-  2543  01E3  108C               	bcf	12,1	;volatile
-  2544                           
-  2545                           ;user.c: 31: TRISAbits.TRISA2 = 0;
-  2546  01E4  110C               	bcf	12,2	;volatile
-  2547                           
-  2548                           ;user.c: 32: TRISAbits.TRISA4 = 1;
-  2549  01E5  160C               	bsf	12,4	;volatile
-  2550                           
-  2551                           ;user.c: 33: TRISAbits.TRISA5 = 1;
-  2552  01E6  168C               	bsf	12,5	;volatile
-  2553                           
-  2554                           ;user.c: 34: ANSELAbits.ANSA4 = 0;
-  2555  01E7  0023               	movlb	3	; select bank3
-  2556  01E8  120C               	bcf	12,4	;volatile
-  2557                           
-  2558                           ;user.c: 36: TRISCbits.TRISC0 = 0;
-  2559  01E9  0021               	movlb	1	; select bank1
-  2560  01EA  100E               	bcf	14,0	;volatile
-  2561                           
-  2562                           ;user.c: 37: TRISCbits.TRISC1 = 0;
-  2563  01EB  108E               	bcf	14,1	;volatile
-  2564                           
-  2565                           ;user.c: 38: TRISCbits.TRISC2 = 0;
-  2566  01EC  110E               	bcf	14,2	;volatile
-  2567                           
-  2568                           ;user.c: 39: TRISCbits.TRISC3 = 0;
-  2569  01ED  118E               	bcf	14,3	;volatile
-  2570                           
-  2571                           ;user.c: 40: TRISCbits.TRISC4 = 0;
-  2572  01EE  120E               	bcf	14,4	;volatile
-  2573                           
-  2574                           ;user.c: 41: TRISCbits.TRISC5 = 0;
-  2575  01EF  128E               	bcf	14,5	;volatile
-  2576                           
-  2577                           ;user.c: 43: init_adc();
-  2578  01F0  21F2               	fcall	_init_adc
-  2579  01F1  0008               	return
-  2580  01F2                     __end_of_InitApp:	
-  2581                           
-  2582                           	psect	text11
-  2583  01F2                     __ptext11:	
-  2584 ;; *************** function _init_adc *****************
-  2585 ;; Defined at:
-  2586 ;;		line 55 in file "user.c"
-  2587 ;; Parameters:    Size  Location     Type
-  2588 ;;		None
-  2589 ;; Auto vars:     Size  Location     Type
-  2590 ;;		None
-  2591 ;; Return value:  Size  Location     Type
-  2592 ;;                  1    wreg      void 
-  2593 ;; Registers used:
-  2594 ;;		wreg, status,2, status,0
-  2595 ;; Tracked objects:
-  2596 ;;		On entry : 0/0
-  2597 ;;		On exit  : 0/0
-  2598 ;;		Unchanged: 0/0
-  2599 ;; Data sizes:     COMMON   BANK0   BANK1
-  2600 ;;      Params:         0       0       0
-  2601 ;;      Locals:         0       0       0
-  2602 ;;      Temps:          0       0       0
-  2603 ;;      Totals:         0       0       0
-  2604 ;;Total ram usage:        0 bytes
-  2605 ;; Hardware stack levels used:    1
-  2606 ;; Hardware stack levels required when called:    1
-  2607 ;; This function calls:
-  2608 ;;		Nothing
-  2609 ;; This function is called by:
-  2610 ;;		_InitApp
-  2611 ;; This function uses a non-reentrant model
-  2612 ;;
-  2613                           
-  2614                           
-  2615                           ;psect for function _init_adc
-  2616  01F2                     _init_adc:	
+  2390                           ;boost.c: 65: LATCbits.LATC0 = f_state;
+  2391  019E  0020               	movlb	0	; select bank0
+  2392  019F  0C42               	rrf	setBoostState@f_state,w
+  2393  01A0  0022               	movlb	2	; select bank2
+  2394  01A1  1C03               	skipc
+  2395  01A2  100E               	bcf	14,0	;volatile
+  2396  01A3  1803               	skipnc
+  2397  01A4  140E               	bsf	14,0	;volatile
+  2398                           
+  2399                           ;boost.c: 66: LATCbits.LATC4 = !f_state;
+  2400  01A5  0020               	movlb	0	; select bank0
+  2401  01A6  0842               	movf	setBoostState@f_state,w
+  2402  01A7  0443               	iorwf	setBoostState@f_state+1,w
+  2403  01A8  1D03               	btfss	3,2
+  2404  01A9  29AD               	goto	u540
+  2405  01AA  0022               	movlb	2	; select bank2
+  2406  01AB  160E               	bsf	14,4	;volatile
+  2407  01AC  29AF               	goto	l977
+  2408  01AD                     u540:	
+  2409  01AD  0022               	movlb	2	; select bank2
+  2410  01AE  120E               	bcf	14,4	;volatile
+  2411  01AF                     l977:	
+  2412                           
+  2413                           ;boost.c: 68: wait_ms(20);
+  2414  01AF  3014               	movlw	20
+  2415  01B0  0020               	movlb	0	; select bank0
+  2416  01B1  00C0               	movwf	wait_ms@time
+  2417  01B2  3000               	movlw	0
+  2418  01B3  00C1               	movwf	wait_ms@time+1
+  2419  01B4  21EE               	fcall	_wait_ms
+  2420                           
+  2421                           ;boost.c: 70: LATCbits.LATC0 = 0;
+  2422  01B5  0022               	movlb	2	; select bank2
+  2423  01B6  100E               	bcf	14,0	;volatile
+  2424                           
+  2425                           ;boost.c: 71: LATCbits.LATC4 = 0;
+  2426  01B7  120E               	bcf	14,4	;volatile
+  2427                           
+  2428                           ;boost.c: 73: wait_ms(20);
+  2429  01B8  3014               	movlw	20
+  2430  01B9  0020               	movlb	0	; select bank0
+  2431  01BA  00C0               	movwf	wait_ms@time
+  2432  01BB  3000               	movlw	0
+  2433  01BC  00C1               	movwf	wait_ms@time+1
+  2434  01BD  21EE               	fcall	_wait_ms
+  2435  01BE  0008               	return
+  2436  01BF                     __end_of_setBoostState:	
+  2437                           
+  2438                           	psect	text8
+  2439  01EE                     __ptext8:	
+  2440 ;; *************** function _wait_ms *****************
+  2441 ;; Defined at:
+  2442 ;;		line 23 in file "system.c"
+  2443 ;; Parameters:    Size  Location     Type
+  2444 ;;  time            2    0[BANK0 ] unsigned int 
+  2445 ;; Auto vars:     Size  Location     Type
+  2446 ;;		None
+  2447 ;; Return value:  Size  Location     Type
+  2448 ;;                  1    wreg      void 
+  2449 ;; Registers used:
+  2450 ;;		wreg, status,2, status,0, pclath, cstack
+  2451 ;; Tracked objects:
+  2452 ;;		On entry : 0/0
+  2453 ;;		On exit  : 0/0
+  2454 ;;		Unchanged: 0/0
+  2455 ;; Data sizes:     COMMON   BANK0   BANK1
+  2456 ;;      Params:         0       2       0
+  2457 ;;      Locals:         0       0       0
+  2458 ;;      Temps:          0       0       0
+  2459 ;;      Totals:         0       2       0
+  2460 ;;Total ram usage:        2 bytes
+  2461 ;; Hardware stack levels used:    1
+  2462 ;; Hardware stack levels required when called:    2
+  2463 ;; This function calls:
+  2464 ;;		___lmul
+  2465 ;; This function is called by:
+  2466 ;;		_setFuzzState
+  2467 ;;		_setFeedbackState
+  2468 ;;		_setBoostState
+  2469 ;; This function uses a non-reentrant model
+  2470 ;;
+  2471                           
+  2472                           
+  2473                           ;psect for function _wait_ms
+  2474  01EE                     _wait_ms:	
+  2475                           
+  2476                           ;system.c: 25: static long timel = 0;
+  2477                           ;system.c: 26: timel = time * 1000l;
+  2478                           
+  2479                           ;incstack = 0
+  2480                           ; Regs used in _wait_ms: [wreg+status,2+status,0+pclath+cstack]
+  2481  01EE  0020               	movlb	0	; select bank0
+  2482  01EF  0840               	movf	wait_ms@time,w
+  2483  01F0  00F1               	movwf	___lmul@multiplier
+  2484  01F1  0841               	movf	wait_ms@time+1,w
+  2485  01F2  00F2               	movwf	___lmul@multiplier+1
+  2486  01F3  01F3               	clrf	___lmul@multiplier+2
+  2487  01F4  01F4               	clrf	___lmul@multiplier+3
+  2488  01F5  3000               	movlw	0
+  2489  01F6  00F8               	movwf	___lmul@multiplicand+3
+  2490  01F7  3000               	movlw	0
+  2491  01F8  00F7               	movwf	___lmul@multiplicand+2
+  2492  01F9  3003               	movlw	3
+  2493  01FA  00F6               	movwf	___lmul@multiplicand+1
+  2494  01FB  30E8               	movlw	232
+  2495  01FC  00F5               	movwf	___lmul@multiplicand
+  2496  01FD  21BF               	fcall	___lmul
+  2497  01FE  0874               	movf	?___lmul+3,w
+  2498  01FF  0020               	movlb	0	; select bank0
+  2499  0200  00A3               	movwf	wait_ms@timel+3
+  2500  0201  0873               	movf	?___lmul+2,w
+  2501  0202  00A2               	movwf	wait_ms@timel+2
+  2502  0203  0872               	movf	?___lmul+1,w
+  2503  0204  00A1               	movwf	wait_ms@timel+1
+  2504  0205  0871               	movf	?___lmul,w
+  2505  0206  00A0               	movwf	wait_ms@timel
+  2506  0207                     l73:	
+  2507                           ;system.c: 27: for( ; timel; timel--);
+  2508                           
+  2509  0207  0823               	movf	wait_ms@timel+3,w
+  2510  0208  0422               	iorwf	wait_ms@timel+2,w
+  2511  0209  0421               	iorwf	wait_ms@timel+1,w
+  2512  020A  0420               	iorwf	wait_ms@timel,w
+  2513  020B  1903               	btfsc	3,2
+  2514  020C  0008               	return
+  2515  020D  30FF               	movlw	255
+  2516  020E  07A0               	addwf	wait_ms@timel,f
+  2517  020F  30FF               	movlw	255
+  2518  0210  3DA1               	addwfc	wait_ms@timel+1,f
+  2519  0211  30FF               	movlw	255
+  2520  0212  3DA2               	addwfc	wait_ms@timel+2,f
+  2521  0213  30FF               	movlw	255
+  2522  0214  3DA3               	addwfc	wait_ms@timel+3,f
+  2523  0215  2A07               	goto	l73
+  2524  0216                     __end_of_wait_ms:	
+  2525                           
+  2526                           	psect	text9
+  2527  01BF                     __ptext9:	
+  2528 ;; *************** function ___lmul *****************
+  2529 ;; Defined at:
+  2530 ;;		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul32.c"
+  2531 ;; Parameters:    Size  Location     Type
+  2532 ;;  multiplier      4    1[COMMON] unsigned long 
+  2533 ;;  multiplicand    4    5[COMMON] unsigned long 
+  2534 ;; Auto vars:     Size  Location     Type
+  2535 ;;  product         4    9[COMMON] unsigned long 
+  2536 ;; Return value:  Size  Location     Type
+  2537 ;;                  4    1[COMMON] unsigned long 
+  2538 ;; Registers used:
+  2539 ;;		wreg, status,2, status,0
+  2540 ;; Tracked objects:
+  2541 ;;		On entry : 0/0
+  2542 ;;		On exit  : 0/0
+  2543 ;;		Unchanged: 0/0
+  2544 ;; Data sizes:     COMMON   BANK0   BANK1
+  2545 ;;      Params:         8       0       0
+  2546 ;;      Locals:         4       0       0
+  2547 ;;      Temps:          0       0       0
+  2548 ;;      Totals:        12       0       0
+  2549 ;;Total ram usage:       12 bytes
+  2550 ;; Hardware stack levels used:    1
+  2551 ;; Hardware stack levels required when called:    1
+  2552 ;; This function calls:
+  2553 ;;		Nothing
+  2554 ;; This function is called by:
+  2555 ;;		_wait_ms
+  2556 ;; This function uses a non-reentrant model
+  2557 ;;
+  2558                           
+  2559                           
+  2560                           ;psect for function ___lmul
+  2561  01BF                     ___lmul:	
+  2562                           
+  2563                           ;incstack = 0
+  2564                           ; Regs used in ___lmul: [wreg+status,2+status,0]
+  2565  01BF  3000               	movlw	0
+  2566  01C0  00FC               	movwf	___lmul@product+3
+  2567  01C1  3000               	movlw	0
+  2568  01C2  00FB               	movwf	___lmul@product+2
+  2569  01C3  3000               	movlw	0
+  2570  01C4  00FA               	movwf	___lmul@product+1
+  2571  01C5  3000               	movlw	0
+  2572  01C6  00F9               	movwf	___lmul@product
+  2573  01C7                     l903:	
+  2574  01C7  1C71               	btfss	___lmul@multiplier,0
+  2575  01C8  29D1               	goto	l907
+  2576  01C9  0875               	movf	___lmul@multiplicand,w
+  2577  01CA  07F9               	addwf	___lmul@product,f
+  2578  01CB  0876               	movf	___lmul@multiplicand+1,w
+  2579  01CC  3DFA               	addwfc	___lmul@product+1,f
+  2580  01CD  0877               	movf	___lmul@multiplicand+2,w
+  2581  01CE  3DFB               	addwfc	___lmul@product+2,f
+  2582  01CF  0878               	movf	___lmul@multiplicand+3,w
+  2583  01D0  3DFC               	addwfc	___lmul@product+3,f
+  2584  01D1                     l907:	
+  2585  01D1  3001               	movlw	1
+  2586  01D2                     u435:	
+  2587  01D2  35F5               	lslf	___lmul@multiplicand,f
+  2588  01D3  0DF6               	rlf	___lmul@multiplicand+1,f
+  2589  01D4  0DF7               	rlf	___lmul@multiplicand+2,f
+  2590  01D5  0DF8               	rlf	___lmul@multiplicand+3,f
+  2591  01D6  0B89               	decfsz	9,f
+  2592  01D7  29D2               	goto	u435
+  2593  01D8  3001               	movlw	1
+  2594  01D9                     u445:	
+  2595  01D9  36F4               	lsrf	___lmul@multiplier+3,f
+  2596  01DA  0CF3               	rrf	___lmul@multiplier+2,f
+  2597  01DB  0CF2               	rrf	___lmul@multiplier+1,f
+  2598  01DC  0CF1               	rrf	___lmul@multiplier,f
+  2599  01DD  0B89               	decfsz	9,f
+  2600  01DE  29D9               	goto	u445
+  2601  01DF  0874               	movf	___lmul@multiplier+3,w
+  2602  01E0  0473               	iorwf	___lmul@multiplier+2,w
+  2603  01E1  0472               	iorwf	___lmul@multiplier+1,w
+  2604  01E2  0471               	iorwf	___lmul@multiplier,w
+  2605  01E3  1D03               	skipz
+  2606  01E4  29C7               	goto	l903
+  2607  01E5  087C               	movf	___lmul@product+3,w
+  2608  01E6  00F4               	movwf	?___lmul+3
+  2609  01E7  087B               	movf	___lmul@product+2,w
+  2610  01E8  00F3               	movwf	?___lmul+2
+  2611  01E9  087A               	movf	___lmul@product+1,w
+  2612  01EA  00F2               	movwf	?___lmul+1
+  2613  01EB  0879               	movf	___lmul@product,w
+  2614  01EC  00F1               	movwf	?___lmul
+  2615  01ED  0008               	return
+  2616  01EE                     __end_of___lmul:	
   2617                           
-  2618                           ;user.c: 56: ADCON1bits.ADFM = 0b1;
-  2619                           
-  2620                           ;incstack = 0
-  2621                           ; Regs used in _init_adc: [wreg+status,2+status,0]
-  2622  01F2  0021               	movlb	1	; select bank1
-  2623  01F3  179E               	bsf	30,7	;volatile
-  2624                           
-  2625                           ;user.c: 57: ADCON1bits.ADCS = 0b110;
-  2626  01F4  081E               	movf	30,w	;volatile
-  2627  01F5  398F               	andlw	-113
-  2628  01F6  3860               	iorlw	96
-  2629  01F7  009E               	movwf	30	;volatile
-  2630                           
-  2631                           ;user.c: 58: ADCON1bits.ADPREF = 0b00;
-  2632  01F8  30FC               	movlw	-4
-  2633  01F9  059E               	andwf	30,f	;volatile
-  2634                           
-  2635                           ;user.c: 59: ADCON0bits.ADON = 0b1;
-  2636  01FA  141D               	bsf	29,0	;volatile
-  2637  01FB  0008               	return
-  2638  01FC                     __end_of_init_adc:	
-  2639                           
-  2640                           	psect	text12
-  2641  021F                     __ptext12:	
-  2642 ;; *************** function _ConfigureOscillator *****************
-  2643 ;; Defined at:
-  2644 ;;		line 17 in file "system.c"
-  2645 ;; Parameters:    Size  Location     Type
-  2646 ;;		None
-  2647 ;; Auto vars:     Size  Location     Type
-  2648 ;;		None
-  2649 ;; Return value:  Size  Location     Type
-  2650 ;;                  1    wreg      void 
-  2651 ;; Registers used:
-  2652 ;;		wreg, status,2, status,0
-  2653 ;; Tracked objects:
-  2654 ;;		On entry : 0/0
-  2655 ;;		On exit  : 0/0
-  2656 ;;		Unchanged: 0/0
-  2657 ;; Data sizes:     COMMON   BANK0   BANK1
-  2658 ;;      Params:         0       0       0
-  2659 ;;      Locals:         0       0       0
-  2660 ;;      Temps:          0       0       0
-  2661 ;;      Totals:         0       0       0
-  2662 ;;Total ram usage:        0 bytes
-  2663 ;; Hardware stack levels used:    1
-  2664 ;; Hardware stack levels required when called:    1
-  2665 ;; This function calls:
-  2666 ;;		Nothing
-  2667 ;; This function is called by:
-  2668 ;;		_main
-  2669 ;; This function uses a non-reentrant model
-  2670 ;;
-  2671                           
+  2618                           	psect	text10
+  2619  0227                     __ptext10:	
+  2620 ;; *************** function _InitApp *****************
+  2621 ;; Defined at:
+  2622 ;;		line 27 in file "user.c"
+  2623 ;; Parameters:    Size  Location     Type
+  2624 ;;		None
+  2625 ;; Auto vars:     Size  Location     Type
+  2626 ;;		None
+  2627 ;; Return value:  Size  Location     Type
+  2628 ;;                  1    wreg      void 
+  2629 ;; Registers used:
+  2630 ;;		wreg, status,2, status,0, pclath, cstack
+  2631 ;; Tracked objects:
+  2632 ;;		On entry : 0/0
+  2633 ;;		On exit  : 0/0
+  2634 ;;		Unchanged: 0/0
+  2635 ;; Data sizes:     COMMON   BANK0   BANK1
+  2636 ;;      Params:         0       0       0
+  2637 ;;      Locals:         0       0       0
+  2638 ;;      Temps:          0       0       0
+  2639 ;;      Totals:         0       0       0
+  2640 ;;Total ram usage:        0 bytes
+  2641 ;; Hardware stack levels used:    1
+  2642 ;; Hardware stack levels required when called:    2
+  2643 ;; This function calls:
+  2644 ;;		_init_adc
+  2645 ;; This function is called by:
+  2646 ;;		_main
+  2647 ;; This function uses a non-reentrant model
+  2648 ;;
+  2649                           
+  2650                           
+  2651                           ;psect for function _InitApp
+  2652  0227                     _InitApp:	
+  2653                           
+  2654                           ;user.c: 28: TRISAbits.TRISA0 = 0;
+  2655                           
+  2656                           ;incstack = 0
+  2657                           ; Regs used in _InitApp: [wreg+status,2+status,0+pclath+cstack]
+  2658  0227  0021               	movlb	1	; select bank1
+  2659  0228  100C               	bcf	12,0	;volatile
+  2660                           
+  2661                           ;user.c: 29: TRISAbits.TRISA1 = 0;
+  2662  0229  108C               	bcf	12,1	;volatile
+  2663                           
+  2664                           ;user.c: 31: TRISAbits.TRISA2 = 0;
+  2665  022A  110C               	bcf	12,2	;volatile
+  2666                           
+  2667                           ;user.c: 32: TRISAbits.TRISA4 = 1;
+  2668  022B  160C               	bsf	12,4	;volatile
+  2669                           
+  2670                           ;user.c: 33: TRISAbits.TRISA5 = 1;
+  2671  022C  168C               	bsf	12,5	;volatile
   2672                           
-  2673                           ;psect for function _ConfigureOscillator
-  2674  021F                     _ConfigureOscillator:	
-  2675                           
-  2676                           ;system.c: 19: OSCCONbits.IRCF = 0b1111;
-  2677                           
-  2678                           ;incstack = 0
-  2679                           ; Regs used in _ConfigureOscillator: [wreg+status,2+status,0]
-  2680  021F  3078               	movlw	120
-  2681  0220  0021               	movlb	1	; select bank1
-  2682  0221  0499               	iorwf	25,f	;volatile
+  2673                           ;user.c: 34: ANSELAbits.ANSA4 = 0;
+  2674  022D  0023               	movlb	3	; select bank3
+  2675  022E  120C               	bcf	12,4	;volatile
+  2676                           
+  2677                           ;user.c: 36: TRISCbits.TRISC0 = 0;
+  2678  022F  0021               	movlb	1	; select bank1
+  2679  0230  100E               	bcf	14,0	;volatile
+  2680                           
+  2681                           ;user.c: 37: TRISCbits.TRISC1 = 0;
+  2682  0231  108E               	bcf	14,1	;volatile
   2683                           
-  2684                           ;system.c: 20: OSCSTAT = 0x00;
-  2685  0222  019A               	clrf	26	;volatile
-  2686  0223  0008               	return
-  2687  0224                     __end_of_ConfigureOscillator:	
-  2688                           
-  2689                           	psect	intentry
-  2690  0004                     __pintentry:	
-  2691 ;; *************** function _isr *****************
-  2692 ;; Defined at:
-  2693 ;;		line 23 in file "interrupts.c"
-  2694 ;; Parameters:    Size  Location     Type
-  2695 ;;		None
-  2696 ;; Auto vars:     Size  Location     Type
-  2697 ;;		None
-  2698 ;; Return value:  Size  Location     Type
-  2699 ;;                  1    wreg      void 
-  2700 ;; Registers used:
-  2701 ;;		None
-  2702 ;; Tracked objects:
-  2703 ;;		On entry : 0/0
-  2704 ;;		On exit  : 0/0
-  2705 ;;		Unchanged: 0/0
-  2706 ;; Data sizes:     COMMON   BANK0   BANK1
-  2707 ;;      Params:         0       0       0
-  2708 ;;      Locals:         0       0       0
-  2709 ;;      Temps:          1       0       0
-  2710 ;;      Totals:         1       0       0
-  2711 ;;Total ram usage:        1 bytes
-  2712 ;; Hardware stack levels used:    1
-  2713 ;; This function calls:
-  2714 ;;		Nothing
-  2715 ;; This function is called by:
-  2716 ;;		Interrupt level 1
-  2717 ;; This function uses a non-reentrant model
-  2718 ;;
-  2719                           
-  2720  0004                     _isr:	
-  2721                           
-  2722                           ;incstack = 0
-  2723                           ; Regs used in _isr: []
-  2724  0004  147E               	bsf	126,0	;set compiler interrupt flag (level 1)
-  2725  0005  3180               	pagesel	$
-  2726  0006  0020               	movlb	0	; select bank0
-  2727  0007  087F               	movf	127,w
-  2728  0008  00F0               	movwf	??_isr
-  2729  0009  0870               	movf	??_isr,w
-  2730  000A  00FF               	movwf	127
-  2731  000B  107E               	bcf	126,0	;clear compiler interrupt flag (level 1)
-  2732  000C  0009               	retfie
-  2733  000D                     __end_of_isr:	
-  2734  007E                     btemp	set	126	;btemp
-  2735  007E                     int$flags	set	126
-  2736  007E                     wtemp	set	126
-  2737  007E                     wtemp0	set	126
-  2738  0080                     wtemp1	set	128
-  2739  0082                     wtemp2	set	130
-  2740  0084                     wtemp3	set	132
-  2741  0086                     wtemp4	set	134
-  2742  0088                     wtemp5	set	136
-  2743  007F                     wtemp6	set	127
-  2744  007E                     ttemp	set	126
-  2745  007E                     ttemp0	set	126
-  2746  0081                     ttemp1	set	129
-  2747  0084                     ttemp2	set	132
-  2748  0087                     ttemp3	set	135
-  2749  007F                     ttemp4	set	127
-  2750  007E                     ltemp	set	126
-  2751  007E                     ltemp0	set	126
-  2752  0082                     ltemp1	set	130
-  2753  0086                     ltemp2	set	134
-  2754  0080                     ltemp3	set	128
+  2684                           ;user.c: 38: TRISCbits.TRISC2 = 0;
+  2685  0232  110E               	bcf	14,2	;volatile
+  2686                           
+  2687                           ;user.c: 39: TRISCbits.TRISC3 = 0;
+  2688  0233  118E               	bcf	14,3	;volatile
+  2689                           
+  2690                           ;user.c: 40: TRISCbits.TRISC4 = 0;
+  2691  0234  120E               	bcf	14,4	;volatile
+  2692                           
+  2693                           ;user.c: 41: TRISCbits.TRISC5 = 0;
+  2694  0235  128E               	bcf	14,5	;volatile
+  2695                           
+  2696                           ;user.c: 43: init_adc();
+  2697  0236  2251               	fcall	_init_adc
+  2698  0237  0008               	return
+  2699  0238                     __end_of_InitApp:	
+  2700                           
+  2701                           	psect	text11
+  2702  0251                     __ptext11:	
+  2703 ;; *************** function _init_adc *****************
+  2704 ;; Defined at:
+  2705 ;;		line 55 in file "user.c"
+  2706 ;; Parameters:    Size  Location     Type
+  2707 ;;		None
+  2708 ;; Auto vars:     Size  Location     Type
+  2709 ;;		None
+  2710 ;; Return value:  Size  Location     Type
+  2711 ;;                  1    wreg      void 
+  2712 ;; Registers used:
+  2713 ;;		wreg, status,2, status,0
+  2714 ;; Tracked objects:
+  2715 ;;		On entry : 0/0
+  2716 ;;		On exit  : 0/0
+  2717 ;;		Unchanged: 0/0
+  2718 ;; Data sizes:     COMMON   BANK0   BANK1
+  2719 ;;      Params:         0       0       0
+  2720 ;;      Locals:         0       0       0
+  2721 ;;      Temps:          0       0       0
+  2722 ;;      Totals:         0       0       0
+  2723 ;;Total ram usage:        0 bytes
+  2724 ;; Hardware stack levels used:    1
+  2725 ;; Hardware stack levels required when called:    1
+  2726 ;; This function calls:
+  2727 ;;		Nothing
+  2728 ;; This function is called by:
+  2729 ;;		_InitApp
+  2730 ;; This function uses a non-reentrant model
+  2731 ;;
+  2732                           
+  2733                           
+  2734                           ;psect for function _init_adc
+  2735  0251                     _init_adc:	
+  2736                           
+  2737                           ;user.c: 56: ADCON1bits.ADFM = 0b1;
+  2738                           
+  2739                           ;incstack = 0
+  2740                           ; Regs used in _init_adc: [wreg+status,2+status,0]
+  2741  0251  0021               	movlb	1	; select bank1
+  2742  0252  179E               	bsf	30,7	;volatile
+  2743                           
+  2744                           ;user.c: 57: ADCON1bits.ADCS = 0b110;
+  2745  0253  081E               	movf	30,w	;volatile
+  2746  0254  398F               	andlw	-113
+  2747  0255  3860               	iorlw	96
+  2748  0256  009E               	movwf	30	;volatile
+  2749                           
+  2750                           ;user.c: 58: ADCON1bits.ADPREF = 0b00;
+  2751  0257  30FC               	movlw	-4
+  2752  0258  059E               	andwf	30,f	;volatile
+  2753                           
+  2754                           ;user.c: 59: ADCON0bits.ADON = 0b1;
+  2755  0259  141D               	bsf	29,0	;volatile
+  2756  025A  0008               	return
+  2757  025B                     __end_of_init_adc:	
+  2758                           
+  2759                           	psect	text12
+  2760  026D                     __ptext12:	
+  2761 ;; *************** function _ConfigureOscillator *****************
+  2762 ;; Defined at:
+  2763 ;;		line 17 in file "system.c"
+  2764 ;; Parameters:    Size  Location     Type
+  2765 ;;		None
+  2766 ;; Auto vars:     Size  Location     Type
+  2767 ;;		None
+  2768 ;; Return value:  Size  Location     Type
+  2769 ;;                  1    wreg      void 
+  2770 ;; Registers used:
+  2771 ;;		wreg, status,2, status,0
+  2772 ;; Tracked objects:
+  2773 ;;		On entry : 0/0
+  2774 ;;		On exit  : 0/0
+  2775 ;;		Unchanged: 0/0
+  2776 ;; Data sizes:     COMMON   BANK0   BANK1
+  2777 ;;      Params:         0       0       0
+  2778 ;;      Locals:         0       0       0
+  2779 ;;      Temps:          0       0       0
+  2780 ;;      Totals:         0       0       0
+  2781 ;;Total ram usage:        0 bytes
+  2782 ;; Hardware stack levels used:    1
+  2783 ;; Hardware stack levels required when called:    1
+  2784 ;; This function calls:
+  2785 ;;		Nothing
+  2786 ;; This function is called by:
+  2787 ;;		_main
+  2788 ;; This function uses a non-reentrant model
+  2789 ;;
+  2790                           
+  2791                           
+  2792                           ;psect for function _ConfigureOscillator
+  2793  026D                     _ConfigureOscillator:	
+  2794                           
+  2795                           ;system.c: 19: OSCCONbits.IRCF = 0b1111;
+  2796                           
+  2797                           ;incstack = 0
+  2798                           ; Regs used in _ConfigureOscillator: [wreg+status,2+status,0]
+  2799  026D  3078               	movlw	120
+  2800  026E  0021               	movlb	1	; select bank1
+  2801  026F  0499               	iorwf	25,f	;volatile
+  2802                           
+  2803                           ;system.c: 20: OSCSTAT = 0x00;
+  2804  0270  019A               	clrf	26	;volatile
+  2805  0271  0008               	return
+  2806  0272                     __end_of_ConfigureOscillator:	
+  2807                           
+  2808                           	psect	intentry
+  2809  0004                     __pintentry:	
+  2810 ;; *************** function _isr *****************
+  2811 ;; Defined at:
+  2812 ;;		line 23 in file "interrupts.c"
+  2813 ;; Parameters:    Size  Location     Type
+  2814 ;;		None
+  2815 ;; Auto vars:     Size  Location     Type
+  2816 ;;		None
+  2817 ;; Return value:  Size  Location     Type
+  2818 ;;                  1    wreg      void 
+  2819 ;; Registers used:
+  2820 ;;		None
+  2821 ;; Tracked objects:
+  2822 ;;		On entry : 0/0
+  2823 ;;		On exit  : 0/0
+  2824 ;;		Unchanged: 0/0
+  2825 ;; Data sizes:     COMMON   BANK0   BANK1
+  2826 ;;      Params:         0       0       0
+  2827 ;;      Locals:         0       0       0
+  2828 ;;      Temps:          1       0       0
+  2829 ;;      Totals:         1       0       0
+  2830 ;;Total ram usage:        1 bytes
+  2831 ;; Hardware stack levels used:    1
+  2832 ;; This function calls:
+  2833 ;;		Nothing
+  2834 ;; This function is called by:
+  2835 ;;		Interrupt level 1
+  2836 ;; This function uses a non-reentrant model
+  2837 ;;
+  2838                           
+  2839  0004                     _isr:	
+  2840                           
+  2841                           ;incstack = 0
+  2842                           ; Regs used in _isr: []
+  2843  0004  147E               	bsf	126,0	;set compiler interrupt flag (level 1)
+  2844  0005  3180               	pagesel	$
+  2845  0006  0020               	movlb	0	; select bank0
+  2846  0007  087F               	movf	127,w
+  2847  0008  00F0               	movwf	??_isr
+  2848  0009  0870               	movf	??_isr,w
+  2849  000A  00FF               	movwf	127
+  2850  000B  107E               	bcf	126,0	;clear compiler interrupt flag (level 1)
+  2851  000C  0009               	retfie
+  2852  000D                     __end_of_isr:	
+  2853  007E                     btemp	set	126	;btemp
+  2854  007E                     int$flags	set	126
+  2855  007E                     wtemp	set	126
+  2856  007E                     wtemp0	set	126
+  2857  0080                     wtemp1	set	128
+  2858  0082                     wtemp2	set	130
+  2859  0084                     wtemp3	set	132
+  2860  0086                     wtemp4	set	134
+  2861  0088                     wtemp5	set	136
+  2862  007F                     wtemp6	set	127
+  2863  007E                     ttemp	set	126
+  2864  007E                     ttemp0	set	126
+  2865  0081                     ttemp1	set	129
+  2866  0084                     ttemp2	set	132
+  2867  0087                     ttemp3	set	135
+  2868  007F                     ttemp4	set	127
+  2869  007E                     ltemp	set	126
+  2870  007E                     ltemp0	set	126
+  2871  0082                     ltemp1	set	130
+  2872  0086                     ltemp2	set	134
+  2873  0080                     ltemp3	set	128
 
 
 Data Sizes:
     Strings     0
     Constant    0
-    Data        8
-    BSS         24
+    Data        14
+    BSS         18
     Persistent  0
     Stack       0
 
 Auto Spaces:
     Space          Size  Autos    Used
     COMMON           14     13      13
-    BANK0            80      8      40
+    BANK0            80      9      41
     BANK1            32      0       0
 
 Pointer List with Targets:
@@ -2781,10 +2900,6 @@ Pointer List with Targets:
 
 Critical Paths under _main in COMMON
 
-    _updateFuzz->_setFeedbackState
-    _updateFuzz->_setFuzzState
-    _initFuzz->_setFeedbackState
-    _initFuzz->_setFuzzState
     _wait_ms->___lmul
 
 Critical Paths under _isr in COMMON
@@ -2793,8 +2908,14 @@ Critical Paths under _isr in COMMON
 
 Critical Paths under _main in BANK0
 
-    _main->_updateBoost
+    _main->_updateFuzz
+    _updateFuzz->_setFeedbackState
+    _updateFuzz->_setFuzzState
     _updateBoost->_setBoostState
+    _initFuzz->_setFeedbackState
+    _initFuzz->_setFuzzState
+    _setFuzzState->_wait_ms
+    _setFeedbackState->_wait_ms
     _initBoost->_setBoostState
     _setBoostState->_wait_ms
 
@@ -2815,7 +2936,7 @@ Call Graph Tables:
  ---------------------------------------------------------------------------------
  (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
  ---------------------------------------------------------------------------------
- (0) _main                                                 0     0      0    2508
+ (0) _main                                                 0     0      0    5723
                 _ConfigureOscillator
                             _InitApp
                           _initBoost
@@ -2823,33 +2944,35 @@ Call Graph Tables:
                         _updateBoost
                          _updateFuzz
  ---------------------------------------------------------------------------------
- (1) _updateFuzz                                           3     1      2     646
-                                              3 COMMON     3     1      2
+ (1) _updateFuzz                                           5     3      2    2009
+                                              4 BANK0      5     3      2
                    _setFeedbackState
                        _setFuzzState
  ---------------------------------------------------------------------------------
- (1) _updateBoost                                          4     2      2     738
+ (1) _updateBoost                                          4     2      2     994
                                               4 BANK0      4     2      2
                       _setBoostState
  ---------------------------------------------------------------------------------
- (1) _initFuzz                                             0     0      0     516
+ (1) _initFuzz                                             0     0      0    1856
                    _setFeedbackState
                        _setFuzzState
  ---------------------------------------------------------------------------------
- (2) _setFuzzState                                         2     0      2     258
-                                              1 COMMON     2     0      2
- ---------------------------------------------------------------------------------
- (2) _setFeedbackState                                     2     0      2     258
-                                              1 COMMON     2     0      2
- ---------------------------------------------------------------------------------
- (1) _initBoost                                            0     0      0     608
-                      _setBoostState
- ---------------------------------------------------------------------------------
- (2) _setBoostState                                        2     0      2     608
+ (2) _setFuzzState                                         2     0      2     928
                                               2 BANK0      2     0      2
                             _wait_ms
  ---------------------------------------------------------------------------------
- (3) _wait_ms                                              2     0      2     370
+ (2) _setFeedbackState                                     2     0      2     928
+                                              2 BANK0      2     0      2
+                            _wait_ms
+ ---------------------------------------------------------------------------------
+ (1) _initBoost                                            0     0      0     864
+                      _setBoostState
+ ---------------------------------------------------------------------------------
+ (2) _setBoostState                                        2     0      2     864
+                                              2 BANK0      2     0      2
+                            _wait_ms
+ ---------------------------------------------------------------------------------
+ (3) _wait_ms                                              2     0      2     626
                                               0 BANK0      2     0      2
                              ___lmul
  ---------------------------------------------------------------------------------
@@ -2885,14 +3008,22 @@ Call Graph Tables:
          ___lmul
    _initFuzz
      _setFeedbackState
+       _wait_ms
+         ___lmul
      _setFuzzState
+       _wait_ms
+         ___lmul
    _updateBoost
      _setBoostState
        _wait_ms
          ___lmul
    _updateFuzz
      _setFeedbackState
+       _wait_ms
+         ___lmul
      _setFuzzState
+       _wait_ms
+         ___lmul
 
  _isr (ROOT)
 
@@ -2912,11 +3043,11 @@ SFR2                 0      0       0       3        0.0%
 STACK                0      0       0       3        0.0%
 BITSFR3              0      0       0       4        0.0%
 SFR3                 0      0       0       4        0.0%
-ABS                  0      0      35       4        0.0%
+ABS                  0      0      36       4        0.0%
 BITBANK0            50      0       0       5        0.0%
 BITSFR4              0      0       0       5        0.0%
 SFR4                 0      0       0       5        0.0%
-BANK0               50      8      28       6       50.0%
+BANK0               50      9      29       6       51.3%
 BITSFR5              0      0       0       6        0.0%
 SFR5                 0      0       0       6        0.0%
 BITBANK1            20      0       0       7        0.0%
@@ -2927,7 +3058,7 @@ BITSFR7              0      0       0       8        0.0%
 SFR7                 0      0       0       8        0.0%
 BITSFR8              0      0       0       9        0.0%
 SFR8                 0      0       0       9        0.0%
-DATA                 0      0      35       9        0.0%
+DATA                 0      0      36       9        0.0%
 BITSFR9              0      0       0      10        0.0%
 SFR9                 0      0       0      10        0.0%
 BITSFR10             0      0       0      11        0.0%
@@ -2977,77 +3108,79 @@ SFR31                0      0       0      32        0.0%
 
 
 Microchip Technology PIC Macro Assembler V1.37 build -260352376 
-Symbol Table                                                                                   Tue Aug 02 23:26:26 2016
+Symbol Table                                                                                   Wed Aug 03 17:25:09 2016
 
-                 __CFG_CP$OFF 0000                            l73 0199                            l58 01D4  
-                 __CFG_LVP$ON 0000                           l149 005A                           l925 0141  
-                         l951 0034                           l875 0159                           l955 0045  
-                         l879 0163                           l983 008A                           l975 007B  
-                         l985 008E                           l995 00AB                           u405 016B  
-                         u505 003E                           u435 01AF                           u460 013F  
-                         u445 01C3                           u455 0124                           u615 00CE  
-                         u625 00DF                           u545 0064                           u650 00F9  
-                         u395 0164                           u660 00FA                           u575 0098  
-                         u495 002D                           u675 010F                           _isr 0004  
-                __CFG_BORV$LO 0000                           wreg 0009                 _boost_pressed 0026  
-                        l1013 00D5                          l1025 0101                          l1017 00E6  
-                        l1027 0105                          ?_isr 0070                  __CFG_WRT$OFF 0000  
-                        _main 01D0                          fsr0h 0005                          fsr1h 0007  
-                        fsr0l 0004                          indf0 0000                          fsr1l 0006  
-                        btemp 007E                          ltemp 007E      __end_of_setFeedbackState 01D0  
-                        start 000D                          ttemp 007E                          wtemp 007E  
-       __end_of_setBoostState 0151                 __CFG_MCLRE$ON 0000               __end_of_InitApp 01F2  
-                       ??_isr 0070                         ?_main 0070                 __CFG_WDTE$OFF 0000  
-         _ConfigureOscillator 021F           ___lmul@multiplicand 0075                __CFG_BOREN$OFF 0000  
-                       ltemp0 007E                         ltemp1 0082                         ltemp2 0086  
-                       ltemp3 0080               __end_of_wait_ms 01A8                         ttemp0 007E  
-                       ttemp1 0081                         ttemp2 0084                         ttemp3 0087  
-                       ttemp4 007F                         status 0003                         wtemp0 007E  
-                       wtemp1 0080                         wtemp2 0082                         wtemp3 0084  
-                       wtemp4 0086                         wtemp5 0088                         wtemp6 007F  
-        ?_ConfigureOscillator 0070               __initialization 000E                  __end_of_main 01E1  
-              __CFG_LPBOR$OFF 0000                        ??_main 007D                _feedback_state 002A  
-                      _ADRESH 009C                        _ADRESL 009B                        _PMADRH 0192  
-                      _PMADRL 0191                        _PMDATH 0194                        _PMDATL 0193  
-                      _PMCON2 0196                _debounce_limit 003A                     ??_InitApp 0071  
-       ??_ConfigureOscillator 0071                __CFG_PWRTE$OFF 0000                        ___lmul 0151  
-              __CFG_STVREN$ON 0000              __end_of_initFuzz 0205              __end_of_init_adc 01FC  
-                   ??_wait_ms 007D       __end_of__initialization 001E     updateBoost@debounce_limit 0044  
-                ?_updateBoost 0044                __pcstackCOMMON 0070                  __pidataBANK0 0205  
-                  __pbssBANK0 0020            __size_of_initBoost 0006             ?_setFeedbackState 0071  
-            _long_press_limit 003E                    __pmaintext 01D0            ??_setFeedbackState 0073  
-               ?_setFuzzState 0071                       ?___lmul 0071                    __pintentry 0004  
-              ___lmul@product 0079      updateFuzz@debounce_limit 0073                       _OSCSTAT 009A  
-                  _boost_down 0024                     ?_initFuzz 0070                     ?_init_adc 0070  
-                     _InitApp 01E1                ??_setFuzzState 0073               __size_of___lmul 002F  
-                     __ptext1 0021                       __ptext2 00C2                       __ptext3 01FC  
-                     __ptext4 01A8                       __ptext5 01BC                       __ptext6 0219  
-                     __ptext7 011D                       __ptext8 0180                       __ptext9 0151  
-           __end_of_initBoost 021F                     _T2CONbits 001C                  __size_of_isr 0009  
-                     _fuzz_up 003C        __size_of_setBoostState 0034                       _wait_ms 0180  
-                     clrloop0 020E           setFuzzState@f_state 0071          end_of_initialization 001E  
-                  ??_initFuzz 0073                       init_ram 0213                    ??_init_adc 0071  
-                     initloop 0214                    _fuzz_state 0030          __size_of_updateBoost 005B  
-                 wait_ms@time 0040                     _PORTAbits 000C              __CFG_FOSC$INTOSC 0000  
-                   _TRISAbits 008C                     _TRISCbits 008E                    _updateFuzz 0021  
-     setFeedbackState@f_state 0071   __end_of_ConfigureOscillator 0224                 _setBoostState 011D  
-              __end_of___lmul 0180           start_initialization 000E                   __end_of_isr 000D  
-        __end_of_setFuzzState 01BC                ?_setBoostState 0042                      ??___lmul 0079  
-                 __pdataBANK0 0038          setBoostState@f_state 0042     __size_of_setFeedbackState 0014  
-                   ___latbits 0000                 __pcstackBANK0 0040                   ?_updateFuzz 0073  
-                    ?_InitApp 0070             __size_of_initFuzz 0009             __size_of_init_adc 000A  
-                   _initBoost 0219                      ?_wait_ms 0040                      _LATAbits 010C  
-             ??_setBoostState 007D                      _LATCbits 010E                     clear_ram0 020D  
-                   _fuzz_down 002C                      _PIR1bits 0011           __size_of_updateFuzz 00A1  
-                  _ADCON0bits 009D                    _ADCON1bits 009E         __size_of_setFuzzState 0014  
-                 _boost_state 0028                    ?_initBoost 0070             ___lmul@multiplier 0071  
-               ??_updateBoost 0046              __size_of_InitApp 0011                  _setFuzzState 01A8  
-                  _ANSELAbits 018C              _setFeedbackState 01BC                      __ptext10 01E1  
-                    __ptext11 01F2                      __ptext12 021F              __size_of_wait_ms 0028  
-                    _boost_up 0038                  _fuzz_pressed 002E                      _initFuzz 01FC  
-                    _init_adc 01F2                 __size_of_main 0011  __size_of_ConfigureOscillator 0005  
-                    int$flags 007E               _fuzz_turning_on 0034           __end_of_updateBoost 011D  
-            _last_boost_state 0036                    _INTCONbits 000B                  ??_updateFuzz 0075  
-                 ??_initBoost 007D                      intlevel1 0000                    _PMCON1bits 0195  
-           __CFG_CLKOUTEN$OFF 0000                   _fuzz_toggle 0032                    _OSCCONbits 0099  
-          __end_of_updateFuzz 00C2                  wait_ms@timel 0020                   _updateBoost 00C2  
+                 __CFG_CP$OFF 0000                            l73 0207                            l58 021A  
+                 __CFG_LVP$ON 0000                           l151 005A                           l903 01C7  
+                         l907 01D1                           l937 0147                           l957 017B  
+                         l977 01AF                           u510 0179                           u505 015E  
+                         u435 01D2                           u540 01AD                           u445 01D9  
+                         u535 0192                           u480 0145                           u705 00E5  
+                         u625 0064                           u730 00FF                           u475 012A  
+                         u740 0100                           u655 0099                           u575 002D  
+                         u585 003E                           u755 0115                           u695 00D4  
+                         _isr 0004                  __CFG_BORV$LO 0000                           wreg 0009  
+               _boost_pressed 0026                          l1003 0034                          l1007 0045  
+                        l1035 008B                          l1027 007C                          l1037 008F  
+                        l1071 00EC                          l1047 00AC                          l1081 010B  
+                        l1067 00DB                          l1079 0107                          ?_isr 0070  
+                __CFG_WRT$OFF 0000                          _main 0216                          fsr0h 0005  
+                        fsr1h 0007                          fsr0l 0004                          indf0 0000  
+                        fsr1l 0006                          btemp 007E                          ltemp 007E  
+    __end_of_setFeedbackState 018B                          start 000D                          ttemp 007E  
+                        wtemp 007E         __end_of_setBoostState 01BF                 __CFG_MCLRE$ON 0000  
+             __end_of_InitApp 0238                         ??_isr 0070                         ?_main 0070  
+               __CFG_WDTE$OFF 0000           _ConfigureOscillator 026D           ___lmul@multiplicand 0075  
+              __CFG_BOREN$OFF 0000                         ltemp0 007E                         ltemp1 0082  
+                       ltemp2 0086                         ltemp3 0080               __end_of_wait_ms 0216  
+                       ttemp0 007E                         ttemp1 0081                         ttemp2 0084  
+                       ttemp3 0087                         ttemp4 007F                         status 0003  
+                       wtemp0 007E                         wtemp1 0080                         wtemp2 0082  
+                       wtemp3 0084                         wtemp4 0086                         wtemp5 0088  
+                       wtemp6 007F          ?_ConfigureOscillator 0070               __initialization 000E  
+                __end_of_main 0227                __CFG_LPBOR$OFF 0000                        ??_main 007D  
+          updateFuzz@fb_state 0047                _feedback_state 0038                        _ADRESH 009C  
+                      _ADRESL 009B                        _PMADRH 0192                        _PMADRL 0191  
+                      _PMDATH 0194                        _PMDATL 0193                        _PMCON2 0196  
+              _debounce_limit 0036                     ??_InitApp 0071         ??_ConfigureOscillator 0071  
+              __CFG_PWRTE$OFF 0000                        ___lmul 01BF                __CFG_STVREN$ON 0000  
+            __end_of_initFuzz 0251              __end_of_init_adc 025B                     ??_wait_ms 007D  
+     __end_of__initialization 001E     updateBoost@debounce_limit 0044                  ?_updateBoost 0044  
+              __pcstackCOMMON 0070                  __pidataBANK0 0238                    __pbssBANK0 0020  
+          __size_of_initBoost 0006             ?_setFeedbackState 0042              _long_press_limit 003E  
+                  __pmaintext 0216            ??_setFeedbackState 007D                 ?_setFuzzState 0042  
+                     ?___lmul 0071                    __pintentry 0004                ___lmul@product 0079  
+    updateFuzz@debounce_limit 0044                       _OSCSTAT 009A                    _boost_down 0024  
+                   ?_initFuzz 0070                     ?_init_adc 0070                       _InitApp 0227  
+              ??_setFuzzState 007D               __size_of___lmul 002F                       __ptext1 0021  
+                     __ptext2 00C8                       __ptext3 0246                       __ptext4 0123  
+                     __ptext5 0157                       __ptext6 0267                       __ptext7 018B  
+                     __ptext8 01EE                       __ptext9 01BF             __end_of_initBoost 026D  
+                   _T2CONbits 001C                  __size_of_isr 0009                       _fuzz_up 003C  
+      __size_of_setBoostState 0034                       _wait_ms 01EE                       clrloop0 025C  
+         setFuzzState@f_state 0042          end_of_initialization 001E                    ??_initFuzz 007D  
+                     init_ram 0261                    ??_init_adc 0071                       initloop 0262  
+                  _fuzz_state 003A          __size_of_updateBoost 005B                   wait_ms@time 0040  
+                   _PORTAbits 000C              __CFG_FOSC$INTOSC 0000                     _TRISAbits 008C  
+                   _TRISCbits 008E                    _updateFuzz 0021       setFeedbackState@f_state 0042  
+ __end_of_ConfigureOscillator 0272                 _setBoostState 018B                __end_of___lmul 01EE  
+         start_initialization 000E                   __end_of_isr 000D          __end_of_setFuzzState 0157  
+              ?_setBoostState 0042                      ??___lmul 0079                   __pdataBANK0 0032  
+        setBoostState@f_state 0042     __size_of_setFeedbackState 0034                     ___latbits 0000  
+               __pcstackBANK0 0040                   ?_updateFuzz 0044                      ?_InitApp 0070  
+           __size_of_initFuzz 000B             __size_of_init_adc 000A                     _initBoost 0267  
+                    ?_wait_ms 0040                      _LATAbits 010C               ??_setBoostState 007D  
+                    _LATCbits 010E                     clear_ram0 025B                     _fuzz_down 0028  
+                    _PIR1bits 0011           __size_of_updateFuzz 00A7                    _ADCON0bits 009D  
+                  _ADCON1bits 009E         __size_of_setFuzzState 0034                   _boost_state 0032  
+                  ?_initBoost 0070             ___lmul@multiplier 0071                 ??_updateBoost 0046  
+            __size_of_InitApp 0011                  _setFuzzState 0123                    _ANSELAbits 018C  
+            _setFeedbackState 0157                      __ptext10 0227                      __ptext11 0251  
+                    __ptext12 026D              __size_of_wait_ms 0028                      _boost_up 0034  
+                _fuzz_pressed 002A                      _initFuzz 0246                      _init_adc 0251  
+               __size_of_main 0011  __size_of_ConfigureOscillator 0005                      int$flags 007E  
+             _fuzz_turning_on 002E           __end_of_updateBoost 0123              _last_boost_state 0030  
+                  _INTCONbits 000B                  ??_updateFuzz 0046                   ??_initBoost 007D  
+                    intlevel1 0000                    _PMCON1bits 0195             __CFG_CLKOUTEN$OFF 0000  
+                 _fuzz_toggle 002C                    _OSCCONbits 0099            __end_of_updateFuzz 00C8  
+                wait_ms@timel 0020                   _updateBoost 00C8  

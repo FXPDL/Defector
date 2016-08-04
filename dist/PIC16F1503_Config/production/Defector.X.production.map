@@ -5,7 +5,7 @@ Linker command line:
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.37\dat\en_msgs.txt -cs \
   -h+dist/PIC16F1503_Config/production\Defector.X.production.sym \
   --cmf=dist/PIC16F1503_Config/production\Defector.X.production.cmf -z \
-  -Q16F1503 -oC:\Users\Nancy\AppData\Local\Temp\sces.2 \
+  -Q16F1503 -oC:\Users\Nancy\AppData\Local\Temp\s10o.2 \
   -Mdist/PIC16F1503_Config/production/Defector.X.production.map -E1 \
   -ver=XC8 -ASTACK=02029h-0206fh -pstack=STACK -ACODE=00h-07FFh \
   -ASTRCODE=00h-07FFh -ASTRING=00h-0FFhx8 -ACONST=00h-0FFhx8 \
@@ -26,7 +26,7 @@ Linker command line:
   -pfunctab=CODE -ACONFIG=08007h-08008h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=08000h-08003h -pidloc=IDLOC -DIDLOC=2 -DCODE=2 -DSTRCODE=2 \
   -DSTRING=2 -DCONST=2 -DENTRY=2 -k \
-  C:\Users\Nancy\AppData\Local\Temp\sces.obj \
+  C:\Users\Nancy\AppData\Local\Temp\s10o.obj \
   dist/PIC16F1503_Config/production\Defector.X.production.obj 
 
 Object code version is 3.11
@@ -36,33 +36,33 @@ Machine type is 16F1503
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Nancy\AppData\Local\Temp\sces.obj
+C:\Users\Nancy\AppData\Local\Temp\s10o.obj
                 end_init                              D        D        1        8       0
                 reset_vec                             0        0        1        0       0
                 config                             8007     8007        2    1000E       0
 dist/PIC16F1503_Config/production\Defector.X.production.obj
                 cinit                                 E        E       13        8       0
                 intentry                              4        4        9        8       0
-                text12                              267      267        5        8       0
-                text11                              243      243        A        8       0
-                text10                              227      227       11        8       0
+                text12                              271      271        5        8       0
+                text11                              255      255        A        8       0
+                text10                              216      216       15        8       0
                 text9                               1BF      1BF       2F        8       0
                 text8                               1EE      1EE       28        8       0
                 text7                               18B      18B       34        8       0
-                text6                               261      261        6        8       0
+                text6                               26B      26B        6        8       0
                 text5                               157      157       34        8       0
                 text4                               123      123       34        8       0
-                text3                               238      238        B        8       0
+                text3                               24A      24A        B        8       0
                 text2                                C8       C8       5B        8       0
                 text1                                21       21       A7        8       0
-                maintext                            216      216       11        8       0
-                cstackBANK0                          38       38        9       20       1
+                maintext                            22B      22B       11        8       0
+                cstackBANK0                          40       40        9       20       1
                 cstackCOMMON                         70       70        D       70       1
-                inittext                            25B      25B        6        8       0
-                clrtext                             255      255        6        8       0
-                dataBANK0                            41       41        8       20       1
-                bssBANK0                             20       20       18       20       1
-                idataBANK0                          24D      24D        8        8       0
+                inittext                            265      265        6        8       0
+                clrtext                             25F      25F        6        8       0
+                dataBANK0                            32       32        E       20       1
+                bssBANK0                             20       20       12       20       1
+                idataBANK0                          23C      23C        E        8       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -72,22 +72,22 @@ TOTAL           Name                               Link     Load   Length     Sp
                 cinit                                 E        E       13         0
                 intentry                              4        4        9         0
                 reset_vec                             0        0        1         0
-                text12                              267      267        5         0
-                text11                              243      243        A         0
-                text10                              227      227       11         0
+                text12                              271      271        5         0
+                text11                              255      255        A         0
+                text10                              216      216       15         0
                 text9                               1BF      1BF       2F         0
                 text8                               1EE      1EE       28         0
                 text7                               18B      18B       34         0
-                text6                               261      261        6         0
+                text6                               26B      26B        6         0
                 text5                               157      157       34         0
                 text4                               123      123       34         0
-                text3                               238      238        B         0
+                text3                               24A      24A        B         0
                 text2                                C8       C8       5B         0
                 text1                                21       21       A7         0
-                maintext                            216      216       11         0
-                inittext                            25B      25B        6         0
-                clrtext                             255      255        6         0
-                idataBANK0                          24D      24D        8         0
+                maintext                            22B      22B       11         0
+                inittext                            265      265        6         0
+                clrtext                             25F      25F        6         0
+                idataBANK0                          23C      23C        E         0
 
         CLASS   STRCODE        
 
@@ -101,9 +101,9 @@ TOTAL           Name                               Link     Load   Length     Sp
                 cstackCOMMON                         70       70        D         1
 
         CLASS   BANK0          
-                cstackBANK0                          38       38        9         1
-                dataBANK0                            41       41        8         1
-                bssBANK0                             20       20       18         1
+                cstackBANK0                          40       40        9         1
+                dataBANK0                            32       32        E         1
+                bssBANK0                             20       20       12         1
 
         CLASS   BANK1          
 
@@ -250,7 +250,7 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
 
                 reset_vec                      000000  000001  000001         0       0  CODE        2
-                intentry                       000004  000268  00026C         8       0  CODE        2
+                intentry                       000004  000272  000276         8       0  CODE        2
                 bssBANK0                       000020  000029  000049        20       1  BANK0       1
                 cstackCOMMON                   000070  00000D  00007D        70       1  COMMON      1
                 config                         008007  000002  008009     1000E       0  CONFIG      2
@@ -263,12 +263,12 @@ UNUSED ADDRESS RANGES
         BANK1            000A0-000BF              20           1
         BIGRAM           02000-0206F              70           1
         CODE             00001-00003               3           2
-                         0026C-007FF             594
+                         00276-007FF             58A
         COMMON           0007D-0007D               1           1
         CONST            00001-00003               3           2
-                         0026C-007FF             100
+                         00276-007FF             100
         ENTRY            00001-00003               3           2
-                         0026C-007FF             100
+                         00276-007FF             100
         IDLOC            08000-08003               4           2
         RAM              00049-0006F              27           1
                          000A0-000BF              20
@@ -306,9 +306,9 @@ UNUSED ADDRESS RANGES
         SFR9             00480-004EF              70           1
         STACK            02029-0206F              47           1
         STRCODE          00001-00003               3           2
-                         0026C-007FF             594
+                         00276-007FF             58A
         STRING           00001-00003               3           2
-                         0026C-007FF             100
+                         00276-007FF             100
 
                                   Symbol Table
 
@@ -318,9 +318,9 @@ _ADCON1bits                   (abs)        0009E
 _ADRESH                       (abs)        0009C
 _ADRESL                       (abs)        0009B
 _ANSELAbits                   (abs)        0018C
-_ConfigureOscillator          text12       00267
+_ConfigureOscillator          text12       00271
 _INTCONbits                   (abs)        0000B
-_InitApp                      text10       00227
+_InitApp                      text10       00216
 _LATAbits                     (abs)        0010C
 _LATCbits                     (abs)        0010E
 _OSCCONbits                   (abs)        00099
@@ -546,15 +546,15 @@ ___lmul@multiplicand          cstackCOMMON 00075
 ___lmul@multiplier            cstackCOMMON 00071
 ___lmul@product               cstackCOMMON 00079
 ___sp                         stack        00000
-__end_of_ConfigureOscillator  text12       0026C
-__end_of_InitApp              text10       00238
+__end_of_ConfigureOscillator  text12       00276
+__end_of_InitApp              text10       0022B
 __end_of___lmul               text9        001EE
 __end_of__initialization      cinit        0001E
-__end_of_initBoost            text6        00267
-__end_of_initFuzz             text3        00243
-__end_of_init_adc             text11       0024D
+__end_of_initBoost            text6        00271
+__end_of_initFuzz             text3        00255
+__end_of_init_adc             text11       0025F
 __end_of_isr                  intentry     0000D
-__end_of_main                 maintext     00227
+__end_of_main                 maintext     0023C
 __end_of_setBoostState        text7        001BF
 __end_of_setFeedbackState     text5        0018B
 __end_of_setFuzzState         text4        00157
@@ -563,21 +563,21 @@ __end_of_updateFuzz           text1        000C8
 __end_of_wait_ms              text8        00216
 __initialization              cinit        0000E
 __pbssBANK0                   bssBANK0     00020
-__pcstackBANK0                cstackBANK0  00038
+__pcstackBANK0                cstackBANK0  00040
 __pcstackCOMMON               cstackCOMMON 00070
-__pdataBANK0                  dataBANK0    00041
-__pidataBANK0                 idataBANK0   0024D
+__pdataBANK0                  dataBANK0    00032
+__pidataBANK0                 idataBANK0   0023C
 __pintentry                   intentry     00004
-__pmaintext                   maintext     00216
+__pmaintext                   maintext     0022B
 __ptext1                      text1        00021
-__ptext10                     text10       00227
-__ptext11                     text11       00243
-__ptext12                     text12       00267
+__ptext10                     text10       00216
+__ptext11                     text11       00255
+__ptext12                     text12       00271
 __ptext2                      text2        000C8
-__ptext3                      text3        00238
+__ptext3                      text3        0024A
 __ptext4                      text4        00123
 __ptext5                      text5        00157
-__ptext6                      text6        00261
+__ptext6                      text6        0026B
 __ptext7                      text7        0018B
 __ptext8                      text8        001EE
 __ptext9                      text9        001BF
@@ -597,22 +597,22 @@ __size_of_updateFuzz          (abs)        00000
 __size_of_wait_ms             (abs)        00000
 _boost_down                   bssBANK0     00024
 _boost_pressed                bssBANK0     00026
-_boost_state                  bssBANK0     00028
-_boost_up                     dataBANK0    00041
-_debounce_limit               dataBANK0    00043
-_feedback_state               bssBANK0     0002A
-_fuzz_down                    bssBANK0     0002C
-_fuzz_pressed                 bssBANK0     0002E
-_fuzz_state                   bssBANK0     00030
-_fuzz_toggle                  bssBANK0     00032
-_fuzz_turning_on              bssBANK0     00034
-_fuzz_up                      dataBANK0    00045
-_initBoost                    text6        00261
-_initFuzz                     text3        00238
-_init_adc                     text11       00243
+_boost_state                  dataBANK0    00032
+_boost_up                     dataBANK0    00034
+_debounce_limit               dataBANK0    00036
+_feedback_state               dataBANK0    00038
+_fuzz_down                    bssBANK0     00028
+_fuzz_pressed                 bssBANK0     0002A
+_fuzz_state                   dataBANK0    0003A
+_fuzz_toggle                  bssBANK0     0002C
+_fuzz_turning_on              bssBANK0     0002E
+_fuzz_up                      dataBANK0    0003C
+_initBoost                    text6        0026B
+_initFuzz                     text3        0024A
+_init_adc                     text11       00255
 _isr                          intentry     00004
-_long_press_limit             dataBANK0    00047
-_main                         maintext     00216
+_long_press_limit             dataBANK0    0003E
+_main                         maintext     0022B
 _setBoostState                text7        0018B
 _setFeedbackState             text5        00157
 _setFuzzState                 text4        00123
@@ -620,9 +620,9 @@ _updateBoost                  text2        000C8
 _updateFuzz                   text1        00021
 _wait_ms                      text8        001EE
 btemp                         (abs)        0007E
-clear_ram0                    clrtext      00255
+clear_ram0                    clrtext      0025F
 end_of_initialization         cinit        0001E
-init_ram                      inittext     0025B
+init_ram                      inittext     00265
 int$flags                     (abs)        0007E
 intlevel0                     functab      00000
 intlevel1                     functab      00000
@@ -636,9 +636,9 @@ ltemp1                        (abs)        00082
 ltemp2                        (abs)        00086
 ltemp3                        (abs)        00080
 reset_vec                     reset_vec    00000
-setBoostState@f_state         cstackBANK0  0003A
-setFeedbackState@f_state      cstackBANK0  0003A
-setFuzzState@f_state          cstackBANK0  0003A
+setBoostState@f_state         cstackBANK0  00042
+setFeedbackState@f_state      cstackBANK0  00042
+setFuzzState@f_state          cstackBANK0  00042
 stackhi                       (abs)        0206F
 stacklo                       (abs)        02029
 start                         init         0000D
@@ -649,10 +649,10 @@ ttemp1                        (abs)        00081
 ttemp2                        (abs)        00084
 ttemp3                        (abs)        00087
 ttemp4                        (abs)        0007F
-updateBoost@debounce_limit    cstackBANK0  0003C
-updateFuzz@debounce_limit     cstackBANK0  0003C
-updateFuzz@fb_state           cstackBANK0  0003F
-wait_ms@time                  cstackBANK0  00038
+updateBoost@debounce_limit    cstackBANK0  00044
+updateFuzz@debounce_limit     cstackBANK0  00044
+updateFuzz@fb_state           cstackBANK0  00047
+wait_ms@time                  cstackBANK0  00040
 wait_ms@timel                 bssBANK0     00020
 wtemp                         (abs)        0007E
 wtemp0                        (abs)        0007E
@@ -1010,7 +1010,7 @@ Total ram usage:        0 bytes
 
  *************** function _init_adc *****************
  Defined at:
-		line 55 in file "user.c"
+		line 60 in file "user.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1109,13 +1109,13 @@ interrupts.c estimated size: 10
 mcc_generated_files/boost.c
 		_updateBoost   		CODE           	00C8	0000	92
 		_setBoostState 		CODE           	018B	0000	53
-		_initBoost     		CODE           	0261	0000	7
+		_initBoost     		CODE           	026B	0000	7
 
 mcc_generated_files/boost.c estimated size: 152
 
 mcc_generated_files/fuzz.c
 		_updateFuzz    		CODE           	0021	0000	168
-		_initFuzz      		CODE           	0238	0000	12
+		_initFuzz      		CODE           	024A	0000	12
 		_setFeedbackState		CODE           	0157	0000	53
 		_setFuzzState  		CODE           	0123	0000	53
 
@@ -1132,18 +1132,18 @@ shared
 shared estimated size: 17
 
 user.c
-		_InitApp       		CODE           	0227	0000	18
-		_init_adc      		CODE           	0243	0000	11
+		_InitApp       		CODE           	0216	0000	22
+		_init_adc      		CODE           	0255	0000	11
 
-user.c estimated size: 29
+user.c estimated size: 33
 
 main.c
-		_main          		CODE           	0216	0000	18
+		_main          		CODE           	022B	0000	18
 
 main.c estimated size: 18
 
 system.c
-		_ConfigureOscillator		CODE           	0267	0000	6
+		_ConfigureOscillator		CODE           	0271	0000	6
 		_wait_ms       		CODE           	01EE	0000	41
 
 system.c estimated size: 47
