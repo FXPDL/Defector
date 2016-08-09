@@ -8,7 +8,8 @@
 #include <htc.h>        /* HiTech General Include File */
 #endif
 
- 
+
+#include "./../state_manager.h"
 #include "boost.h"
 
 
@@ -19,8 +20,9 @@ int boost_up = 1;
 int boost_down = 0;  
 int last_boost_state = 0;
 
-void initBoost(void) {
-    setBoostState(0);
+void initBoost() {
+    int initState = getBoostState();
+    setBoostState(initState);
 }
 
 void updateBoost(int debounce_limit) {
@@ -62,7 +64,7 @@ void setBoostState(int f_state) {
     if (boost_state == f_state) {return;}
     boost_state = f_state;
     Boost_LED = f_state;
-     Relay_Boost1 = f_state;
+    Relay_Boost1 = f_state;
     Relay_Boost10 = !f_state;
 
     wait_ms(relay_delay);
@@ -70,5 +72,6 @@ void setBoostState(int f_state) {
     Relay_Boost1 = 0;
     Relay_Boost10 = 0;
 
+    updateBoostState(boost_state);  
     wait_ms(relay_delay);
 }

@@ -3869,6 +3869,44 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdbool.h"
+typedef unsigned char bool;
+
+# 99 "mcc_generated_files/./../memory.h"
+uint16_t FLASH_ReadWord(uint16_t flashAddr);
+
+# 128
+void FLASH_WriteWord(uint16_t flashAddr, uint16_t *ramBuf, uint16_t word);
+
+# 164
+int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray);
+
+# 189
+void FLASH_EraseBlock(uint16_t startAddr);
+
+# 36 "mcc_generated_files/./../HEF.h"
+int8_t HEF_ByteArrayWrite( uint8_t block, uint8_t *bArray, uint8_t count);
+
+# 47
+int8_t HEF_ByteArrayRead( uint8_t *bArray, uint8_t block, uint8_t count);
+
+# 57
+uint8_t HEF_ByteRead( uint8_t block, uint8_t offset);
+
+# 26 "mcc_generated_files/./../state_manager.h"
+typedef struct {
+int fuzz;
+int boost;
+} PedalState;
+
+void initStateManager(void);
+PedalState getCurrentState(void);
+int getFuzzState(void);
+int getBoostState(void);
+void updateFuzzState(int);
+void updateBoostState(int);
+void saveState(void);
+
 # 18 "mcc_generated_files/../system.h"
 void ConfigureOscillator(void);
 void wait_ms(uint16_t);
@@ -3880,7 +3918,7 @@ void updateFuzz(int);
 void setFuzzState(int);
 void setFeedbackState(int);
 
-# 16 "mcc_generated_files/fuzz.c"
+# 17 "mcc_generated_files/fuzz.c"
 int fuzz_state = -1;
 int feedback_state = -1;
 
@@ -3892,19 +3930,16 @@ int fuzz_turning_on = 0;
 
 int long_press_limit = 20000000;
 
-void initFuzz(void) {
-
-# 32
-setFuzzState(0);
-
-# 40
+void initFuzz() {
+int initState = getFuzzState();
+setFuzzState(initState);
 setFeedbackState(0);
 
 }
 
 void updateFuzz(int debounce_limit) {
 
-# 51
+# 42
 if (PORTAbits.RA4 == 0) {
 if (fuzz_pressed > 0) {
 fuzz_pressed--;
@@ -3914,7 +3949,7 @@ fuzz_pressed++;
 
 }
 
-# 64
+# 55
 if (fuzz_pressed == 0) {
 
 fuzz_down++;
@@ -3967,10 +4002,9 @@ wait_ms(20);
 LATCbits.LATC2 = 0;
 LATCbits.LATC1 = 0;
 
-
+updateFuzzState(fuzz_state);
 wait_ms(20);
 }
-
 
 void setFeedbackState(int f_state) {
 if (feedback_state == f_state) {return;}

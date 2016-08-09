@@ -11,6 +11,10 @@
       </logicalFolder>
       <itemPath>system.h</itemPath>
       <itemPath>user.h</itemPath>
+      <itemPath>mcc_generated_files/boost.h</itemPath>
+      <itemPath>mcc_generated_files/fuzz.h</itemPath>
+      <itemPath>HEF.h</itemPath>
+      <itemPath>state_manager.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -26,10 +30,10 @@
       <itemPath>system.c</itemPath>
       <itemPath>user.c</itemPath>
       <itemPath>mcc_generated_files/fuzz.c</itemPath>
-      <itemPath>mcc_generated_files/fuzz.h</itemPath>
       <itemPath>mcc_generated_files/boost.c</itemPath>
-      <itemPath>mcc_generated_files/boost.h</itemPath>
       <itemPath>mcc_generated_files/hardware_controls.h</itemPath>
+      <itemPath>HEF.c</itemPath>
+      <itemPath>state_manager.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -141,6 +145,7 @@
         <property key="opt-xc8-linker-link_startup" value="false"/>
         <property key="opt-xc8-linker-serial" value=""/>
         <property key="program-the-device-with-default-config-words" value="true"/>
+        <appendMe value="--ROM=default,-1f80-1fff"/>
       </HI-TECH-LINK>
       <PICkit3PlatformTool>
         <property key="AutoSelectMemRanges" value="auto"/>
@@ -149,6 +154,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
@@ -166,7 +172,7 @@
         <property key="memories.programmemory.partition2.start"
                   value="${memories.programmemory.partition2.start.value}"/>
         <property key="memories.programmemory.start" value="0x0"/>
-        <property key="poweroptions.powerenable" value="false"/>
+        <property key="poweroptions.powerenable" value="true"/>
         <property key="programmertogo.imagename" value=""/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

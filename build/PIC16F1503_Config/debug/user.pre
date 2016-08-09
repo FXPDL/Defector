@@ -3894,6 +3894,11 @@ TRISCbits.TRISC3 = 0;
 TRISCbits.TRISC4 = 0;
 TRISCbits.TRISC5 = 0;
 
+LATCbits.LATC5 = 0;
+
+LATAbits.LATA2 = 0;
+LATCbits.LATC3 = 0;
+
 init_adc();
 
 }

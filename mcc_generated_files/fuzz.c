@@ -11,6 +11,7 @@
 
 
 
+#include "./../state_manager.h"
 #include "fuzz.h"
 
 int fuzz_state = -1; //initialize to an invalid value so the initialize will run.
@@ -24,19 +25,9 @@ int fuzz_turning_on = 0;
 
 int long_press_limit = 20000000; 
 
-void initFuzz(void) {
-   /*  fuzz_state = 0;
-    Fuzz_LED = 0;
-   Relay_Fuzz1 = 0; //off
-    Relay_Fuzz10 = 1; //off*/
-    setFuzzState(0);
-    
-    
-   /* feedback_state = 0;
-    Feedback_LED = 0;
-    Relay_Feedback1 = 0;//off 
-    Relay_Feedback10 = 1;//off*/
-    
+void initFuzz() {
+    int initState = getFuzzState();
+    setFuzzState(initState);   
     setFeedbackState(0);
 
 }
@@ -113,10 +104,9 @@ void setFuzzState(int f_state) {
     Relay_Fuzz1 = 0;
     Relay_Fuzz10 = 0;  
     
-        
+    updateFuzzState(fuzz_state);    
     wait_ms(relay_delay);
 }
-
 
 void setFeedbackState(int f_state) {
     if (feedback_state == f_state) {return;}
@@ -125,7 +115,7 @@ void setFeedbackState(int f_state) {
     Relay_Feedback1 = f_state;
     Relay_Feedback10 = !f_state;
     
-      wait_ms(relay_delay);
+    wait_ms(relay_delay);
     
     Relay_Feedback1 = 0;
     Relay_Feedback10 = 0;  

@@ -3911,9 +3911,11 @@ void main(void) {
 ConfigureOscillator();
 InitApp();
 
+# 41
 initFuzz();
 initBoost();
 
+# 52
 while (1) {
 updateFuzz(debounce_limit);
 updateBoost(debounce_limit);

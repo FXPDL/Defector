@@ -1,0 +1,162 @@
+
+# 1 "HEFlash.c"
+
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdbool.h"
+typedef unsigned char bool;
+
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdint.h"
+typedef signed char int8_t;
+
+# 20
+typedef signed int int16_t;
+
+# 28
+typedef signed short long int int24_t;
+
+# 36
+typedef signed long int int32_t;
+
+# 43
+typedef unsigned char uint8_t;
+
+# 49
+typedef unsigned int uint16_t;
+
+# 56
+typedef unsigned short long int uint24_t;
+
+# 63
+typedef unsigned long int uint32_t;
+
+# 71
+typedef signed char int_least8_t;
+
+# 78
+typedef signed int int_least16_t;
+
+# 90
+typedef signed short long int int_least24_t;
+
+# 98
+typedef signed long int int_least32_t;
+
+# 105
+typedef unsigned char uint_least8_t;
+
+# 111
+typedef unsigned int uint_least16_t;
+
+# 121
+typedef unsigned short long int uint_least24_t;
+
+# 128
+typedef unsigned long int uint_least32_t;
+
+# 137
+typedef signed char int_fast8_t;
+
+# 144
+typedef signed int int_fast16_t;
+
+# 156
+typedef signed short long int int_fast24_t;
+
+# 164
+typedef signed long int int_fast32_t;
+
+# 171
+typedef unsigned char uint_fast8_t;
+
+# 177
+typedef unsigned int uint_fast16_t;
+
+# 187
+typedef unsigned short long int uint_fast24_t;
+
+# 194
+typedef unsigned long int uint_fast32_t;
+
+# 200
+typedef int32_t intmax_t;
+
+
+
+
+typedef uint32_t uintmax_t;
+
+
+
+
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
+
+# 99 "memory.h"
+uint16_t FLASH_ReadWord(uint16_t flashAddr);
+
+# 128
+void FLASH_WriteWord(uint16_t flashAddr, uint16_t *ramBuf, uint16_t word);
+
+# 164
+int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray);
+
+# 189
+void FLASH_EraseBlock(uint16_t startAddr);
+
+# 26 "HEFlash.h"
+char HEFLASH_writeBlock (char radd, char* buffer, char count);
+
+# 35
+char HEFLASH_readBlock (char* buffer, char radd, char count);
+
+# 43
+char HEFLASH_readByte (char radd, char offset);
+
+# 14 "HEFlash.c"
+char HEFLASH_writeBlock (char radd, char* data, char count) {
+
+uint16_t add = radd * 32 + 0x0780;
+
+if ((count > 32)||(radd >= (0x07FF-0x0780+1)/32))
+return -1;
+
+FLASH_EraseBlock (add);
+
+while (count > 1) {
+
+FLASH_WriteWord (add++, (uint16_t) *data++, 1);
+count--;
+}
+
+
+FLASH_WriteWord (add, (uint16_t) *data, 0);
+
+
+return PMCON1bits.WRERR;
+}
+
+
+char HEFLASH_readBlock (char *buffer, char radd, char count) {
+
+unsigned add = radd * 32 + 0x0780;
+
+if ((count > 32)||(radd >= (0x07FF-0x0780+1)/32))
+return -1;
+
+while (count > 0) {
+*buffer++ = (char) FLASH_ReadWord (add++);
+count--;
+}
+
+return 0;
+}
+
+char HEFLASH_readByte (char radd, char offset) {
+
+unsigned add = radd * 32 + 0x0780 + offset;
+
+return (char) FLASH_ReadWord (add);
+}

@@ -9,23 +9,27 @@
 [v ___ftadd __ftadd `(f  1 e 3 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
+"12 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\HEF.c
+[v _HEF_ByteArrayWrite HEF_ByteArrayWrite `(c  1 e 1 0 ]
+"53
+[v _HEF_ByteArrayRead HEF_ByteArrayRead `(c  1 e 1 0 ]
 "23 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\interrupts.c
 [v _isr isr `II(v  1 e 1 0 ]
 "28 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"22 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
+"23 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 [v _initBoost initBoost `(v  1 e 1 0 ]
-"26
+"29
 [v _updateBoost updateBoost `(v  1 e 1 0 ]
-"61
+"64
 [v _setBoostState setBoostState `(v  1 e 1 0 ]
-"27 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
+"28 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 [v _initFuzz initFuzz `(v  1 e 1 0 ]
-"44
+"40
 [v _updateFuzz updateFuzz `(v  1 e 1 0 ]
-"104
+"100
 [v _setFuzzState setFuzzState `(v  1 e 1 0 ]
-"121
+"116
 [v _setFeedbackState setFeedbackState `(v  1 e 1 0 ]
 "58 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/memory.c
 [v _FLASH_ReadWord FLASH_ReadWord `(ui  1 e 2 0 ]
@@ -33,13 +37,25 @@
 [v _FLASH_WriteBlock FLASH_WriteBlock `(c  1 e 1 0 ]
 "141
 [v _FLASH_EraseBlock FLASH_EraseBlock `(v  1 e 1 0 ]
+"18 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
+[v _initStateManager initStateManager `(v  1 e 1 0 ]
+"42
+[v _getFuzzState getFuzzState `(i  1 e 2 0 ]
+"51
+[v _getBoostState getBoostState `(i  1 e 2 0 ]
+"59
+[v _updateFuzzState updateFuzzState `(v  1 e 1 0 ]
+"67
+[v _updateBoostState updateBoostState `(v  1 e 1 0 ]
+"74
+[v _saveState saveState `(v  1 e 1 0 ]
 "17 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 1 0 ]
 "23
 [v _wait_ms wait_ms `(v  1 e 1 0 ]
 "27 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
 [v _InitApp InitApp `(v  1 e 1 0 ]
-"55
+"60
 [v _init_adc init_adc `(v  1 e 1 0 ]
 [s S19 . 1 `uc 1 IOCIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
@@ -58,7 +74,7 @@
 ]
 [u S33 . 1 `S19 1 . 1 0 `S28 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES33  1 e 1 @11 ]
-[s S404 . 1 `uc 1 RA0 1 0 :1:0 
+[s S474 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -66,9 +82,9 @@
 `uc 1 RA5 1 0 :1:5 
 ]
 "429
-[u S411 . 1 `S404 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES411  1 e 1 @12 ]
-[s S249 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S481 . 1 `S474 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES481  1 e 1 @12 ]
+[s S283 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 SSP1IF 1 0 :1:3 
@@ -77,14 +93,14 @@
 `uc 1 TMR1GIF 1 0 :1:7 
 ]
 "528
-[u S257 . 1 `S249 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES257  1 e 1 @17 ]
-[s S268 . 1 `uc 1 T2CKPS 1 0 :2:0 
+[u S291 . 1 `S283 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES291  1 e 1 @17 ]
+[s S302 . 1 `uc 1 T2CKPS 1 0 :2:0 
 `uc 1 TMR2ON 1 0 :1:2 
 `uc 1 T2OUTPS 1 0 :4:3 
 ]
 "883
-[s S272 . 1 `uc 1 T2CKPS0 1 0 :1:0 
+[s S306 . 1 `uc 1 T2CKPS0 1 0 :1:0 
 `uc 1 T2CKPS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 T2OUTPS0 1 0 :1:3 
@@ -92,8 +108,8 @@
 `uc 1 T2OUTPS2 1 0 :1:5 
 `uc 1 T2OUTPS3 1 0 :1:6 
 ]
-[u S280 . 1 `S268 1 . 1 0 `S272 1 . 1 0 ]
-[v _T2CONbits T2CONbits `VES280  1 e 1 @28 ]
+[u S314 . 1 `S302 1 . 1 0 `S306 1 . 1 0 ]
+[v _T2CONbits T2CONbits `VES314  1 e 1 @28 ]
 [s S191 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
@@ -135,12 +151,12 @@
 [v _ADRESL ADRESL `VEuc  1 e 1 @155 ]
 "1457
 [v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
-[s S316 . 1 `uc 1 ADON 1 0 :1:0 
+[s S350 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :5:2 
 ]
 "1501
-[s S320 . 1 `uc 1 . 1 0 :1:0 
+[s S354 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 ADGO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -148,23 +164,23 @@
 `uc 1 CHS3 1 0 :1:5 
 `uc 1 CHS4 1 0 :1:6 
 ]
-[s S328 . 1 `uc 1 . 1 0 :1:0 
+[s S362 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 ]
-[u S331 . 1 `S316 1 . 1 0 `S320 1 . 1 0 `S328 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES331  1 e 1 @157 ]
-[s S296 . 1 `uc 1 ADPREF 1 0 :2:0 
+[u S365 . 1 `S350 1 . 1 0 `S354 1 . 1 0 `S362 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES365  1 e 1 @157 ]
+[s S330 . 1 `uc 1 ADPREF 1 0 :2:0 
 `uc 1 . 1 0 :2:2 
 `uc 1 ADCS 1 0 :3:4 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "1572
-[s S301 . 1 `uc 1 ADPREF0 1 0 :1:0 
+[s S335 . 1 `uc 1 ADPREF0 1 0 :1:0 
 `uc 1 ADPREF1 1 0 :1:1 
 ]
-[u S304 . 1 `S296 1 . 1 0 `S301 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES304  1 e 1 @158 ]
-[s S421 . 1 `uc 1 LATA0 1 0 :1:0 
+[u S338 . 1 `S330 1 . 1 0 `S335 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES338  1 e 1 @158 ]
+[s S262 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -172,9 +188,9 @@
 `uc 1 LATA5 1 0 :1:5 
 ]
 "1663
-[u S428 . 1 `S421 1 . 1 0 ]
-[v _LATAbits LATAbits `VES428  1 e 1 @268 ]
-[s S438 . 1 `uc 1 LATC0 1 0 :1:0 
+[u S269 . 1 `S262 1 . 1 0 ]
+[v _LATAbits LATAbits `VES269  1 e 1 @268 ]
+[s S245 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -182,8 +198,8 @@
 `uc 1 LATC5 1 0 :1:5 
 ]
 "1707
-[u S445 . 1 `S438 1 . 1 0 ]
-[v _LATCbits LATCbits `VES445  1 e 1 @270 ]
+[u S252 . 1 `S245 1 . 1 0 ]
+[v _LATCbits LATCbits `VES252  1 e 1 @270 ]
 [s S208 . 1 `uc 1 ANSA0 1 0 :1:0 
 `uc 1 ANSA1 1 0 :1:1 
 `uc 1 ANSA2 1 0 :1:2 
@@ -195,6 +211,8 @@
 ]
 [u S216 . 1 `S208 1 . 1 0 `S214 1 . 1 0 ]
 [v _ANSELAbits ANSELAbits `VES216  1 e 1 @396 ]
+"2353
+[v _PMADR PMADR `VEus  1 e 2 @401 ]
 "2359
 [v _PMADRL PMADRL `VEuc  1 e 1 @401 ]
 "2378
@@ -218,77 +236,95 @@
 [v _PMCON2 PMCON2 `VEuc  1 e 1 @406 ]
 "21 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
 [v _debounce_limit debounce_limit `i  1 e 2 0 ]
-"15 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
+"16 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 [v _boost_state boost_state `i  1 e 2 0 ]
-"17
-[v _boost_pressed boost_pressed `i  1 e 2 0 ]
 "18
+[v _boost_pressed boost_pressed `i  1 e 2 0 ]
+"19
 [v _boost_up boost_up `i  1 e 2 0 ]
-"19
-[v _boost_down boost_down `i  1 e 2 0 ]
-"16 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
-[v _fuzz_state fuzz_state `i  1 e 2 0 ]
-"17
-[v _feedback_state feedback_state `i  1 e 2 0 ]
-"19
-[v _fuzz_pressed fuzz_pressed `i  1 e 2 0 ]
 "20
-[v _fuzz_up fuzz_up `i  1 e 2 0 ]
+[v _boost_down boost_down `i  1 e 2 0 ]
+"17 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
+[v _fuzz_state fuzz_state `i  1 e 2 0 ]
+"18
+[v _feedback_state feedback_state `i  1 e 2 0 ]
+"20
+[v _fuzz_pressed fuzz_pressed `i  1 e 2 0 ]
 "21
-[v _fuzz_down fuzz_down `i  1 e 2 0 ]
+[v _fuzz_up fuzz_up `i  1 e 2 0 ]
 "22
-[v _fuzz_toggle fuzz_toggle `i  1 e 2 0 ]
+[v _fuzz_down fuzz_down `i  1 e 2 0 ]
 "23
+[v _fuzz_toggle fuzz_toggle `i  1 e 2 0 ]
+"24
 [v _fuzz_turning_on fuzz_turning_on `i  1 e 2 0 ]
-"25
+"26
 [v _long_press_limit long_press_limit `i  1 e 2 0 ]
+"15 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
+[v _isInitialized isInitialized `i  1 e 2 0 ]
+[s S618 . 4 `i 1 fuzz 2 0 `i 1 boost 2 2 ]
+"16
+[v _pedalState pedalState `S618  1 e 4 0 ]
 "28 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"41
-} 0
-"44 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
-[v _updateFuzz updateFuzz `(v  1 e 1 0 ]
-{
-"89
-[v updateFuzz@fb_state fb_state `i  1 a 2 7 ]
-"44
-[v updateFuzz@debounce_limit debounce_limit `i  1 p 2 4 ]
-"102
-} 0
-"26 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
-[v _updateBoost updateBoost `(v  1 e 1 0 ]
-{
-[v updateBoost@debounce_limit debounce_limit `i  1 p 2 4 ]
 "58
 } 0
-"27 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
+"40 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
+[v _updateFuzz updateFuzz `(v  1 e 1 0 ]
+{
+"85
+[v updateFuzz@fb_state fb_state `i  1 a 2 10 ]
+"40
+[v updateFuzz@debounce_limit debounce_limit `i  1 p 2 7 ]
+"98
+} 0
+"29 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
+[v _updateBoost updateBoost `(v  1 e 1 0 ]
+{
+[v updateBoost@debounce_limit debounce_limit `i  1 p 2 7 ]
+"61
+} 0
+"28 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 [v _initFuzz initFuzz `(v  1 e 1 0 ]
 {
-"42
+"38
 } 0
-"104
+"100
 [v _setFuzzState setFuzzState `(v  1 e 1 0 ]
 {
-[v setFuzzState@f_state f_state `i  1 p 2 2 ]
-"118
+[v setFuzzState@f_state f_state `i  1 p 2 5 ]
+"114
 } 0
-"121
+"59 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
+[v _updateFuzzState updateFuzzState `(v  1 e 1 0 ]
+{
+[v updateFuzzState@state state `i  1 p 2 3 ]
+"64
+} 0
+"116 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 [v _setFeedbackState setFeedbackState `(v  1 e 1 0 ]
 {
 [v setFeedbackState@f_state f_state `i  1 p 2 2 ]
-"136
+"131
 } 0
-"22 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
+"42 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
+[v _getFuzzState getFuzzState `(i  1 e 2 0 ]
+{
+"48
+} 0
+"23 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 [v _initBoost initBoost `(v  1 e 1 0 ]
 {
-"24
+"25
+[v initBoost@i i `i  1 a 2 7 ]
+"27
 } 0
-"61
+"64
 [v _setBoostState setBoostState `(v  1 e 1 0 ]
 {
-[v setBoostState@f_state f_state `i  1 p 2 2 ]
-"74
+[v setBoostState@f_state f_state `i  1 p 2 5 ]
+"78
 } 0
 "23 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
 [v _wait_ms wait_ms `(v  1 e 1 0 ]
@@ -308,15 +344,88 @@
 [v ___lmul@multiplicand multiplicand `ul  1 p 4 5 ]
 "129
 } 0
+"67 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
+[v _updateBoostState updateBoostState `(v  1 e 1 0 ]
+{
+[v updateBoostState@state state `i  1 p 2 3 ]
+"72
+} 0
+"74
+[v _saveState saveState `(v  1 e 1 0 ]
+{
+"75
+[v saveState@r r `uc  1 a 1 12 ]
+"77
+} 0
+"12 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\HEF.c
+[v _HEF_ByteArrayWrite HEF_ByteArrayWrite `(c  1 e 1 0 ]
+{
+[v HEF_ByteArrayWrite@block block `uc  1 a 1 wreg ]
+"13
+[v HEF_ByteArrayWrite@blockAddr blockAddr `ui  1 a 2 10 ]
+"14
+[v HEF_ByteArrayWrite@GIEBitValue GIEBitValue `uc  1 a 1 8 ]
+"12
+[v HEF_ByteArrayWrite@block block `uc  1 a 1 wreg ]
+[v HEF_ByteArrayWrite@byteArray byteArray `*.4uc  1 p 1 4 ]
+[v HEF_ByteArrayWrite@count count `uc  1 p 1 5 ]
+"14
+[v HEF_ByteArrayWrite@block block `uc  1 a 1 9 ]
+"51
+} 0
+"141 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/memory.c
+[v _FLASH_EraseBlock FLASH_EraseBlock `(v  1 e 1 0 ]
+{
+"142
+[v FLASH_EraseBlock@GIEBitValue GIEBitValue `uc  1 a 1 3 ]
+"141
+[v FLASH_EraseBlock@startAddr startAddr `ui  1 p 2 1 ]
+"165
+} 0
+"51 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
+[v _getBoostState getBoostState `(i  1 e 2 0 ]
+{
+"57
+} 0
+"18
+[v _initStateManager initStateManager `(v  1 e 1 0 ]
+{
+"19
+[v initStateManager@r r `uc  1 a 1 0 ]
+"33
+} 0
+"53 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\HEF.c
+[v _HEF_ByteArrayRead HEF_ByteArrayRead `(c  1 e 1 0 ]
+{
+[v HEF_ByteArrayRead@bArray bArray `*.4uc  1 a 1 wreg ]
+"56
+[v HEF_ByteArrayRead@wordAdd wordAdd `ui  1 a 2 8 ]
+"53
+[v HEF_ByteArrayRead@bArray bArray `*.4uc  1 a 1 wreg ]
+[v HEF_ByteArrayRead@block block `uc  1 p 1 4 ]
+[v HEF_ByteArrayRead@count count `uc  1 p 1 5 ]
+"56
+[v HEF_ByteArrayRead@bArray bArray `*.4uc  1 a 1 10 ]
+"71
+} 0
+"58 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/memory.c
+[v _FLASH_ReadWord FLASH_ReadWord `(ui  1 e 2 0 ]
+{
+"59
+[v FLASH_ReadWord@GIEBitValue GIEBitValue `uc  1 a 1 3 ]
+"58
+[v FLASH_ReadWord@flashAddr flashAddr `ui  1 p 2 1 ]
+"72
+} 0
 "27 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\user.c
 [v _InitApp InitApp `(v  1 e 1 0 ]
 {
-"45
+"50
 } 0
-"55
+"60
 [v _init_adc init_adc `(v  1 e 1 0 ]
 {
-"60
+"65
 } 0
 "17 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 1 0 ]

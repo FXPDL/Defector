@@ -3869,6 +3869,44 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdbool.h"
+typedef unsigned char bool;
+
+# 99 "mcc_generated_files/./../memory.h"
+uint16_t FLASH_ReadWord(uint16_t flashAddr);
+
+# 128
+void FLASH_WriteWord(uint16_t flashAddr, uint16_t *ramBuf, uint16_t word);
+
+# 164
+int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray);
+
+# 189
+void FLASH_EraseBlock(uint16_t startAddr);
+
+# 36 "mcc_generated_files/./../HEF.h"
+int8_t HEF_ByteArrayWrite( uint8_t block, uint8_t *bArray, uint8_t count);
+
+# 47
+int8_t HEF_ByteArrayRead( uint8_t *bArray, uint8_t block, uint8_t count);
+
+# 57
+uint8_t HEF_ByteRead( uint8_t block, uint8_t offset);
+
+# 26 "mcc_generated_files/./../state_manager.h"
+typedef struct {
+int fuzz;
+int boost;
+} PedalState;
+
+void initStateManager(void);
+PedalState getCurrentState(void);
+int getFuzzState(void);
+int getBoostState(void);
+void updateFuzzState(int);
+void updateBoostState(int);
+void saveState(void);
+
 # 18 "mcc_generated_files/../system.h"
 void ConfigureOscillator(void);
 void wait_ms(uint16_t);
@@ -3879,7 +3917,7 @@ void initBoost(void);
 void updateBoost(int);
 void setBoostState(int);
 
-# 15 "mcc_generated_files/boost.c"
+# 16 "mcc_generated_files/boost.c"
 int boost_state = -1;
 
 int boost_pressed = 0;
@@ -3887,13 +3925,15 @@ int boost_up = 1;
 int boost_down = 0;
 int last_boost_state = 0;
 
-void initBoost(void) {
-setBoostState(0);
+void initBoost() {
+setBoostState(getBoostState());
+int i = 0;
+i++;
 }
 
 void updateBoost(int debounce_limit) {
 
-# 33
+# 36
 if (PORTAbits.RA5 == 0) {
 if (boost_pressed > 0) {
 boost_pressed--;
@@ -3902,7 +3942,7 @@ boost_pressed--;
 boost_pressed++;
 }
 
-# 45
+# 48
 if (boost_pressed == 0) {
 boost_down = 1;
 if (boost_up == 1) {
@@ -3931,5 +3971,6 @@ wait_ms(20);
 LATCbits.LATC0 = 0;
 LATCbits.LATC4 = 0;
 
+updateBoostState(boost_state);
 wait_ms(20);
 }

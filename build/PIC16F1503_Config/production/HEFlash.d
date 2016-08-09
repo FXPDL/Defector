@@ -1,0 +1,1 @@
+ build/PIC16F1503_Config/production/HEFlash.d  build/PIC16F1503_Config/production/HEFlash.p1:  HEFlash.c HEFlash.h memory.h

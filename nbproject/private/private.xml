@@ -3,14 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/mcc_generated_files/boost.c</file>
-            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/mcc_generated_files/hardware_controls.h</file>
             <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/main.c</file>
-            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/system.h</file>
-            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/mcc_generated_files/boost.h</file>
+            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/user.c</file>
+            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/system.c</file>
+            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/user.h</file>
             <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/mcc_generated_files/fuzz.c</file>
             <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/mcc_generated_files/fuzz.h</file>
-            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/system.c</file>
+            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/mcc_generated_files/boost.c</file>
+            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/mcc_generated_files/boost.h</file>
+            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/mcc_generated_files/memory.c</file>
+            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/HEF.c</file>
+            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/state_manager.h</file>
+            <file>file:/C:/Users/Nancy/Dropbox%20(Stepframe)/Foxpedal%20Programming/Code/Defector.X/state_manager.c</file>
         </group>
     </open-files>
 </project-private>

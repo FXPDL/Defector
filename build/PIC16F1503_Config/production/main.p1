@@ -2882,30 +2882,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 30: InitApp();
 "30
 [e ( _InitApp ..  ]
-[; ;main.c: 32: initFuzz();
-"32
-[e ( _initFuzz ..  ]
-[; ;main.c: 33: initBoost();
+[; ;main.c: 33: initFuzz();
 "33
+[e ( _initFuzz ..  ]
+[; ;main.c: 34: initBoost();
+"34
 [e ( _initBoost ..  ]
-[; ;main.c: 35: while (1) {
-"35
+[; ;main.c: 36: while (1) {
+"36
 [e :U 344 ]
 {
-[; ;main.c: 36: updateFuzz(debounce_limit);
-"36
-[e ( _updateFuzz (1 _debounce_limit ]
-[; ;main.c: 37: updateBoost(debounce_limit);
+[; ;main.c: 37: updateFuzz(debounce_limit);
 "37
+[e ( _updateFuzz (1 _debounce_limit ]
+[; ;main.c: 38: updateBoost(debounce_limit);
+"38
 [e ( _updateBoost (1 _debounce_limit ]
-"39
+"40
 }
 [e :U 343 ]
-"35
+"36
 [e $U 344  ]
 [e :U 345 ]
-[; ;main.c: 39: }
-[; ;main.c: 41: }
-"41
+[; ;main.c: 40: }
+[; ;main.c: 42: }
+"42
 [e :UE 342 ]
 }

@@ -1,4 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
+"33 mcc_generated_files/./../state_manager.h
+[v _getFuzzState `(i ~T0 @X0 0 ef ]
 "41 mcc_generated_files/fuzz.h
 [v _setFuzzState `(v ~T0 @X0 0 ef1`i ]
 "42
@@ -29,6 +31,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LATCbits `VS97 ~T0 @X0 0 e@270 ]
 "19 mcc_generated_files/../system.h
 [v _wait_ms `(v ~T0 @X0 0 ef1`ui ]
+"35 mcc_generated_files/./../state_manager.h
+[v _updateFuzzState `(v ~T0 @X0 0 ef1`i ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -2861,6 +2865,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
+[; ;memory.h: 99: uint16_t FLASH_ReadWord(uint16_t flashAddr);
+[; ;memory.h: 128: void FLASH_WriteWord(uint16_t flashAddr, uint16_t *ramBuf, uint16_t word);
+[; ;memory.h: 164: int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray);
+[; ;memory.h: 189: void FLASH_EraseBlock(uint16_t startAddr);
+[; ;HEF.h: 36: int8_t HEF_ByteArrayWrite( uint8_t block, uint8_t *bArray, uint8_t count);
+[; ;HEF.h: 47: int8_t HEF_ByteArrayRead( uint8_t *bArray, uint8_t block, uint8_t count);
+[; ;HEF.h: 57: uint8_t HEF_ByteRead( uint8_t block, uint8_t offset);
+[; ;state_manager.h: 26: typedef struct {
+[; ;state_manager.h: 27: int fuzz;
+[; ;state_manager.h: 28: int boost;
+[; ;state_manager.h: 29: } PedalState;
+[; ;state_manager.h: 31: void initStateManager(void);
+[; ;state_manager.h: 32: PedalState getCurrentState(void);
+[; ;state_manager.h: 33: int getFuzzState(void);
+[; ;state_manager.h: 34: int getBoostState(void);
+[; ;state_manager.h: 35: void updateFuzzState(int);
+[; ;state_manager.h: 36: void updateBoostState(int);
+[; ;state_manager.h: 37: void saveState(void);
 [; ;system.h: 18: void ConfigureOscillator(void);
 [; ;system.h: 19: void wait_ms(uint16_t);
 [; ;system.h: 20: uint16_t adc_convert(uint8_t);
@@ -2868,304 +2891,311 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;fuzz.h: 40: void updateFuzz(int);
 [; ;fuzz.h: 41: void setFuzzState(int);
 [; ;fuzz.h: 42: void setFeedbackState(int);
-"16 mcc_generated_files/fuzz.c
+"17 mcc_generated_files/fuzz.c
 [v _fuzz_state `i ~T0 @X0 1 e ]
 [i _fuzz_state
 -U -> 1 `i
 ]
-[; ;fuzz.c: 16: int fuzz_state = -1;
-"17
+[; ;fuzz.c: 17: int fuzz_state = -1;
+"18
 [v _feedback_state `i ~T0 @X0 1 e ]
 [i _feedback_state
 -U -> 1 `i
 ]
-[; ;fuzz.c: 17: int feedback_state = -1;
-"19
+[; ;fuzz.c: 18: int feedback_state = -1;
+"20
 [v _fuzz_pressed `i ~T0 @X0 1 e ]
 [i _fuzz_pressed
 -> 0 `i
 ]
-[; ;fuzz.c: 19: int fuzz_pressed = 0;
-"20
+[; ;fuzz.c: 20: int fuzz_pressed = 0;
+"21
 [v _fuzz_up `i ~T0 @X0 1 e ]
 [i _fuzz_up
 -> 1 `i
 ]
-[; ;fuzz.c: 20: int fuzz_up = 1;
-"21
+[; ;fuzz.c: 21: int fuzz_up = 1;
+"22
 [v _fuzz_down `i ~T0 @X0 1 e ]
 [i _fuzz_down
 -> 0 `i
 ]
-[; ;fuzz.c: 21: int fuzz_down = 0;
-"22
+[; ;fuzz.c: 22: int fuzz_down = 0;
+"23
 [v _fuzz_toggle `i ~T0 @X0 1 e ]
 [i _fuzz_toggle
 -> 0 `i
 ]
-[; ;fuzz.c: 22: int fuzz_toggle = 0;
-"23
+[; ;fuzz.c: 23: int fuzz_toggle = 0;
+"24
 [v _fuzz_turning_on `i ~T0 @X0 1 e ]
 [i _fuzz_turning_on
 -> 0 `i
 ]
-[; ;fuzz.c: 23: int fuzz_turning_on = 0;
-"25
+[; ;fuzz.c: 24: int fuzz_turning_on = 0;
+"26
 [v _long_press_limit `i ~T0 @X0 1 e ]
 [i _long_press_limit
 -> -> 20000000 `l `i
 ]
-[; ;fuzz.c: 25: int long_press_limit = 20000000;
-"27
+[; ;fuzz.c: 26: int long_press_limit = 20000000;
+"28
 [v _initFuzz `(v ~T0 @X0 1 ef ]
 {
-[; ;fuzz.c: 27: void initFuzz(void) {
+[; ;fuzz.c: 28: void initFuzz() {
 [e :U _initFuzz ]
 [f ]
-[; ;fuzz.c: 32: setFuzzState(0);
-"32
-[e ( _setFuzzState (1 -> 0 `i ]
-[; ;fuzz.c: 40: setFeedbackState(0);
-"40
+"29
+[v _initState `i ~T0 @X0 1 a ]
+[; ;fuzz.c: 29: int initState = getFuzzState();
+[e = _initState ( _getFuzzState ..  ]
+[; ;fuzz.c: 30: setFuzzState(initState);
+"30
+[e ( _setFuzzState (1 _initState ]
+[; ;fuzz.c: 31: setFeedbackState(0);
+"31
 [e ( _setFeedbackState (1 -> 0 `i ]
-[; ;fuzz.c: 42: }
-"42
-[e :UE 342 ]
+[; ;fuzz.c: 33: }
+"33
+[e :UE 343 ]
 }
-"44
+"35
 [v _updateFuzz `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;fuzz.c: 44: void updateFuzz(int debounce_limit) {
+[; ;fuzz.c: 35: void updateFuzz(int debounce_limit) {
 [e :U _updateFuzz ]
 [v _debounce_limit `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;fuzz.c: 51: if (PORTAbits.RA4 == 0) {
-"51
-[e $ ! == -> . . _PORTAbits 0 4 `i -> 0 `i 344  ]
+[; ;fuzz.c: 42: if (PORTAbits.RA4 == 0) {
+"42
+[e $ ! == -> . . _PORTAbits 0 4 `i -> 0 `i 345  ]
 {
-[; ;fuzz.c: 52: if (fuzz_pressed > 0) {
-"52
-[e $ ! > _fuzz_pressed -> 0 `i 345  ]
+[; ;fuzz.c: 43: if (fuzz_pressed > 0) {
+"43
+[e $ ! > _fuzz_pressed -> 0 `i 346  ]
 {
-[; ;fuzz.c: 53: fuzz_pressed--;
-"53
+[; ;fuzz.c: 44: fuzz_pressed--;
+"44
 [e -- _fuzz_pressed -> 1 `i ]
-"54
+"45
 }
-[e :U 345 ]
-"55
-}
-[; ;fuzz.c: 54: }
-[; ;fuzz.c: 55: } else if (fuzz_pressed < debounce_limit) {
-[e $U 346  ]
-[e :U 344 ]
-[e $ ! < _fuzz_pressed _debounce_limit 347  ]
-{
-[; ;fuzz.c: 56: fuzz_pressed++;
-"56
-[e ++ _fuzz_pressed -> 1 `i ]
-"58
-}
-[e :U 347 ]
-"64
 [e :U 346 ]
-[; ;fuzz.c: 58: }
-[; ;fuzz.c: 64: if (fuzz_pressed == 0) {
-[e $ ! == _fuzz_pressed -> 0 `i 348  ]
-{
-[; ;fuzz.c: 66: fuzz_down++;
-"66
-[e ++ _fuzz_down -> 1 `i ]
-[; ;fuzz.c: 67: if (fuzz_state == 1) {
-"67
-[e $ ! == _fuzz_state -> 1 `i 349  ]
-{
-[; ;fuzz.c: 68: if (fuzz_up == 1) {
-"68
-[e $ ! == _fuzz_up -> 1 `i 350  ]
-{
-[; ;fuzz.c: 69: fuzz_toggle = 1;
-"69
-[e = _fuzz_toggle -> 1 `i ]
-"70
+"46
 }
-[e :U 350 ]
-[; ;fuzz.c: 70: }
-[; ;fuzz.c: 72: if (fuzz_down >= long_press_limit && feedback_state == 0 && fuzz_turning_on == 0) {
-"72
-[e $ ! && && >= _fuzz_down _long_press_limit == _feedback_state -> 0 `i == _fuzz_turning_on -> 0 `i 351  ]
+[; ;fuzz.c: 45: }
+[; ;fuzz.c: 46: } else if (fuzz_pressed < debounce_limit) {
+[e $U 347  ]
+[e :U 345 ]
+[e $ ! < _fuzz_pressed _debounce_limit 348  ]
 {
-[; ;fuzz.c: 74: fuzz_down = long_press_limit;
-"74
-[e = _fuzz_down _long_press_limit ]
-[; ;fuzz.c: 75: LATAbits.LATA2 = 0;
-"75
-[e = . . _LATAbits 0 2 -> -> 0 `i `uc ]
-[; ;fuzz.c: 76: setFeedbackState(1);
-"76
-[e ( _setFeedbackState (1 -> 1 `i ]
-"77
+[; ;fuzz.c: 47: fuzz_pressed++;
+"47
+[e ++ _fuzz_pressed -> 1 `i ]
+"49
+}
+[e :U 348 ]
+"55
+[e :U 347 ]
+[; ;fuzz.c: 49: }
+[; ;fuzz.c: 55: if (fuzz_pressed == 0) {
+[e $ ! == _fuzz_pressed -> 0 `i 349  ]
+{
+[; ;fuzz.c: 57: fuzz_down++;
+"57
+[e ++ _fuzz_down -> 1 `i ]
+[; ;fuzz.c: 58: if (fuzz_state == 1) {
+"58
+[e $ ! == _fuzz_state -> 1 `i 350  ]
+{
+[; ;fuzz.c: 59: if (fuzz_up == 1) {
+"59
+[e $ ! == _fuzz_up -> 1 `i 351  ]
+{
+[; ;fuzz.c: 60: fuzz_toggle = 1;
+"60
+[e = _fuzz_toggle -> 1 `i ]
+"61
 }
 [e :U 351 ]
-"78
-}
-[; ;fuzz.c: 77: }
-[; ;fuzz.c: 78: } else {
-[e $U 352  ]
-[e :U 349 ]
+[; ;fuzz.c: 61: }
+[; ;fuzz.c: 63: if (fuzz_down >= long_press_limit && feedback_state == 0 && fuzz_turning_on == 0) {
+"63
+[e $ ! && && >= _fuzz_down _long_press_limit == _feedback_state -> 0 `i == _fuzz_turning_on -> 0 `i 352  ]
 {
-[; ;fuzz.c: 80: fuzz_turning_on = 1;
-"80
-[e = _fuzz_turning_on -> 1 `i ]
-[; ;fuzz.c: 81: fuzz_toggle = 0;
-"81
-[e = _fuzz_toggle -> 0 `i ]
-[; ;fuzz.c: 82: setFuzzState(1);
-"82
-[e ( _setFuzzState (1 -> 1 `i ]
-[; ;fuzz.c: 83: feedback_state = 0;
-"83
-[e = _feedback_state -> 0 `i ]
-"84
+[; ;fuzz.c: 65: fuzz_down = long_press_limit;
+"65
+[e = _fuzz_down _long_press_limit ]
+[; ;fuzz.c: 66: LATAbits.LATA2 = 0;
+"66
+[e = . . _LATAbits 0 2 -> -> 0 `i `uc ]
+[; ;fuzz.c: 67: setFeedbackState(1);
+"67
+[e ( _setFeedbackState (1 -> 1 `i ]
+"68
 }
 [e :U 352 ]
-[; ;fuzz.c: 84: }
-[; ;fuzz.c: 87: fuzz_up = 0;
-"87
-[e = _fuzz_up -> 0 `i ]
-"88
+"69
 }
-[; ;fuzz.c: 88: } else if (fuzz_pressed >= debounce_limit) {
+[; ;fuzz.c: 68: }
+[; ;fuzz.c: 69: } else {
 [e $U 353  ]
-[e :U 348 ]
-[e $ ! >= _fuzz_pressed _debounce_limit 354  ]
+[e :U 350 ]
 {
-"89
+[; ;fuzz.c: 71: fuzz_turning_on = 1;
+"71
+[e = _fuzz_turning_on -> 1 `i ]
+[; ;fuzz.c: 72: fuzz_toggle = 0;
+"72
+[e = _fuzz_toggle -> 0 `i ]
+[; ;fuzz.c: 73: setFuzzState(1);
+"73
+[e ( _setFuzzState (1 -> 1 `i ]
+[; ;fuzz.c: 74: feedback_state = 0;
+"74
+[e = _feedback_state -> 0 `i ]
+"75
+}
+[e :U 353 ]
+[; ;fuzz.c: 75: }
+[; ;fuzz.c: 78: fuzz_up = 0;
+"78
+[e = _fuzz_up -> 0 `i ]
+"79
+}
+[; ;fuzz.c: 79: } else if (fuzz_pressed >= debounce_limit) {
+[e $U 354  ]
+[e :U 349 ]
+[e $ ! >= _fuzz_pressed _debounce_limit 355  ]
+{
+"80
 [v _fb_state `i ~T0 @X0 1 a ]
-[; ;fuzz.c: 89: int fb_state = feedback_state;
+[; ;fuzz.c: 80: int fb_state = feedback_state;
 [e = _fb_state _feedback_state ]
-[; ;fuzz.c: 90: if (fuzz_toggle == 1 && fb_state == 0) {
-"90
-[e $ ! && == _fuzz_toggle -> 1 `i == _fb_state -> 0 `i 355  ]
+[; ;fuzz.c: 81: if (fuzz_toggle == 1 && fb_state == 0) {
+"81
+[e $ ! && == _fuzz_toggle -> 1 `i == _fb_state -> 0 `i 356  ]
 {
-[; ;fuzz.c: 91: setFuzzState(0);
-"91
+[; ;fuzz.c: 82: setFuzzState(0);
+"82
 [e ( _setFuzzState (1 -> 0 `i ]
+"83
+}
+[e :U 356 ]
+[; ;fuzz.c: 83: }
+[; ;fuzz.c: 84: LATAbits.LATA2 = fuzz_state;
+"84
+[e = . . _LATAbits 0 2 -> _fuzz_state `uc ]
+[; ;fuzz.c: 86: setFeedbackState(0);
+"86
+[e ( _setFeedbackState (1 -> 0 `i ]
+[; ;fuzz.c: 87: fuzz_turning_on = 0;
+"87
+[e = _fuzz_turning_on -> 0 `i ]
+[; ;fuzz.c: 88: fuzz_toggle = 0;
+"88
+[e = _fuzz_toggle -> 0 `i ]
+[; ;fuzz.c: 89: fuzz_up = 1;
+"89
+[e = _fuzz_up -> 1 `i ]
+[; ;fuzz.c: 90: fuzz_down = 0;
+"90
+[e = _fuzz_down -> 0 `i ]
+[; ;fuzz.c: 91: fuzz_pressed = debounce_limit;
+"91
+[e = _fuzz_pressed _debounce_limit ]
 "92
 }
 [e :U 355 ]
-[; ;fuzz.c: 92: }
-[; ;fuzz.c: 93: LATAbits.LATA2 = fuzz_state;
 "93
-[e = . . _LATAbits 0 2 -> _fuzz_state `uc ]
-[; ;fuzz.c: 95: setFeedbackState(0);
-"95
-[e ( _setFeedbackState (1 -> 0 `i ]
-[; ;fuzz.c: 96: fuzz_turning_on = 0;
-"96
-[e = _fuzz_turning_on -> 0 `i ]
-[; ;fuzz.c: 97: fuzz_toggle = 0;
-"97
-[e = _fuzz_toggle -> 0 `i ]
-[; ;fuzz.c: 98: fuzz_up = 1;
-"98
-[e = _fuzz_up -> 1 `i ]
-[; ;fuzz.c: 99: fuzz_down = 0;
-"99
-[e = _fuzz_down -> 0 `i ]
-[; ;fuzz.c: 100: fuzz_pressed = debounce_limit;
-"100
-[e = _fuzz_pressed _debounce_limit ]
-"101
-}
 [e :U 354 ]
-"102
-[e :U 353 ]
-[; ;fuzz.c: 101: }
-[; ;fuzz.c: 102: }
-[e :UE 343 ]
+[; ;fuzz.c: 92: }
+[; ;fuzz.c: 93: }
+[e :UE 344 ]
 }
-"104
+"95
 [v _setFuzzState `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;fuzz.c: 104: void setFuzzState(int f_state) {
+[; ;fuzz.c: 95: void setFuzzState(int f_state) {
 [e :U _setFuzzState ]
 [v _f_state `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;fuzz.c: 105: if (fuzz_state == f_state) {return;}
-"105
-[e $ ! == _fuzz_state _f_state 357  ]
+[; ;fuzz.c: 96: if (fuzz_state == f_state) {return;}
+"96
+[e $ ! == _fuzz_state _f_state 358  ]
 {
-[e $UE 356  ]
+[e $UE 357  ]
 }
-[e :U 357 ]
-[; ;fuzz.c: 106: fuzz_state = f_state;
-"106
+[e :U 358 ]
+[; ;fuzz.c: 97: fuzz_state = f_state;
+"97
 [e = _fuzz_state _f_state ]
-[; ;fuzz.c: 107: LATAbits.LATA2 = f_state;
-"107
+[; ;fuzz.c: 98: LATAbits.LATA2 = f_state;
+"98
 [e = . . _LATAbits 0 2 -> _f_state `uc ]
-[; ;fuzz.c: 108: LATCbits.LATC2 = f_state;
-"108
+[; ;fuzz.c: 99: LATCbits.LATC2 = f_state;
+"99
 [e = . . _LATCbits 0 2 -> _f_state `uc ]
-[; ;fuzz.c: 109: LATCbits.LATC1 = !f_state;
-"109
+[; ;fuzz.c: 100: LATCbits.LATC1 = !f_state;
+"100
 [e = . . _LATCbits 0 1 -> -> ! != _f_state -> 0 `i `i `uc ]
-[; ;fuzz.c: 111: wait_ms(20);
-"111
+[; ;fuzz.c: 102: wait_ms(20);
+"102
 [e ( _wait_ms (1 -> -> 20 `i `ui ]
-[; ;fuzz.c: 113: LATCbits.LATC2 = 0;
-"113
+[; ;fuzz.c: 104: LATCbits.LATC2 = 0;
+"104
 [e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
-[; ;fuzz.c: 114: LATCbits.LATC1 = 0;
-"114
+[; ;fuzz.c: 105: LATCbits.LATC1 = 0;
+"105
 [e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
-[; ;fuzz.c: 117: wait_ms(20);
-"117
+[; ;fuzz.c: 107: updateFuzzState(fuzz_state);
+"107
+[e ( _updateFuzzState (1 _fuzz_state ]
+[; ;fuzz.c: 108: wait_ms(20);
+"108
 [e ( _wait_ms (1 -> -> 20 `i `ui ]
-[; ;fuzz.c: 118: }
-"118
-[e :UE 356 ]
+[; ;fuzz.c: 109: }
+"109
+[e :UE 357 ]
 }
-"121
+"111
 [v _setFeedbackState `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;fuzz.c: 121: void setFeedbackState(int f_state) {
+[; ;fuzz.c: 111: void setFeedbackState(int f_state) {
 [e :U _setFeedbackState ]
 [v _f_state `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;fuzz.c: 122: if (feedback_state == f_state) {return;}
-"122
-[e $ ! == _feedback_state _f_state 359  ]
+[; ;fuzz.c: 112: if (feedback_state == f_state) {return;}
+"112
+[e $ ! == _feedback_state _f_state 360  ]
 {
-[e $UE 358  ]
+[e $UE 359  ]
 }
-[e :U 359 ]
-[; ;fuzz.c: 123: feedback_state = f_state;
-"123
+[e :U 360 ]
+[; ;fuzz.c: 113: feedback_state = f_state;
+"113
 [e = _feedback_state _f_state ]
-[; ;fuzz.c: 124: LATCbits.LATC3 = f_state;
-"124
+[; ;fuzz.c: 114: LATCbits.LATC3 = f_state;
+"114
 [e = . . _LATCbits 0 3 -> _f_state `uc ]
-[; ;fuzz.c: 125: LATAbits.LATA0 = f_state;
-"125
+[; ;fuzz.c: 115: LATAbits.LATA0 = f_state;
+"115
 [e = . . _LATAbits 0 0 -> _f_state `uc ]
-[; ;fuzz.c: 126: LATAbits.LATA1 = !f_state;
-"126
+[; ;fuzz.c: 116: LATAbits.LATA1 = !f_state;
+"116
 [e = . . _LATAbits 0 1 -> -> ! != _f_state -> 0 `i `i `uc ]
-[; ;fuzz.c: 128: wait_ms(20);
-"128
+[; ;fuzz.c: 118: wait_ms(20);
+"118
 [e ( _wait_ms (1 -> -> 20 `i `ui ]
-[; ;fuzz.c: 130: LATAbits.LATA0 = 0;
-"130
+[; ;fuzz.c: 120: LATAbits.LATA0 = 0;
+"120
 [e = . . _LATAbits 0 0 -> -> 0 `i `uc ]
-[; ;fuzz.c: 131: LATAbits.LATA1 = 0;
-"131
+[; ;fuzz.c: 121: LATAbits.LATA1 = 0;
+"121
 [e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
-[; ;fuzz.c: 134: wait_ms(20);
-"134
+[; ;fuzz.c: 124: wait_ms(20);
+"124
 [e ( _wait_ms (1 -> -> 20 `i `ui ]
-[; ;fuzz.c: 136: }
-"136
-[e :UE 358 ]
+[; ;fuzz.c: 126: }
+"126
+[e :UE 359 ]
 }
