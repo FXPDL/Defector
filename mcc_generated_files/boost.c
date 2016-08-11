@@ -17,15 +17,14 @@ int boost_state = -1; //initialize to an invalid value so the initialize will ru
 
 int boost_pressed = 0;  
 int boost_up = 1;  
-int boost_down = 0;  
-int last_boost_state = 0;
+int boost_toggle = 0;
 
 void initBoost() {
     int initState = getBoostState();
     setBoostState(initState);
 }
 
-void updateBoost(int debounce_limit) {
+void updateBoost(void) {
 
     //http://www.kennethkuhn.com/electronics/debounce.c
     /* Step 1: Update the integrator based on the input signal.  Note that the 
@@ -45,16 +44,26 @@ void updateBoost(int debounce_limit) {
     0 or MAXIMUM. */
 
     if (boost_pressed == 0) {
-        boost_down = 1;
-        if (boost_up == 1) {
-            setBoostState(!boost_state);
+        if (boost_state == 1) {
+            if (boost_up == 1) {
+                boost_toggle = 1;
+            }
+        } else {
+            //boost was off, so turn it on
+            boost_toggle = 0;
+            setBoostState(1);
         }
+
+        
         boost_up = 0;
     } else if (boost_pressed >= debounce_limit) {
+        if (boost_toggle == 1) {
+            setBoostState(0);
+        }
+        boost_toggle = 0;
         boost_up = 1;
-        boost_down = 0;
         boost_pressed = debounce_limit; /* defensive code if integrator got corrupted */
-    }     
+    }    
     
     
 }

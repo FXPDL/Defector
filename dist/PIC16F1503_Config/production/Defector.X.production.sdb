@@ -17,19 +17,19 @@
 [v _isr isr `II(v  1 e 1 0 ]
 "28 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"23 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
+"22 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 [v _initBoost initBoost `(v  1 e 1 0 ]
-"28
+"27
 [v _updateBoost updateBoost `(v  1 e 1 0 ]
-"63
+"72
 [v _setBoostState setBoostState `(v  1 e 1 0 ]
 "28 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 [v _initFuzz initFuzz `(v  1 e 1 0 ]
 "35
 [v _updateFuzz updateFuzz `(v  1 e 1 0 ]
-"95
+"92
 [v _setFuzzState setFuzzState `(v  1 e 1 0 ]
-"111
+"108
 [v _setFeedbackState setFeedbackState `(v  1 e 1 0 ]
 "58 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/memory.c
 [v _FLASH_ReadWord FLASH_ReadWord `(ui  1 e 2 0 ]
@@ -40,9 +40,9 @@
 "18 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
 [v _initStateManager initStateManager `(v  1 e 1 0 ]
 "26 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.h
-[s S619 . 4 `i 1 fuzz 2 0 `i 1 boost 2 2 ]
+[s S613 . 4 `i 1 fuzz 2 0 `i 1 boost 2 2 ]
 "23 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
-[v _getCurrentState getCurrentState `(S619  1 e 4 0 ]
+[v _getCurrentState getCurrentState `(S613  1 e 4 0 ]
 "42
 [v _getFuzzState getFuzzState `(i  1 e 2 0 ]
 "49
@@ -78,7 +78,7 @@
 ]
 [u S33 . 1 `S19 1 . 1 0 `S28 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES33  1 e 1 @11 ]
-[s S454 . 1 `uc 1 RA0 1 0 :1:0 
+[s S451 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -86,9 +86,9 @@
 `uc 1 RA5 1 0 :1:5 
 ]
 "429
-[u S461 . 1 `S454 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES461  1 e 1 @12 ]
-[s S283 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S458 . 1 `S451 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES458  1 e 1 @12 ]
+[s S280 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 SSP1IF 1 0 :1:3 
@@ -97,14 +97,14 @@
 `uc 1 TMR1GIF 1 0 :1:7 
 ]
 "528
-[u S291 . 1 `S283 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES291  1 e 1 @17 ]
-[s S302 . 1 `uc 1 T2CKPS 1 0 :2:0 
+[u S288 . 1 `S280 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES288  1 e 1 @17 ]
+[s S299 . 1 `uc 1 T2CKPS 1 0 :2:0 
 `uc 1 TMR2ON 1 0 :1:2 
 `uc 1 T2OUTPS 1 0 :4:3 
 ]
 "883
-[s S306 . 1 `uc 1 T2CKPS0 1 0 :1:0 
+[s S303 . 1 `uc 1 T2CKPS0 1 0 :1:0 
 `uc 1 T2CKPS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 T2OUTPS0 1 0 :1:3 
@@ -112,9 +112,9 @@
 `uc 1 T2OUTPS2 1 0 :1:5 
 `uc 1 T2OUTPS3 1 0 :1:6 
 ]
-[u S314 . 1 `S302 1 . 1 0 `S306 1 . 1 0 ]
-[v _T2CONbits T2CONbits `VES314  1 e 1 @28 ]
-[s S191 . 1 `uc 1 TRISA0 1 0 :1:0 
+[u S311 . 1 `S299 1 . 1 0 `S303 1 . 1 0 ]
+[v _T2CONbits T2CONbits `VES311  1 e 1 @28 ]
+[s S188 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -122,9 +122,9 @@
 `uc 1 TRISA5 1 0 :1:5 
 ]
 "947
-[u S198 . 1 `S191 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES198  1 e 1 @140 ]
-[s S228 . 1 `uc 1 TRISC0 1 0 :1:0 
+[u S195 . 1 `S188 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES195  1 e 1 @140 ]
+[s S225 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -132,14 +132,14 @@
 `uc 1 TRISC5 1 0 :1:5 
 ]
 "996
-[u S235 . 1 `S228 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES235  1 e 1 @142 ]
-[s S155 . 1 `uc 1 SCS 1 0 :2:0 
+[u S232 . 1 `S225 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES232  1 e 1 @142 ]
+[s S152 . 1 `uc 1 SCS 1 0 :2:0 
 `uc 1 . 1 0 :1:2 
 `uc 1 IRCF 1 0 :4:3 
 ]
 "1356
-[s S159 . 1 `uc 1 SCS0 1 0 :1:0 
+[s S156 . 1 `uc 1 SCS0 1 0 :1:0 
 `uc 1 SCS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 IRCF0 1 0 :1:3 
@@ -147,20 +147,20 @@
 `uc 1 IRCF2 1 0 :1:5 
 `uc 1 IRCF3 1 0 :1:6 
 ]
-[u S167 . 1 `S155 1 . 1 0 `S159 1 . 1 0 ]
-[v _OSCCONbits OSCCONbits `VES167  1 e 1 @153 ]
+[u S164 . 1 `S152 1 . 1 0 `S156 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES164  1 e 1 @153 ]
 "1400
 [v _OSCSTAT OSCSTAT `VEuc  1 e 1 @154 ]
 "1438
 [v _ADRESL ADRESL `VEuc  1 e 1 @155 ]
 "1457
 [v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
-[s S350 . 1 `uc 1 ADON 1 0 :1:0 
+[s S347 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :5:2 
 ]
 "1501
-[s S354 . 1 `uc 1 . 1 0 :1:0 
+[s S351 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 ADGO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -168,23 +168,23 @@
 `uc 1 CHS3 1 0 :1:5 
 `uc 1 CHS4 1 0 :1:6 
 ]
-[s S362 . 1 `uc 1 . 1 0 :1:0 
+[s S359 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 ]
-[u S365 . 1 `S350 1 . 1 0 `S354 1 . 1 0 `S362 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES365  1 e 1 @157 ]
-[s S330 . 1 `uc 1 ADPREF 1 0 :2:0 
+[u S362 . 1 `S347 1 . 1 0 `S351 1 . 1 0 `S359 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES362  1 e 1 @157 ]
+[s S327 . 1 `uc 1 ADPREF 1 0 :2:0 
 `uc 1 . 1 0 :2:2 
 `uc 1 ADCS 1 0 :3:4 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "1572
-[s S335 . 1 `uc 1 ADPREF0 1 0 :1:0 
+[s S332 . 1 `uc 1 ADPREF0 1 0 :1:0 
 `uc 1 ADPREF1 1 0 :1:1 
 ]
-[u S338 . 1 `S330 1 . 1 0 `S335 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES338  1 e 1 @158 ]
-[s S262 . 1 `uc 1 LATA0 1 0 :1:0 
+[u S335 . 1 `S327 1 . 1 0 `S332 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES335  1 e 1 @158 ]
+[s S259 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -192,9 +192,9 @@
 `uc 1 LATA5 1 0 :1:5 
 ]
 "1663
-[u S269 . 1 `S262 1 . 1 0 ]
-[v _LATAbits LATAbits `VES269  1 e 1 @268 ]
-[s S245 . 1 `uc 1 LATC0 1 0 :1:0 
+[u S266 . 1 `S259 1 . 1 0 ]
+[v _LATAbits LATAbits `VES266  1 e 1 @268 ]
+[s S242 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -202,19 +202,19 @@
 `uc 1 LATC5 1 0 :1:5 
 ]
 "1707
-[u S252 . 1 `S245 1 . 1 0 ]
-[v _LATCbits LATCbits `VES252  1 e 1 @270 ]
-[s S208 . 1 `uc 1 ANSA0 1 0 :1:0 
+[u S249 . 1 `S242 1 . 1 0 ]
+[v _LATCbits LATCbits `VES249  1 e 1 @270 ]
+[s S205 . 1 `uc 1 ANSA0 1 0 :1:0 
 `uc 1 ANSA1 1 0 :1:1 
 `uc 1 ANSA2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
 `uc 1 ANSA4 1 0 :1:4 
 ]
 "2279
-[s S214 . 1 `uc 1 ANSELA 1 0 :6:0 
+[s S211 . 1 `uc 1 ANSELA 1 0 :6:0 
 ]
-[u S216 . 1 `S208 1 . 1 0 `S214 1 . 1 0 ]
-[v _ANSELAbits ANSELAbits `VES216  1 e 1 @396 ]
+[u S213 . 1 `S205 1 . 1 0 `S211 1 . 1 0 ]
+[v _ANSELAbits ANSELAbits `VES213  1 e 1 @396 ]
 "2353
 [v _PMADR PMADR `VEus  1 e 2 @401 ]
 "2359
@@ -238,8 +238,6 @@
 [v _PMCON1bits PMCON1bits `VES61  1 e 1 @405 ]
 "2496
 [v _PMCON2 PMCON2 `VEuc  1 e 1 @406 ]
-"21 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
-[v _debounce_limit debounce_limit `i  1 e 2 0 ]
 "16 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 [v _boost_state boost_state `i  1 e 2 0 ]
 "18
@@ -247,7 +245,7 @@
 "19
 [v _boost_up boost_up `i  1 e 2 0 ]
 "20
-[v _boost_down boost_down `i  1 e 2 0 ]
+[v _boost_toggle boost_toggle `i  1 e 2 0 ]
 "17 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 [v _fuzz_state fuzz_state `i  1 e 2 0 ]
 "18
@@ -266,9 +264,9 @@
 [v _long_press_limit long_press_limit `i  1 e 2 0 ]
 "15 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
 [v _isInitialized isInitialized `i  1 e 2 0 ]
-[s S619 . 4 `i 1 fuzz 2 0 `i 1 boost 2 2 ]
+[s S613 . 4 `i 1 fuzz 2 0 `i 1 boost 2 2 ]
 "16
-[v _pedalState pedalState `S619  1 e 4 0 ]
+[v _pedalState pedalState `S613  1 e 4 0 ]
 "28 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
@@ -277,17 +275,14 @@
 "35 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 [v _updateFuzz updateFuzz `(v  1 e 1 0 ]
 {
-"80
-[v updateFuzz@fb_state fb_state `i  1 a 2 10 ]
-"35
-[v updateFuzz@debounce_limit debounce_limit `i  1 p 2 7 ]
-"93
+"77
+[v updateFuzz@fb_state fb_state `i  1 a 2 8 ]
+"90
 } 0
-"28 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
+"27 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 [v _updateBoost updateBoost `(v  1 e 1 0 ]
 {
-[v updateBoost@debounce_limit debounce_limit `i  1 p 2 7 ]
-"60
+"69
 } 0
 "28 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 [v _initFuzz initFuzz `(v  1 e 1 0 ]
@@ -296,11 +291,11 @@
 [v initFuzz@initState initState `i  1 a 2 7 ]
 "33
 } 0
-"95
+"92
 [v _setFuzzState setFuzzState `(v  1 e 1 0 ]
 {
 [v setFuzzState@f_state f_state `i  1 p 2 5 ]
-"109
+"106
 } 0
 "57 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
 [v _updateFuzzState updateFuzzState `(v  1 e 1 0 ]
@@ -308,29 +303,29 @@
 [v updateFuzzState@state state `i  1 p 2 3 ]
 "62
 } 0
-"111 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
+"108 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/fuzz.c
 [v _setFeedbackState setFeedbackState `(v  1 e 1 0 ]
 {
 [v setFeedbackState@f_state f_state `i  1 p 2 2 ]
-"126
+"123
 } 0
 "42 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
 [v _getFuzzState getFuzzState `(i  1 e 2 0 ]
 {
 "46
 } 0
-"23 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
+"22 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\mcc_generated_files/boost.c
 [v _initBoost initBoost `(v  1 e 1 0 ]
 {
-"24
+"23
 [v initBoost@initState initState `i  1 a 2 7 ]
-"26
+"25
 } 0
-"63
+"72
 [v _setBoostState setBoostState `(v  1 e 1 0 ]
 {
 [v setBoostState@f_state f_state `i  1 p 2 5 ]
-"77
+"86
 } 0
 "23 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\system.c
 [v _wait_ms wait_ms `(v  1 e 1 0 ]
@@ -399,9 +394,9 @@
 "21
 } 0
 "26 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.h
-[s S619 . 4 `i 1 fuzz 2 0 `i 1 boost 2 2 ]
+[s S613 . 4 `i 1 fuzz 2 0 `i 1 boost 2 2 ]
 "23 C:\Users\Nancy\Dropbox (Stepframe)\Foxpedal Programming\Code\Defector.X\state_manager.c
-[v _getCurrentState getCurrentState `(S619  1 e 4 0 ]
+[v _getCurrentState getCurrentState `(S613  1 e 4 0 ]
 {
 "25
 [v getCurrentState@r r `uc  1 a 1 0 ]

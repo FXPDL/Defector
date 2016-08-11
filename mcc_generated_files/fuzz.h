@@ -37,6 +37,6 @@ extern "C" {
 
 
 void initFuzz(void);
-void updateFuzz(int);
+void updateFuzz(void);
 void setFuzzState(int);
 void setFeedbackState(int);

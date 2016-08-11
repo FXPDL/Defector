@@ -32,7 +32,7 @@ void initFuzz() {
 
 }
 
-void updateFuzz(int debounce_limit) {
+void updateFuzz(void) {
 
     //http://www.kennethkuhn.com/electronics/debounce.c
     /* Step 1: Update the integrator based on the input signal.  Note that the 

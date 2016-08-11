@@ -31,5 +31,5 @@ extern "C" {
 #define Relay_Boost10 LATCbits.LATC4
 
 void initBoost(void);
-void updateBoost(int);
+void updateBoost(void);
 void setBoostState(int);

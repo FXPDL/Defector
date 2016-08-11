@@ -3889,7 +3889,7 @@ uint16_t adc_convert(uint8_t);
 
 # 39 "./mcc_generated_files/fuzz.h"
 void initFuzz(void);
-void updateFuzz(int);
+void updateFuzz(void);
 void setFuzzState(int);
 void setFeedbackState(int);
 
@@ -3900,13 +3900,10 @@ uint16_t adc_convert(uint8_t);
 
 # 33 "./mcc_generated_files/boost.h"
 void initBoost(void);
-void updateBoost(int);
+void updateBoost(void);
 void setBoostState(int);
 
-# 21 "main.c"
-int debounce_limit = 25;
-
-# 28
+# 28 "main.c"
 void main(void) {
 ConfigureOscillator();
 InitApp();
@@ -3916,8 +3913,8 @@ initFuzz();
 initBoost();
 
 while (1) {
-updateFuzz(debounce_limit);
-updateBoost(debounce_limit);
+updateFuzz();
+updateBoost();
 
 }
 

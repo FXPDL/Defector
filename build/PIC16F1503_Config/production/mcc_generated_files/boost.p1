@@ -2878,7 +2878,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 19: void wait_ms(uint16_t);
 [; ;system.h: 20: uint16_t adc_convert(uint8_t);
 [; ;boost.h: 33: void initBoost(void);
-[; ;boost.h: 34: void updateBoost(int);
+[; ;boost.h: 34: void updateBoost(void);
 [; ;boost.h: 35: void setBoostState(int);
 "16 mcc_generated_files/boost.c
 [v _boost_state `i ~T0 @X0 1 e ]
@@ -2899,159 +2899,180 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;boost.c: 19: int boost_up = 1;
 "20
-[v _boost_down `i ~T0 @X0 1 e ]
-[i _boost_down
+[v _boost_toggle `i ~T0 @X0 1 e ]
+[i _boost_toggle
 -> 0 `i
 ]
-[; ;boost.c: 20: int boost_down = 0;
-"21
-[v _last_boost_state `i ~T0 @X0 1 e ]
-[i _last_boost_state
--> 0 `i
-]
-[; ;boost.c: 21: int last_boost_state = 0;
-"23
+[; ;boost.c: 20: int boost_toggle = 0;
+"22
 [v _initBoost `(v ~T0 @X0 1 ef ]
 {
-[; ;boost.c: 23: void initBoost() {
+[; ;boost.c: 22: void initBoost() {
 [e :U _initBoost ]
 [f ]
-"24
+"23
 [v _initState `i ~T0 @X0 1 a ]
-[; ;boost.c: 24: int initState = getBoostState();
+[; ;boost.c: 23: int initState = getBoostState();
 [e = _initState ( _getBoostState ..  ]
-[; ;boost.c: 25: setBoostState(initState);
-"25
+[; ;boost.c: 24: setBoostState(initState);
+"24
 [e ( _setBoostState (1 _initState ]
-[; ;boost.c: 26: }
-"26
+[; ;boost.c: 25: }
+"25
 [e :UE 343 ]
 }
-"28
-[v _updateBoost `(v ~T0 @X0 1 ef1`i ]
+"27
+[v _updateBoost `(v ~T0 @X0 1 ef ]
 {
-[; ;boost.c: 28: void updateBoost(int debounce_limit) {
+[; ;boost.c: 27: void updateBoost(void) {
 [e :U _updateBoost ]
-[v _debounce_limit `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;boost.c: 35: if (PORTAbits.RA5 == 0) {
-"35
+[; ;boost.c: 34: if (PORTAbits.RA5 == 0) {
+"34
 [e $ ! == -> . . _PORTAbits 0 5 `i -> 0 `i 345  ]
 {
-[; ;boost.c: 36: if (boost_pressed > 0) {
-"36
+[; ;boost.c: 35: if (boost_pressed > 0) {
+"35
 [e $ ! > _boost_pressed -> 0 `i 346  ]
 {
-[; ;boost.c: 37: boost_pressed--;
-"37
+[; ;boost.c: 36: boost_pressed--;
+"36
 [e -- _boost_pressed -> 1 `i ]
-"38
+"37
 }
 [e :U 346 ]
-"39
+"38
 }
-[; ;boost.c: 38: }
-[; ;boost.c: 39: } else if (boost_pressed < debounce_limit) {
+[; ;boost.c: 37: }
+[; ;boost.c: 38: } else if (boost_pressed < 25) {
 [e $U 347  ]
 [e :U 345 ]
-[e $ ! < _boost_pressed _debounce_limit 348  ]
+[e $ ! < _boost_pressed -> 25 `i 348  ]
 {
-[; ;boost.c: 40: boost_pressed++;
-"40
+[; ;boost.c: 39: boost_pressed++;
+"39
 [e ++ _boost_pressed -> 1 `i ]
-"41
+"40
 }
 [e :U 348 ]
-"47
+"46
 [e :U 347 ]
-[; ;boost.c: 41: }
-[; ;boost.c: 47: if (boost_pressed == 0) {
+[; ;boost.c: 40: }
+[; ;boost.c: 46: if (boost_pressed == 0) {
 [e $ ! == _boost_pressed -> 0 `i 349  ]
 {
-[; ;boost.c: 48: boost_down = 1;
-"48
-[e = _boost_down -> 1 `i ]
-[; ;boost.c: 49: if (boost_up == 1) {
-"49
-[e $ ! == _boost_up -> 1 `i 350  ]
+[; ;boost.c: 47: if (boost_state == 1) {
+"47
+[e $ ! == _boost_state -> 1 `i 350  ]
 {
-[; ;boost.c: 50: setBoostState(!boost_state);
+[; ;boost.c: 48: if (boost_up == 1) {
+"48
+[e $ ! == _boost_up -> 1 `i 351  ]
+{
+[; ;boost.c: 49: boost_toggle = 1;
+"49
+[e = _boost_toggle -> 1 `i ]
 "50
-[e ( _setBoostState (1 -> ! != _boost_state -> 0 `i `i ]
+}
+[e :U 351 ]
 "51
 }
+[; ;boost.c: 50: }
+[; ;boost.c: 51: } else {
+[e $U 352  ]
 [e :U 350 ]
-[; ;boost.c: 51: }
-[; ;boost.c: 52: boost_up = 0;
-"52
-[e = _boost_up -> 0 `i ]
-"53
-}
-[; ;boost.c: 53: } else if (boost_pressed >= debounce_limit) {
-[e $U 351  ]
-[e :U 349 ]
-[e $ ! >= _boost_pressed _debounce_limit 352  ]
 {
-[; ;boost.c: 54: boost_up = 1;
+[; ;boost.c: 53: boost_toggle = 0;
+"53
+[e = _boost_toggle -> 0 `i ]
+[; ;boost.c: 54: setBoostState(1);
 "54
-[e = _boost_up -> 1 `i ]
-[; ;boost.c: 55: boost_down = 0;
+[e ( _setBoostState (1 -> 1 `i ]
 "55
-[e = _boost_down -> 0 `i ]
-[; ;boost.c: 56: boost_pressed = debounce_limit;
-"56
-[e = _boost_pressed _debounce_limit ]
-"57
 }
 [e :U 352 ]
+[; ;boost.c: 55: }
+[; ;boost.c: 58: boost_up = 0;
+"58
+[e = _boost_up -> 0 `i ]
+"59
+}
+[; ;boost.c: 59: } else if (boost_pressed >= 25) {
+[e $U 353  ]
+[e :U 349 ]
+[e $ ! >= _boost_pressed -> 25 `i 354  ]
+{
+[; ;boost.c: 60: if (boost_toggle == 1) {
 "60
-[e :U 351 ]
-[; ;boost.c: 57: }
-[; ;boost.c: 60: }
+[e $ ! == _boost_toggle -> 1 `i 355  ]
+{
+[; ;boost.c: 61: setBoostState(0);
+"61
+[e ( _setBoostState (1 -> 0 `i ]
+"62
+}
+[e :U 355 ]
+[; ;boost.c: 62: }
+[; ;boost.c: 63: boost_toggle = 0;
+"63
+[e = _boost_toggle -> 0 `i ]
+[; ;boost.c: 64: boost_up = 1;
+"64
+[e = _boost_up -> 1 `i ]
+[; ;boost.c: 65: boost_pressed = 25;
+"65
+[e = _boost_pressed -> 25 `i ]
+"66
+}
+[e :U 354 ]
+"69
+[e :U 353 ]
+[; ;boost.c: 66: }
+[; ;boost.c: 69: }
 [e :UE 344 ]
 }
-"63
+"72
 [v _setBoostState `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;boost.c: 63: void setBoostState(int f_state) {
+[; ;boost.c: 72: void setBoostState(int f_state) {
 [e :U _setBoostState ]
 [v _f_state `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;boost.c: 64: if (boost_state == f_state) {return;}
-"64
-[e $ ! == _boost_state _f_state 354  ]
-{
-[e $UE 353  ]
-}
-[e :U 354 ]
-[; ;boost.c: 65: boost_state = f_state;
-"65
-[e = _boost_state _f_state ]
-[; ;boost.c: 66: LATCbits.LATC5 = f_state;
-"66
-[e = . . _LATCbits 0 5 -> _f_state `uc ]
-[; ;boost.c: 67: LATCbits.LATC0 = f_state;
-"67
-[e = . . _LATCbits 0 0 -> _f_state `uc ]
-[; ;boost.c: 68: LATCbits.LATC4 = !f_state;
-"68
-[e = . . _LATCbits 0 4 -> -> ! != _f_state -> 0 `i `i `uc ]
-[; ;boost.c: 70: wait_ms(20);
-"70
-[e ( _wait_ms (1 -> -> 20 `i `ui ]
-[; ;boost.c: 72: LATCbits.LATC0 = 0;
-"72
-[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
-[; ;boost.c: 73: LATCbits.LATC4 = 0;
+[; ;boost.c: 73: if (boost_state == f_state) {return;}
 "73
-[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
-[; ;boost.c: 75: updateBoostState(boost_state);
+[e $ ! == _boost_state _f_state 357  ]
+{
+[e $UE 356  ]
+}
+[e :U 357 ]
+[; ;boost.c: 74: boost_state = f_state;
+"74
+[e = _boost_state _f_state ]
+[; ;boost.c: 75: LATCbits.LATC5 = f_state;
 "75
-[e ( _updateBoostState (1 _boost_state ]
-[; ;boost.c: 76: wait_ms(20);
+[e = . . _LATCbits 0 5 -> _f_state `uc ]
+[; ;boost.c: 76: LATCbits.LATC0 = f_state;
 "76
-[e ( _wait_ms (1 -> -> 20 `i `ui ]
-[; ;boost.c: 77: }
+[e = . . _LATCbits 0 0 -> _f_state `uc ]
+[; ;boost.c: 77: LATCbits.LATC4 = !f_state;
 "77
-[e :UE 353 ]
+[e = . . _LATCbits 0 4 -> -> ! != _f_state -> 0 `i `i `uc ]
+[; ;boost.c: 79: wait_ms(20);
+"79
+[e ( _wait_ms (1 -> -> 20 `i `ui ]
+[; ;boost.c: 81: LATCbits.LATC0 = 0;
+"81
+[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
+[; ;boost.c: 82: LATCbits.LATC4 = 0;
+"82
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+[; ;boost.c: 84: updateBoostState(boost_state);
+"84
+[e ( _updateBoostState (1 _boost_state ]
+[; ;boost.c: 85: wait_ms(20);
+"85
+[e ( _wait_ms (1 -> -> 20 `i `ui ]
+[; ;boost.c: 86: }
+"86
+[e :UE 356 ]
 }

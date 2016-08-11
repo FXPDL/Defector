@@ -18,7 +18,7 @@
 
 #define _XTAL_FREQ 32000000                  // Fosc  frequency for _delay()  library
 
-int debounce_limit = 25;
+
 
 
 /******************************************************************************/
@@ -34,8 +34,8 @@ void main(void) {
     initBoost();
     
     while (1) {
-        updateFuzz(debounce_limit);
-        updateBoost(debounce_limit);
+        updateFuzz();
+        updateBoost();
 
     }
 

@@ -3914,7 +3914,7 @@ uint16_t adc_convert(uint8_t);
 
 # 39 "mcc_generated_files/fuzz.h"
 void initFuzz(void);
-void updateFuzz(int);
+void updateFuzz(void);
 void setFuzzState(int);
 void setFeedbackState(int);
 
@@ -3937,19 +3937,20 @@ setFeedbackState(0);
 
 }
 
-void updateFuzz(int debounce_limit) {
+void updateFuzz(void) {
 
-# 42
+
+
 if (PORTAbits.RA4 == 0) {
 if (fuzz_pressed > 0) {
 fuzz_pressed--;
 }
-} else if (fuzz_pressed < debounce_limit) {
+} else if (fuzz_pressed < 25) {
 fuzz_pressed++;
 
 }
 
-# 55
+# 52
 if (fuzz_pressed == 0) {
 
 fuzz_down++;
@@ -3974,7 +3975,7 @@ feedback_state = 0;
 
 
 fuzz_up = 0;
-} else if (fuzz_pressed >= debounce_limit) {
+} else if (fuzz_pressed >= 25) {
 int fb_state = feedback_state;
 if (fuzz_toggle == 1 && fb_state == 0) {
 setFuzzState(0);
@@ -3986,7 +3987,7 @@ fuzz_turning_on = 0;
 fuzz_toggle = 0;
 fuzz_up = 1;
 fuzz_down = 0;
-fuzz_pressed = debounce_limit;
+fuzz_pressed = 25;
 }
 }
 

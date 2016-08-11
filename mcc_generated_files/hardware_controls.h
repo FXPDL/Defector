@@ -22,3 +22,4 @@ extern "C" {
 #endif	/* HARDWARE_CONTROLS_H */
 
 #define relay_delay   20  //milliseconds
+#define debounce_limit  25

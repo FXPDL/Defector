@@ -3914,7 +3914,7 @@ uint16_t adc_convert(uint8_t);
 
 # 33 "mcc_generated_files/boost.h"
 void initBoost(void);
-void updateBoost(int);
+void updateBoost(void);
 void setBoostState(int);
 
 # 16 "mcc_generated_files/boost.c"
@@ -3922,36 +3922,45 @@ int boost_state = -1;
 
 int boost_pressed = 0;
 int boost_up = 1;
-int boost_down = 0;
-int last_boost_state = 0;
+int boost_toggle = 0;
 
 void initBoost() {
 int initState = getBoostState();
 setBoostState(initState);
 }
 
-void updateBoost(int debounce_limit) {
+void updateBoost(void) {
 
-# 35
+# 34
 if (PORTAbits.RA5 == 0) {
 if (boost_pressed > 0) {
 boost_pressed--;
 }
-} else if (boost_pressed < debounce_limit) {
+} else if (boost_pressed < 25) {
 boost_pressed++;
 }
 
-# 47
+# 46
 if (boost_pressed == 0) {
-boost_down = 1;
+if (boost_state == 1) {
 if (boost_up == 1) {
-setBoostState(!boost_state);
+boost_toggle = 1;
 }
+} else {
+
+boost_toggle = 0;
+setBoostState(1);
+}
+
+
 boost_up = 0;
-} else if (boost_pressed >= debounce_limit) {
+} else if (boost_pressed >= 25) {
+if (boost_toggle == 1) {
+setBoostState(0);
+}
+boost_toggle = 0;
 boost_up = 1;
-boost_down = 0;
-boost_pressed = debounce_limit;
+boost_pressed = 25;
 }
 
 
